@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2026 CERN
+# SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
+# SPDX-License-Identifier: CERN-OHL-W-2.0
+
+Modified: 2026-09-25, Kari Vierimaa, Kempele, Finland.
+Description: Translated from VHDL to SystemVerilog.
+
+This directory is a modification of Covered Source from the CERN colibri
+library, made under section 3 of CERN-OHL-W-2.0. The modification is a
+translation from VHDL to SystemVerilog. Module names, generic names, port
+names, and behaviour are kept where the language allows.
+
+Upstream:
+  https://gitlab.com/colibri-cern/colibri
+  commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+
+Author of this modification:
+  Kari Vierimaa, Kempele, Finland
+
+Source Location:
+  The GitHub repository URL for this translation, once that repository is
+  published. No GitHub URL is assigned yet.
+
+This is not an official CERN project. CERN has not endorsed this
+translation. Use of the CERN Open Hardware Licence does not imply
+endorsement by CERN of any Licensor or their designs, nor any involvement
+by CERN in their development.
+
+The licence text in LICENSES/CERN-OHL-W-2.0.txt is the unmodified
+CERN-OHL-W-2.0.
