@@ -14,7 +14,7 @@ This file is the contract for every later translation. `counter` in `src/common/
 
 ## Frozen files
 
-Wave 0 owns these paths. A later agent edits only the directory it was assigned, and it appends only its own files to `verilator/colibri.f` in a new block under the marker. It leaves every other directory, every package, `counter.sv`, `CONVENTIONS.md`, `NOTICE`, `LICENSES/`, and `verilator/wave0_elab.sv` unchanged.
+These packages are the shared API. Do not rename them. `verilator/colibri.f` lists them in dependency order. `LICENSES/CERN-OHL-W-2.0.txt` stays unmodified.
 
 | VHDL library `colibri` | SystemVerilog package | File |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ if (width_is_too_small) begin : gen_width_check
 end
 ```
 
-## Testbenches and SVA (later waves)
+## Testbenches and SVA
 
 Verilator is 2-state. Replace `'X'` and `'U'` with `1'b0` or `1'b1`. Clocks use `` `timescale 1ns/1ps `` and `#delay`:
 
@@ -263,7 +263,7 @@ Lint from the `colibri_sv` directory:
 verilator --lint-only -Wall -Wno-DECLFILENAME -f verilator/colibri.f
 ```
 
-Wave 0 was linted with Verilator 5.020. `-Wno-DECLFILENAME` is required because package files and `wave0_elab.sv` do not use the file name as a module name.
+Lint was checked with Verilator 5.020. `-Wno-DECLFILENAME` is required because package files do not use the file name as a module name.
 
 Inline waivers already in the packages:
 

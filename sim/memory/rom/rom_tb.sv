@@ -16,7 +16,7 @@ module rom_tb;
   localparam int g_N_WORDS    = 20;
   localparam int g_DATA_WIDTH = 32;
   localparam int c_ADDR_W     = colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS));
-  localparam string c_INIT_FILE = "../colibri/sim/memory/rom/rom_contents.txt";
+  localparam string c_INIT_FILE = "sim/memory/rom/rom_contents.txt";
 
   logic clk = 1'b0;
   logic [c_ADDR_W-1:0] addr = '0;
