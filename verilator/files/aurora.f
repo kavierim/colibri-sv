@@ -1,0 +1,10 @@
+src/proto/aurora_64b66b/include/aurora_const_pkg.sv
+src/proto/aurora_64b66b/include/meta_buffer.sv
+src/proto/aurora_64b66b/tx/aurora_st_encoder.sv
+src/proto/aurora_64b66b/aurora_tx.sv
+src/proto/aurora_64b66b/rx/gearbox_up.sv
+src/proto/aurora_64b66b/rx/cc_gearbox_up.sv
+src/proto/aurora_64b66b/rx/block_sync_fsm.sv
+src/proto/aurora_64b66b/rx/channel_bond.sv
+src/proto/aurora_64b66b/rx/aurora_st_decoder.sv
+src/proto/aurora_64b66b/aurora_rx.sv

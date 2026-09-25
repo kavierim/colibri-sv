@@ -1,0 +1,28 @@
+# SPDX-FileCopyrightText: 2026 CERN
+# SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
+# SPDX-License-Identifier: CERN-OHL-W-2.0
+#
+# Modified: 2026-09-25, Kari Vierimaa, Kempele, Finland.
+# Translated from VHDL to SystemVerilog.
+# Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+
+# Comms testbenches and SVA. Paths are relative to colibri_sv.
+# Each testbench is a separate --top. Do not pass this file on one Verilator
+# command together with every bench; that would elaborate every top at once.
+
+fv/comms/gearbox_up_sva.sv
+fv/comms/gearbox_down_sva.sv
+sim/comms/bit_shifter_tb.sv
+sim/comms/bert_tb.sv
+sim/comms/prbs_tb.sv
+sim/comms/scrambler_tb.sv
+sim/comms/slip_buffer_tb.sv
+sim/comms/gearbox_up_tb.sv
+sim/comms/gearbox_down_tb.sv
+sim/comms/gearbox_loopback_tb.sv
+sim/comms/cc_gearbox_up_tb.sv
+sim/comms/cc_gearbox_down_tb.sv
+sim/comms/cc_gearbox_up_thr_tb.sv
+sim/comms/cc_gearbox_down_thr_tb.sv
+sim/comms/cc_gearbox_loopback_tb.sv
+sim/comms/crc_tb.sv

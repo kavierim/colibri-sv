@@ -32,7 +32,7 @@ module counter #(
   // are unchanged.
   localparam int unsigned c_WIDTH = (g_COUNTER_WIDTH > 0) ? g_COUNTER_WIDTH : 1;
 
-  logic [c_WIDTH-1:0] counter_int = '0;
+  logic [c_WIDTH-1:0] counter_int /* verilator public */ = '0;
 
   if (int'(g_COUNTER_WIDTH) < colibri_utils::log2ceil(int'(g_MODULO))) begin : gen_width_check
     $error("ERROR: counter width not sufficient for selected modulo");

@@ -1,0 +1,12 @@
+src/common/comparator.sv
+src/common/edge_detect.sv
+src/common/synchro.sv
+src/common/synchro_generic.sv
+src/common/synchro_reset.sv
+src/common/synchro_pulse.sv
+src/common/synchro_handshake.sv
+src/common/debouncer.sv
+src/common/pipeline_buffer.sv
+src/common/skid_buffer.sv
+src/common/stream_buffer.sv
+src/common/stream_buffer_generic.sv
