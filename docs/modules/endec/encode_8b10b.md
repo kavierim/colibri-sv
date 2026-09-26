@@ -3,7 +3,7 @@ type: Module
 title: encode_8b10b
 description: 8b/10b encoder.
 tags: [domain:endec, module:encode_8b10b]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/endec/encode_8b10b.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 8b/10b encoder.
 
-RTL notes: 8b/10b Encoder lookup table (ROM)-based 8b/10b encoder. The lookup table approach guarantees minimal resource usage and short combinatorial paths. Changelog: - 0.2 reformatted for Vivado to infer primitives Library entity. Lint alongside verilator/wave0_elab.sv reports multiple tops.
-
 # When to use
 
 See the [endec domain index](index.md) for siblings and typical compositions.
@@ -26,21 +24,21 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| (none) | |
+| Declaration |
+| --- |
+| (none) |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic       clk_i` |
-| | `input  logic [7:0] snk_data_i` |
-| | `input  logic       snk_valid_i` |
-| | `input  logic       snk_control_i, // inject K code` |
-| | `output logic [9:0] src_data_o` |
-| | `output logic       src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic       clk_i` |
+| `input  logic [7:0] snk_data_i` |
+| `input  logic       snk_valid_i` |
+| `input  logic       snk_control_i, // inject K code` |
+| `output logic [9:0] src_data_o` |
+| `output logic       src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

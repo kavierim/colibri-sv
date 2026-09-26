@@ -3,7 +3,7 @@ type: Module
 title: synchro_reset
 description: Reset synchronizer.
 tags: [domain:common, module:synchro_reset, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_reset.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Reset synchronizer.
 
-RTL notes: Reset signal synchronizer. Synchronizes an asynchronous reset into the destination clock domain. g_DURATION is how many destination clocks the output reset stays asserted after the input reset is released.
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,20 +24,20 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter logic g_IN_POLARITY  = 1'b1` |
-| | `parameter logic g_OUT_POLARITY = 1'b1` |
-| | `parameter int   g_DURATION     = 1` |
+| Declaration |
+| --- |
+| `parameter logic g_IN_POLARITY  = 1'b1` |
+| `parameter logic g_OUT_POLARITY = 1'b1` |
+| `parameter int   g_DURATION     = 1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `output logic reset_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `output logic reset_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

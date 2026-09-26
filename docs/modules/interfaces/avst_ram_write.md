@@ -3,7 +3,7 @@ type: Module
 title: avst_ram_write
 description: Write Avalon-ST beats into RAM.
 tags: [domain:interfaces, module:avst_ram_write, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/stream/avst_ram_write.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Write Avalon-ST beats into RAM.
 
-RTL notes: Simple Avalon Stream to RAM writer. Sequential writes of a packeted Avalon-ST input. start_addr_i is sampled at start of packet. A later start of packet restarts from the new address. The write stops on end of packet.
-
 # When to use
 
 See the [interfaces domain index](index.md) for siblings and typical compositions.
@@ -26,26 +24,26 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 8` |
-| | `parameter int unsigned g_ADDR_WIDTH = 8` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 8` |
+| `parameter int unsigned g_ADDR_WIDTH = 8` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                      clk_i` |
-| | `input  logic                      reset_i` |
-| | `input  logic [g_ADDR_WIDTH-1:0]   start_addr_i` |
-| | `input  logic                      snk_sop_i` |
-| | `input  logic                      snk_eop_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]   snk_data_i` |
-| | `input  logic                      snk_valid_i` |
-| | `output logic                      wr_en_o` |
-| | `output logic [g_ADDR_WIDTH-1:0]   wr_addr_o` |
-| | `output logic [g_DATA_WIDTH-1:0]   wr_data_o` |
+| Declaration |
+| --- |
+| `input  logic                      clk_i` |
+| `input  logic                      reset_i` |
+| `input  logic [g_ADDR_WIDTH-1:0]   start_addr_i` |
+| `input  logic                      snk_sop_i` |
+| `input  logic                      snk_eop_i` |
+| `input  logic [g_DATA_WIDTH-1:0]   snk_data_i` |
+| `input  logic                      snk_valid_i` |
+| `output logic                      wr_en_o` |
+| `output logic [g_ADDR_WIDTH-1:0]   wr_addr_o` |
+| `output logic [g_DATA_WIDTH-1:0]   wr_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

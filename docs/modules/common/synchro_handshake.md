@@ -3,7 +3,7 @@ type: Module
 title: synchro_handshake
 description: Stream CDC with backpressure propagation.
 tags: [domain:common, module:synchro_handshake, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_handshake.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Stream CDC with backpressure propagation.
 
-RTL notes: Clock domain boundary synchronizer with handshake. Synchronizes a data/valid/ready stream with a two-way handshake. Round-trip latency follows g_NUM_STAGES. Minimum latency is 4 clocks for valid and 6 clocks for ready. Intended for signals that change infrequently; a cc_fifo is the high-throughput alternative. VHDL requires g_DATA_WIDTH (no default). Default 1 lets Verilator elaborate this module.
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,25 +24,25 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH = 1` |
-| | `parameter int g_NUM_STAGES = 2` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH = 1` |
+| `parameter int g_NUM_STAGES = 2` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     snk_clk_i` |
-| | `input  logic                     src_clk_i` |
-| | `input  logic                     reset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
-| | `input  logic                     snk_valid_i` |
-| | `output logic                     snk_ready_o` |
-| | `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
-| | `output logic                     src_valid_o` |
-| | `input  logic                     src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic                     snk_clk_i` |
+| `input  logic                     src_clk_i` |
+| `input  logic                     reset_i` |
+| `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
+| `input  logic                     snk_valid_i` |
+| `output logic                     snk_ready_o` |
+| `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
+| `output logic                     src_valid_o` |
+| `input  logic                     src_ready_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

@@ -3,7 +3,7 @@ type: Module
 title: aurora_rx
 description: Aurora receiver (lanes to 64b stream).
 tags: [domain:aurora, module:aurora_rx]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/aurora_rx.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Aurora receiver (lanes to 64b stream).
 
-RTL notes: Aurora 64b/66b Receiver. Simplex multi-lane Aurora 64b/66b receiver chain (PMA/PCS): GEARBOX -> DESCRAMBLER -> BIT_SHIFT_FSM -> CHANNEL_BONDING -> DECODER changelog: - 0.1 first release - 0.2 add sub-entity register control in generics - 0.3 add multi-lane support - 0.3b: update to lhcb vhdl style guideline
-
 # When to use
 
 See the [aurora_64b66b domain index](index.md) for siblings and typical compositions.
@@ -26,31 +24,31 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_N_LANES             = 1` |
-| | `parameter int unsigned g_LANE_WIDTH          = 32` |
-| | `parameter int unsigned g_GBX_BUF_SIZE        = colibri_aurora_const::c_AURORA_ENC_WIDTH * 16` |
-| | `parameter bit          g_DISABLE_DESCRAMBLER = 1'b0` |
-| | `parameter bit          g_USE_OPTIMIZED_GBX   = 1'b1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_N_LANES             = 1` |
+| `parameter int unsigned g_LANE_WIDTH          = 32` |
+| `parameter int unsigned g_GBX_BUF_SIZE        = colibri_aurora_const::c_AURORA_ENC_WIDTH * 16` |
+| `parameter bit          g_DISABLE_DESCRAMBLER = 1'b0` |
+| `parameter bit          g_USE_OPTIMIZED_GBX   = 1'b1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic snk_clk_i` |
-| | `input  logic src_clk_i` |
-| | `input  logic src_reset_i` |
-| | `input  logic [g_N_LANES-1:0] snk_valid_i` |
-| | `input  logic [g_LANE_WIDTH-1:0] snk_data_i [0:g_N_LANES-1]` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic src_valid_o` |
-| | `output logic src_error_o` |
-| | `output logic [colibri_aurora_const::c_AURORA_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic [colibri_utils::log2ceil(colibri_aurora_const::c_AURORA_DATA_WIDTH / 8)-1:0] src_empty_o` |
-| | `output logic src_link_up_o` |
+| Declaration |
+| --- |
+| `input  logic snk_clk_i` |
+| `input  logic src_clk_i` |
+| `input  logic src_reset_i` |
+| `input  logic [g_N_LANES-1:0] snk_valid_i` |
+| `input  logic [g_LANE_WIDTH-1:0] snk_data_i [0:g_N_LANES-1]` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic src_valid_o` |
+| `output logic src_error_o` |
+| `output logic [colibri_aurora_const::c_AURORA_DATA_WIDTH-1:0] src_data_o` |
+| `output logic [colibri_utils::log2ceil(colibri_aurora_const::c_AURORA_DATA_WIDTH / 8)-1:0] src_empty_o` |
+| `output logic src_link_up_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

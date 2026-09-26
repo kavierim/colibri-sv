@@ -3,7 +3,7 @@ type: Module
 title: jtag_serdes
 description: JTAG USER-register duplex stream bridge.
 tags: [domain:io, module:jtag_serdes]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/jtag/jtag_serdes.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 JTAG USER-register duplex stream bridge.
 
-RTL notes: JTAG stream serializer/deserializer Author: Alberto Perro (alberto.perro at cern.ch) Date: 15-12-2025 Created Version: 0.1 Copyright CERN 2025 This component converts a simple jtag interface with additional FSM signals (shift, update) into a streaming duplex interface with configurable data width. The entity has been designed to work with JTAG primitives available from vendors to create a vendor-independent direct interface with user logic.
-
 # When to use
 
 Bridge parallel stream beats to a JTAG USER data register. Often paired with [`stream_to_wbm`](../misc/stream_to_wbm.md) for register access over JTAG.
@@ -26,27 +24,27 @@ Bridge parallel stream beats to a JTAG USER data register. Often paired with [`s
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 8` |
-| | `parameter bit g_REG_FALLING = 1'b0` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 8` |
+| `parameter bit g_REG_FALLING = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_ser_i` |
-| | `input  logic clk_par_i` |
-| | `input  logic shift_i` |
-| | `input  logic update_i` |
-| | `input  logic [colibri_utils::downto_width(int'(g_DATA_WIDTH))-1:0] par_data_i` |
-| | `input  logic par_valid_i` |
-| | `output logic par_ready_o` |
-| | `output logic [colibri_utils::downto_width(int'(g_DATA_WIDTH))-1:0] par_data_o` |
-| | `output logic par_valid_o` |
-| | `input  logic ser_data_i` |
-| | `output logic ser_data_o` |
+| Declaration |
+| --- |
+| `input  logic clk_ser_i` |
+| `input  logic clk_par_i` |
+| `input  logic shift_i` |
+| `input  logic update_i` |
+| `input  logic [colibri_utils::downto_width(int'(g_DATA_WIDTH))-1:0] par_data_i` |
+| `input  logic par_valid_i` |
+| `output logic par_ready_o` |
+| `output logic [colibri_utils::downto_width(int'(g_DATA_WIDTH))-1:0] par_data_o` |
+| `output logic par_valid_o` |
+| `input  logic ser_data_i` |
+| `output logic ser_data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

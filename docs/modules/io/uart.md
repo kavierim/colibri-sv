@@ -3,7 +3,7 @@ type: Module
 title: uart
 description: UART transceiver (TX + RX).
 tags: [domain:io, module:uart]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/uart/uart.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 UART transceiver (TX + RX).
 
-RTL notes: UART Controller module Author: Alberto Perro (alberto.perro at cern.ch) Date: 20-03-2024 Version: 0.1 This module implements a simple uart controller. Release log: - 0.1 first release
-
 # When to use
 
 See the [io domain index](index.md) for siblings and typical compositions.
@@ -26,25 +24,25 @@ See the [io domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter time g_CLOCK_PERIOD = time'(100ns)` |
-| | `parameter int unsigned g_BAUD_RATE = 115200` |
+| Declaration |
+| --- |
+| `parameter time g_CLOCK_PERIOD = time'(100ns)` |
+| `parameter int unsigned g_BAUD_RATE = 115200` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic       clk_i` |
-| | `input  logic       reset_i` |
-| | `input  logic [7:0] tx_data_i` |
-| | `input  logic       tx_valid_i` |
-| | `output logic       tx_ready_o` |
-| | `output logic [7:0] rx_data_o` |
-| | `output logic       rx_valid_o` |
-| | `input  logic       rx_pin_i` |
-| | `output logic       tx_pin_o` |
+| Declaration |
+| --- |
+| `input  logic       clk_i` |
+| `input  logic       reset_i` |
+| `input  logic [7:0] tx_data_i` |
+| `input  logic       tx_valid_i` |
+| `output logic       tx_ready_o` |
+| `output logic [7:0] rx_data_o` |
+| `output logic       rx_valid_o` |
+| `input  logic       rx_pin_i` |
+| `output logic       tx_pin_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

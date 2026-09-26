@@ -3,7 +3,7 @@ type: Module
 title: heartbeat
 description: Periodic heartbeat from a divided counter.
 tags: [domain:misc, module:heartbeat]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/heartbeat.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Periodic heartbeat from a divided counter.
 
-RTL notes: Clock heartbeat generator. Divides `clk_i` down to `heartbeat_o`.
-
 # When to use
 
 See the [misc domain index](index.md) for siblings and typical compositions.
@@ -26,19 +24,19 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter time g_BEAT_PERIOD = 1s` |
-| | `parameter time g_CLK_PERIOD  = 8ns` |
+| Declaration |
+| --- |
+| `parameter time g_BEAT_PERIOD = 1s` |
+| `parameter time g_CLK_PERIOD  = 8ns` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `output logic heartbeat_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `output logic heartbeat_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

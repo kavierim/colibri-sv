@@ -3,8 +3,8 @@ type: Module
 title: comparator
 description: Comparator with enable.
 tags: [domain:common, module:comparator]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/common/comparator.sv
 sources:
   - id: upstream
@@ -16,31 +16,29 @@ sources:
 
 Comparator with enable.
 
-RTL notes: Simple Comparator. Asserts a_gt_b_o when a is greater than b, and only while enable is high. g_IS_EQUAL selects a greater-or-equal compare. The result is delayed one cycle.
-
 # When to use
 
-See the [common domain index](index.md) for siblings and typical compositions.
+Registered compare with enable; unsigned `a_i`/`b_i`; use `g_IS_EQUAL` for `>=` instead of `>`.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH = 32` |
-| | `parameter bit g_IS_EQUAL   = 1'b0` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH = 32` |
+| `parameter bit g_IS_EQUAL   = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                    clk_i` |
-| | `input  logic                    enable_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] a_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] b_i` |
-| | `output logic                    a_gt_b_o` |
+| Declaration |
+| --- |
+| `input  logic                    clk_i` |
+| `input  logic                    enable_i` |
+| `input  logic [g_DATA_WIDTH-1:0] a_i` |
+| `input  logic [g_DATA_WIDTH-1:0] b_i` |
+| `output logic                    a_gt_b_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

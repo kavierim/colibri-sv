@@ -3,7 +3,7 @@ type: Module
 title: spi_master
 description: SPI master.
 tags: [domain:io, module:spi_master]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/spi/spi_master.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 SPI master.
 
-RTL notes: Serial Peripheral Interface Master Author: Alberto Perro (alberto.perro at cern.ch) Date: 05-02-2025 Version: 0.1 0.1 initial release
-
 # When to use
 
 See the [io domain index](index.md) for siblings and typical compositions.
@@ -26,29 +24,29 @@ See the [io domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter time g_CLOCK_PERIOD = time'(25ns)` |
-| | `parameter int unsigned g_SCK_FREQUENCY = 1_000_000,  // spi clock frequency` |
-| | `parameter int unsigned g_WORD_SIZE = 8` |
-| | `parameter logic g_SCK_POLARITY = 1'b0,  // 0 -> active high` |
-| | `parameter logic g_SCK_PHASE = 1'b0      // 0 -> rising edge` |
+| Declaration |
+| --- |
+| `parameter time g_CLOCK_PERIOD = time'(25ns)` |
+| `parameter int unsigned g_SCK_FREQUENCY = 1_000_000,  // spi clock frequency` |
+| `parameter int unsigned g_WORD_SIZE = 8` |
+| `parameter logic g_SCK_POLARITY = 1'b0,  // 0 -> active high` |
+| `parameter logic g_SCK_PHASE = 1'b0      // 0 -> rising edge` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                   clk_i` |
-| | `input  logic                   miso_i,  // Master In Slave Out` |
-| | `output logic                   mosi_o,  // Master Out Slave In` |
-| | `output logic                   cs_n_o,  // Chip Select (active low)` |
-| | `output logic                   sck_o,   // SPI clock` |
-| | `output logic [g_WORD_SIZE-1:0] src_data_o` |
-| | `output logic                   src_valid_o` |
-| | `input  logic [g_WORD_SIZE-1:0] snk_data_i` |
-| | `input  logic                   snk_valid_i` |
-| | `output logic                   snk_ready_o` |
+| Declaration |
+| --- |
+| `input  logic                   clk_i` |
+| `input  logic                   miso_i,  // Master In Slave Out` |
+| `output logic                   mosi_o,  // Master Out Slave In` |
+| `output logic                   cs_n_o,  // Chip Select (active low)` |
+| `output logic                   sck_o,   // SPI clock` |
+| `output logic [g_WORD_SIZE-1:0] src_data_o` |
+| `output logic                   src_valid_o` |
+| `input  logic [g_WORD_SIZE-1:0] snk_data_i` |
+| `input  logic                   snk_valid_i` |
+| `output logic                   snk_ready_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

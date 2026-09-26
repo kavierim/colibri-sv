@@ -3,7 +3,7 @@ type: Module
 title: synchro_pulse
 description: Pulse synchronizer across clock domains.
 tags: [domain:common, module:synchro_pulse, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_pulse.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Pulse synchronizer across clock domains.
 
-RTL notes: Synchronizes fast pulses over clock domain boundaries. Pulses from the source clock become single-cycle pulses in the destination domain, independent of the clock-frequency relation. Destination pulses are one cycle wide regardless of the source pulse width. There should be at least 2 destination clock cycles between consecutive source pulses. Work inspired from the article "Crossing the abyss: asynchronous signals in a synchronous world" By Mike Stein, Paradigm Works, available at https://www.edn.com/crossing-the-abyss-asynchronous-signals-in-a-synchronous-world/
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,19 +24,19 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_NUM_STAGES = 2` |
+| Declaration |
+| --- |
+| `parameter int g_NUM_STAGES = 2` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic src_clk_i` |
-| | `input  logic dst_clk_i` |
-| | `input  logic pulse_i` |
-| | `output logic pulse_o` |
+| Declaration |
+| --- |
+| `input  logic src_clk_i` |
+| `input  logic dst_clk_i` |
+| `input  logic pulse_i` |
+| `output logic pulse_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

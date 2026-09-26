@@ -3,7 +3,7 @@ type: Package
 title: colibri_mem
 description: Shared memory helpers.
 tags: [package, pkg:mem]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/mem_pkg.sv
 sources:

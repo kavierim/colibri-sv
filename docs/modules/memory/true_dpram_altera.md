@@ -3,7 +3,7 @@ type: Module
 title: true_dpram_altera
 description: Vendor-style true DPRAM for Intel/Altera.
 tags: [domain:memory, module:true_dpram_altera]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/optimized/true_dpram_altera.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Vendor-style true DPRAM for Intel/Altera.
 
-RTL notes: Altera-style true dual-port RAM. Behavioural description for BRAM inference. Same-port read-after-write returns the word just written, matching the VHDL shared-variable update before the read.
-
 # When to use
 
 Vendor Altera variant of `true_dpram`.
@@ -26,33 +24,33 @@ Vendor Altera variant of `true_dpram`.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH   = 16` |
-| | `parameter int g_A_DATA_WIDTH = g_DATA_WIDTH` |
-| | `parameter int g_B_DATA_WIDTH = g_A_DATA_WIDTH` |
-| | `parameter int g_N_WORDS      = 10` |
-| | `parameter int g_A_ADDR_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter int g_B_ADDR_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter bit g_REGISTER_OUT = 1'b0` |
-| | `parameter string g_INIT_FILE = ""` |
-| | `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH   = 16` |
+| `parameter int g_A_DATA_WIDTH = g_DATA_WIDTH` |
+| `parameter int g_B_DATA_WIDTH = g_A_DATA_WIDTH` |
+| `parameter int g_N_WORDS      = 10` |
+| `parameter int g_A_ADDR_WIDTH = colibri_utils::log2ceil(` |
+| `parameter int g_B_ADDR_WIDTH = colibri_utils::log2ceil(` |
+| `parameter bit g_REGISTER_OUT = 1'b0` |
+| `parameter string g_INIT_FILE = ""` |
+| `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clka_i` |
-| | `input  logic wra_i` |
-| | `input  logic [colibri_utils::downto_width(g_A_ADDR_WIDTH)-1:0] addra_i` |
-| | `input  logic [g_A_DATA_WIDTH-1:0] dataa_i` |
-| | `output logic [g_A_DATA_WIDTH-1:0] dataa_o` |
-| | `input  logic clkb_i` |
-| | `input  logic wrb_i` |
-| | `input  logic [colibri_utils::downto_width(g_B_ADDR_WIDTH)-1:0] addrb_i` |
-| | `input  logic [g_B_DATA_WIDTH-1:0] datab_i` |
-| | `output logic [g_B_DATA_WIDTH-1:0] datab_o` |
+| Declaration |
+| --- |
+| `input  logic clka_i` |
+| `input  logic wra_i` |
+| `input  logic [colibri_utils::downto_width(g_A_ADDR_WIDTH)-1:0] addra_i` |
+| `input  logic [g_A_DATA_WIDTH-1:0] dataa_i` |
+| `output logic [g_A_DATA_WIDTH-1:0] dataa_o` |
+| `input  logic clkb_i` |
+| `input  logic wrb_i` |
+| `input  logic [colibri_utils::downto_width(g_B_ADDR_WIDTH)-1:0] addrb_i` |
+| `input  logic [g_B_DATA_WIDTH-1:0] datab_i` |
+| `output logic [g_B_DATA_WIDTH-1:0] datab_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

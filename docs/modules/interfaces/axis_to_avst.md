@@ -3,8 +3,8 @@ type: Module
 title: axis_to_avst
 description: AXI-Stream to Avalon-ST adapter.
 tags: [domain:interfaces, module:axis_to_avst, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/interfaces/stream/axis_to_avst.sv
 sources:
   - id: upstream
@@ -16,40 +16,38 @@ sources:
 
 AXI-Stream to Avalon-ST adapter.
 
-RTL notes: AXI Stream to Avalon ST adapter. AXI-Stream byte order is little-endian (first byte in the low bits). Partially empty words keep the valid bytes grouped at the low end. Release log: - 0.1 first release - 0.2 changed g_SWAP_ENDIANNESS for g_AVST_ENDIANNESS
-
 # When to use
 
-See the [interfaces domain index](index.md) for siblings and typical compositions.
+Ingress from AXI-Stream IP; often follows [`avst_to_axis`](avst_to_axis.md) in the reverse direction.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned             g_DATA_WIDTH      = 32` |
-| | `parameter colibri_types::endian_t  g_AVST_ENDIANNESS = colibri_types::BIG` |
-| | `parameter bit                      g_ADD_REGISTERS   = 1'b1` |
+| Declaration |
+| --- |
+| `parameter int unsigned             g_DATA_WIDTH      = 32` |
+| `parameter colibri_types::endian_t  g_AVST_ENDIANNESS = colibri_types::BIG` |
+| `parameter bit                      g_ADD_REGISTERS   = 1'b1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                    clk_i` |
-| | `input  logic                    reset_i` |
-| | `output logic                    snk_tready_o` |
-| | `input  logic                    snk_tvalid_i` |
-| | `input  logic                    snk_tlast_i` |
-| | `input  logic [c_KEEP_W-1:0]     snk_tkeep_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_tdata_i` |
-| | `input  logic                    src_ready_i` |
-| | `output logic                    src_valid_o` |
-| | `output logic                    src_sop_o` |
-| | `output logic                    src_eop_o` |
-| | `output logic [c_EMPTY_W-1:0]    src_empty_o` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                    clk_i` |
+| `input  logic                    reset_i` |
+| `output logic                    snk_tready_o` |
+| `input  logic                    snk_tvalid_i` |
+| `input  logic                    snk_tlast_i` |
+| `input  logic [c_KEEP_W-1:0]     snk_tkeep_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_tdata_i` |
+| `input  logic                    src_ready_i` |
+| `output logic                    src_valid_o` |
+| `output logic                    src_sop_o` |
+| `output logic                    src_eop_o` |
+| `output logic [c_EMPTY_W-1:0]    src_empty_o` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

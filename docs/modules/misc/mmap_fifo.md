@@ -3,8 +3,8 @@ type: Module
 title: mmap_fifo
 description: Wishbone slave to full-duplex Avalon-ST packet FIFO.
 tags: [domain:misc, module:mmap_fifo]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/misc/mmap_fifo/mmap_fifo.sv
 sources:
   - id: upstream
@@ -16,59 +16,57 @@ sources:
 
 Wishbone slave to full-duplex Avalon-ST packet FIFO.
 
-RTL notes: Memory Mapped Stream FIFO. Wishbone slave in front of full-duplex Avalon-ST packet streams.
-
 # When to use
 
-See the [misc domain index](index.md) for siblings and typical compositions.
+Software-driven packet IO: Wishbone register file + TX/RX AVST packet ports. Split hierarchy: [`mmap_fifo_tx`](mmap_fifo_tx.md), [`mmap_fifo_rx`](mmap_fifo_rx.md), CSR blocks in `mmap_fifo/vhdl_if/`.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
-| | `parameter int unsigned g_WB_DATA_WIDTH = 32` |
-| | `parameter int unsigned g_STREAM_DATA_WIDTH = g_WB_DATA_WIDTH` |
-| | `parameter int unsigned g_NUM_WORDS = 16` |
-| | `parameter int unsigned g_NUM_CH = 4` |
-| | `parameter bit g_USE_BLOCK_RAM = 1'b0` |
-| | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
+| `parameter int unsigned g_WB_DATA_WIDTH = 32` |
+| `parameter int unsigned g_STREAM_DATA_WIDTH = g_WB_DATA_WIDTH` |
+| `parameter int unsigned g_NUM_WORDS = 16` |
+| `parameter int unsigned g_NUM_CH = 4` |
+| `parameter bit g_USE_BLOCK_RAM = 1'b0` |
+| `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic reset_i` |
-| | `input  logic clk_i` |
-| | `output logic snk_ready_o` |
-| | `input  logic snk_valid_i` |
-| | `input  logic snk_sop_i` |
-| | `input  logic snk_eop_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_STREAM_DATA_WIDTH) / 8))-1:0] snk_empty_i` |
-| | `input  logic [g_STREAM_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_NUM_CH)))-1:0] snk_chan_i` |
-| | `input  logic src_ready_i` |
-| | `output logic src_valid_o` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_STREAM_DATA_WIDTH) / 8))-1:0] src_empty_o` |
-| | `output logic [g_STREAM_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_NUM_CH)))-1:0] src_chan_o` |
-| | `input  logic wb_clk_i` |
-| | `input  logic [g_WB_ADDR_WIDTH-1:0] wb_adr_i` |
-| | `output logic [g_WB_DATA_WIDTH-1:0] wb_dat_o` |
-| | `input  logic [g_WB_DATA_WIDTH-1:0] wb_dat_i` |
-| | `input  logic wb_we_i` |
-| | `input  logic [colibri_utils::downto_width(int'(g_WB_DATA_WIDTH) / 8)-1:0] wb_sel_i` |
-| | `input  logic wb_stb_i` |
-| | `input  logic wb_cyc_i` |
-| | `output logic wb_ack_o` |
-| | `output logic wb_err_o` |
-| | `output logic rx_intr_o` |
-| | `output logic tx_intr_o` |
+| Declaration |
+| --- |
+| `input  logic reset_i` |
+| `input  logic clk_i` |
+| `output logic snk_ready_o` |
+| `input  logic snk_valid_i` |
+| `input  logic snk_sop_i` |
+| `input  logic snk_eop_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_STREAM_DATA_WIDTH) / 8))-1:0] snk_empty_i` |
+| `input  logic [g_STREAM_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_NUM_CH)))-1:0] snk_chan_i` |
+| `input  logic src_ready_i` |
+| `output logic src_valid_o` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_STREAM_DATA_WIDTH) / 8))-1:0] src_empty_o` |
+| `output logic [g_STREAM_DATA_WIDTH-1:0] src_data_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_NUM_CH)))-1:0] src_chan_o` |
+| `input  logic wb_clk_i` |
+| `input  logic [g_WB_ADDR_WIDTH-1:0] wb_adr_i` |
+| `output logic [g_WB_DATA_WIDTH-1:0] wb_dat_o` |
+| `input  logic [g_WB_DATA_WIDTH-1:0] wb_dat_i` |
+| `input  logic wb_we_i` |
+| `input  logic [colibri_utils::downto_width(int'(g_WB_DATA_WIDTH) / 8)-1:0] wb_sel_i` |
+| `input  logic wb_stb_i` |
+| `input  logic wb_cyc_i` |
+| `output logic wb_ack_o` |
+| `output logic wb_err_o` |
+| `output logic rx_intr_o` |
+| `output logic tx_intr_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

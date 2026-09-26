@@ -3,7 +3,7 @@ type: Module
 title: deinterleaver
 description: Split one stream into multiple outputs.
 tags: [domain:packet, module:deinterleaver]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/deinterleaver.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Split one stream into multiple outputs.
 
-RTL notes: Deinterleaves one Avalon-ST stream into g_NUM_OUTPUTS streams using the sideband identifier snk_channel_i.
-
 # When to use
 
 See the [packet domain index](index.md) for siblings and typical compositions.
@@ -26,31 +24,31 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_NUM_OUTPUTS = 3` |
-| | `parameter int unsigned g_DATA_WIDTH  = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_NUM_OUTPUTS = 3` |
+| `parameter int unsigned g_DATA_WIDTH  = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                         clk_i` |
-| | `input  logic                         reset_i` |
-| | `input  logic                         snk_sop_i` |
-| | `input  logic                         snk_eop_i` |
-| | `input  logic                         snk_valid_i` |
-| | `output logic                         snk_ready_o` |
-| | `input  logic [c_DATA_W-1:0]          snk_data_i` |
-| | `input  logic [c_EMPTY_W-1:0]         snk_empty_i` |
-| | `input  logic [c_CH_W-1:0]            snk_channel_i` |
-| | `output logic [g_NUM_OUTPUTS-1:0]     src_sop_o` |
-| | `output logic [g_NUM_OUTPUTS-1:0]     src_eop_o` |
-| | `output logic [g_NUM_OUTPUTS-1:0]     src_valid_o` |
-| | `input  logic [g_NUM_OUTPUTS-1:0]     src_ready_i` |
-| | `output logic [c_DATA_W-1:0]          src_data_o [g_NUM_OUTPUTS-1:0]` |
-| | `output logic [c_EMPTY_W-1:0]         src_empty_o [g_NUM_OUTPUTS-1:0]` |
+| Declaration |
+| --- |
+| `input  logic                         clk_i` |
+| `input  logic                         reset_i` |
+| `input  logic                         snk_sop_i` |
+| `input  logic                         snk_eop_i` |
+| `input  logic                         snk_valid_i` |
+| `output logic                         snk_ready_o` |
+| `input  logic [c_DATA_W-1:0]          snk_data_i` |
+| `input  logic [c_EMPTY_W-1:0]         snk_empty_i` |
+| `input  logic [c_CH_W-1:0]            snk_channel_i` |
+| `output logic [g_NUM_OUTPUTS-1:0]     src_sop_o` |
+| `output logic [g_NUM_OUTPUTS-1:0]     src_eop_o` |
+| `output logic [g_NUM_OUTPUTS-1:0]     src_valid_o` |
+| `input  logic [g_NUM_OUTPUTS-1:0]     src_ready_i` |
+| `output logic [c_DATA_W-1:0]          src_data_o [g_NUM_OUTPUTS-1:0]` |
+| `output logic [c_EMPTY_W-1:0]         src_empty_o [g_NUM_OUTPUTS-1:0]` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

@@ -3,7 +3,7 @@ type: Module
 title: be_add_lead
 description: Insert a leading word on an Avalon-ST packet.
 tags: [domain:misc, module:be_add_lead]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/be_add_lead.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Insert a leading word on an Avalon-ST packet.
 
-RTL notes: Big-endian packet add-leading-bytes module. Shifts an Avalon-ST packet right and inserts `snk_lead_i`. `snk_lead_i` and `shl_i` are sampled at `snk_sop_i`.
-
 # When to use
 
 See the [misc domain index](index.md) for siblings and typical compositions.
@@ -26,31 +24,31 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8):0] shl_i` |
-| | `output logic snk_ready_o` |
-| | `input  logic snk_valid_i` |
-| | `input  logic snk_sop_i` |
-| | `input  logic snk_eop_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] snk_empty_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_lead_i` |
-| | `input  logic src_ready_i` |
-| | `output logic src_valid_o` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] src_empty_o` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8):0] shl_i` |
+| `output logic snk_ready_o` |
+| `input  logic snk_valid_i` |
+| `input  logic snk_sop_i` |
+| `input  logic snk_eop_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] snk_empty_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_lead_i` |
+| `input  logic src_ready_i` |
+| `output logic src_valid_o` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] src_empty_o` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

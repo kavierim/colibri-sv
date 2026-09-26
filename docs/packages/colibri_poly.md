@@ -3,7 +3,7 @@ type: Package
 title: colibri_poly
 description: CRC, scrambler, and PRBS polynomials.
 tags: [package, pkg:poly]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/poly_pkg.sv
 sources:

@@ -3,7 +3,7 @@ type: Package
 title: colibri_binaryio
 description: Simulation binary file read and write tasks.
 tags: [package, pkg:binaryio]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/fileio/binaryio.sv
 sources:

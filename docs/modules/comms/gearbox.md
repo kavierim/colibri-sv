@@ -3,7 +3,7 @@ type: Module
 title: gearbox
 description: Single-clock width gearbox.
 tags: [domain:comms, module:gearbox]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/gearbox.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Single-clock width gearbox.
 
-RTL notes: Single-clock gearbox. Input and output widths are independent.
-
 # When to use
 
 Use [`cc_gearbox`](cc_gearbox.md) when the two sides use different clocks.
@@ -26,24 +24,24 @@ Use [`cc_gearbox`](cc_gearbox.md) when the two sides use different clocks.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_INPUT_WIDTH = 8` |
-| | `parameter int g_OUTPUT_WIDTH = 8` |
+| Declaration |
+| --- |
+| `parameter int g_INPUT_WIDTH = 8` |
+| `parameter int g_OUTPUT_WIDTH = 8` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     clk_i` |
-| | `input  logic                     reset_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0] snk_data_i` |
-| | `input  logic                     snk_valid_i` |
-| | `output logic                     snk_ready_o` |
-| | `output logic [g_OUTPUT_WIDTH-1:0] src_data_o` |
-| | `output logic                     src_valid_o` |
-| | `input  logic                     src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic                     clk_i` |
+| `input  logic                     reset_i` |
+| `input  logic [g_INPUT_WIDTH-1:0] snk_data_i` |
+| `input  logic                     snk_valid_i` |
+| `output logic                     snk_ready_o` |
+| `output logic [g_OUTPUT_WIDTH-1:0] src_data_o` |
+| `output logic                     src_valid_o` |
+| `input  logic                     src_ready_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

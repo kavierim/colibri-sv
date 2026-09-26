@@ -3,7 +3,7 @@ type: Module
 title: ram
 description: Single-port, single-clock RAM.
 tags: [domain:memory, module:ram]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/ram.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Single-port, single-clock RAM.
 
-RTL notes: Single-port RAM. Hex init file, one word per line. g_N_WORDS and g_DATA_WIDTH have elaboration defaults; the VHDL generics do not.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,27 +24,27 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_N_WORDS      = 16` |
-| | `parameter int g_DATA_WIDTH   = 8` |
-| | `parameter bit g_REGISTER_IN  = 1'b0` |
-| | `parameter bit g_REGISTER_OUT = 1'b1` |
-| | `parameter string g_INIT_FILE = ""` |
-| | `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
-| | `parameter bit g_WRITE_FIRST  = 1'b1` |
+| Declaration |
+| --- |
+| `parameter int g_N_WORDS      = 16` |
+| `parameter int g_DATA_WIDTH   = 8` |
+| `parameter bit g_REGISTER_IN  = 1'b0` |
+| `parameter bit g_REGISTER_OUT = 1'b1` |
+| `parameter string g_INIT_FILE = ""` |
+| `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
+| `parameter bit g_WRITE_FIRST  = 1'b1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_i` |
-| | `input  logic we_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] data_i` |
-| | `output logic [g_DATA_WIDTH-1:0] q_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_i` |
+| `input  logic we_i` |
+| `input  logic [g_DATA_WIDTH-1:0] data_i` |
+| `output logic [g_DATA_WIDTH-1:0] q_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

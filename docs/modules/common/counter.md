@@ -3,8 +3,8 @@ type: Module
 title: counter
 description: Simple counter with optional modulo and enable.
 tags: [domain:common, module:counter]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/common/counter.sv
 sources:
   - id: upstream
@@ -16,31 +16,29 @@ sources:
 
 Simple counter with optional modulo and enable.
 
-RTL notes: Simple Counter Some of the work was inspired by the PoC Library (https://github.com/VLSI-EDA/PoC) Release log: - 0.2 Modify g_MODULO behavior to avoid integer limits at 32 bits - 0.1 first release Style reference for later modules. See CONVENTIONS.md.
-
 # When to use
 
-See the [common domain index](index.md) for siblings and typical compositions.
+Basic timed/event counting; set `g_MODULO` and width explicitly for wrap behaviour.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_MODULO = 0` |
-| | `parameter int unsigned g_COUNTER_WIDTH = colibri_utils::log2ceil(int'(g_MODULO))` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_MODULO = 0` |
+| `parameter int unsigned g_COUNTER_WIDTH = colibri_utils::log2ceil(int'(g_MODULO))` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic enable_i` |
-| | `output logic [((g_COUNTER_WIDTH > 0) ? g_COUNTER_WIDTH : 1)-1:0] value_o` |
-| | `output logic wraparound_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic enable_i` |
+| `output logic [((g_COUNTER_WIDTH > 0) ? g_COUNTER_WIDTH : 1)-1:0] value_o` |
+| `output logic wraparound_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

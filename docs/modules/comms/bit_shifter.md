@@ -3,7 +3,7 @@ type: Module
 title: bit_shifter
 description: Arbitrary bit shift on a stream.
 tags: [domain:comms, module:bit_shifter]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/bit_shifter.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Arbitrary bit shift on a stream.
 
-RTL notes: Bit-shift a continuous stream. g_MSB_RIGHT 1 joins the new word on the MSB side. g_MSB_RIGHT 0 joins it on the LSB side. The output uses the registered offset.
-
 # When to use
 
 See the [comms domain index](index.md) for siblings and typical compositions.
@@ -26,21 +24,21 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 8` |
-| | `parameter bit          g_MSB_RIGHT = 1'b1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 8` |
+| `parameter bit          g_MSB_RIGHT = 1'b1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                                                          clk_i` |
-| | `input  logic                                                          reset_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH)))-1:0] offset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]                                       data_i` |
-| | `output logic [g_DATA_WIDTH-1:0]                                       data_o` |
+| Declaration |
+| --- |
+| `input  logic                                                          clk_i` |
+| `input  logic                                                          reset_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH)))-1:0] offset_i` |
+| `input  logic [g_DATA_WIDTH-1:0]                                       data_i` |
+| `output logic [g_DATA_WIDTH-1:0]                                       data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

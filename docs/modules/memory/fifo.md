@@ -3,8 +3,8 @@ type: Module
 title: fifo
 description: Single-clock FIFO; arbitrary input and output width.
 tags: [domain:memory, module:fifo]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/memory/fifo.sv
 sources:
   - id: upstream
@@ -16,8 +16,6 @@ sources:
 
 Single-clock FIFO; arbitrary input and output width.
 
-RTL notes: Single-clock FIFO. The shared-variable memory is a logic array updated in always_ff. Mixed input/output widths instantiate gearbox (src/comms).
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,27 +24,27 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_NUM_WORDS    = 4` |
-| | `parameter int g_INPUT_WIDTH  = 8` |
-| | `parameter int g_OUTPUT_WIDTH = g_INPUT_WIDTH` |
-| | `parameter bit g_ENABLE_FWFT  = 1'b0` |
+| Declaration |
+| --- |
+| `parameter int g_NUM_WORDS    = 4` |
+| `parameter int g_INPUT_WIDTH  = 8` |
+| `parameter int g_OUTPUT_WIDTH = g_INPUT_WIDTH` |
+| `parameter bit g_ENABLE_FWFT  = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0] data_i` |
-| | `input  logic wrreq_i` |
-| | `input  logic rdreq_i` |
-| | `output logic [g_OUTPUT_WIDTH-1:0] q_o` |
-| | `output logic [colibri_utils::log2ceil(g_NUM_WORDS):0] usedw_o` |
-| | `output logic empty_o` |
-| | `output logic full_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [g_INPUT_WIDTH-1:0] data_i` |
+| `input  logic wrreq_i` |
+| `input  logic rdreq_i` |
+| `output logic [g_OUTPUT_WIDTH-1:0] q_o` |
+| `output logic [colibri_utils::log2ceil(g_NUM_WORDS):0] usedw_o` |
+| `output logic empty_o` |
+| `output logic full_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

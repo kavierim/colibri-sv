@@ -3,7 +3,7 @@ type: Module
 title: wb_ram
 description: RAM with Wishbone B4 slave port.
 tags: [domain:interfaces, module:wb_ram]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/memory_mapped/wb_ram.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 RAM with Wishbone B4 slave port.
 
-RTL notes: Wishbone RAM interface. Release log: - 0.1 first release
-
 # When to use
 
 See the [interfaces domain index](index.md) for siblings and typical compositions.
@@ -26,28 +24,28 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_N_WORDS       = 16` |
-| | `parameter int unsigned g_WB_DATA_WIDTH = 32` |
-| | `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_N_WORDS       = 16` |
+| `parameter int unsigned g_WB_DATA_WIDTH = 32` |
+| `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                         clk_i` |
-| | `input  logic                         reset_i` |
-| | `input  logic [g_WB_ADDR_WIDTH-1:0]   wb_adr_i` |
-| | `input  logic [g_WB_DATA_WIDTH-1:0]   wb_dat_i` |
-| | `output logic [g_WB_DATA_WIDTH-1:0]   wb_dat_o` |
-| | `input  logic                         wb_we_i` |
-| | `input  logic [c_SEL_W-1:0]           wb_sel_i` |
-| | `input  logic                         wb_stb_i` |
-| | `input  logic                         wb_cyc_i` |
-| | `output logic                         wb_ack_o` |
-| | `output logic                         wb_err_o` |
+| Declaration |
+| --- |
+| `input  logic                         clk_i` |
+| `input  logic                         reset_i` |
+| `input  logic [g_WB_ADDR_WIDTH-1:0]   wb_adr_i` |
+| `input  logic [g_WB_DATA_WIDTH-1:0]   wb_dat_i` |
+| `output logic [g_WB_DATA_WIDTH-1:0]   wb_dat_o` |
+| `input  logic                         wb_we_i` |
+| `input  logic [c_SEL_W-1:0]           wb_sel_i` |
+| `input  logic                         wb_stb_i` |
+| `input  logic                         wb_cyc_i` |
+| `output logic                         wb_ack_o` |
+| `output logic                         wb_err_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

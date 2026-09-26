@@ -3,7 +3,7 @@ type: Module
 title: slip_buffer
 description: Slip buffer for stream bit alignment.
 tags: [domain:comms, module:slip_buffer]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/slip_buffer.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Slip buffer for stream bit alignment.
 
-RTL notes: Slip buffer for stream synchronization.
-
 # When to use
 
 See the [comms domain index](index.md) for siblings and typical compositions.
@@ -26,24 +24,24 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 64` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 64` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                    clk_i` |
-| | `input  logic                    reset_i,      // active high` |
-| | `input  logic                    slip_i,       // slip pulse which triggers shift` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic                    snk_valid_i` |
-| | `output logic                    snk_ready_o` |
-| | `output logic                    src_valid_o` |
-| | `input  logic                    src_ready_i` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                    clk_i` |
+| `input  logic                    reset_i,      // active high` |
+| `input  logic                    slip_i,       // slip pulse which triggers shift` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic                    snk_valid_i` |
+| `output logic                    snk_ready_o` |
+| `output logic                    src_valid_o` |
+| `input  logic                    src_ready_i` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

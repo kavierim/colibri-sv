@@ -1,6 +1,6 @@
 # Component catalog
 
-The machine-readable catalog lives in the OKF bundle:
+The machine-readable catalog lives under `docs/`:
 
 - [Bundle index](docs/index.md)
 - [Packages](docs/packages/index.md)

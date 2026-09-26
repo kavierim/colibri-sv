@@ -2,9 +2,9 @@
 
 ## Documentation
 
-- OKF bundle root: [`docs/`](docs/index.md) (v0.2).
+- Documentation root: [`docs/`](docs/index.md).
 - Module template: [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md).
-- Project OKF settings: [`.cursor/skills/okf-documentation/project.md`](.cursor/skills/okf-documentation/project.md).
+- Project doc settings: [`.cursor/skills/documentation/project.md`](.cursor/skills/documentation/project.md).
 
 ## RTL
 
@@ -19,7 +19,7 @@ From repo root: `uv run python tools/generate_okf_bundle.py` — refreshes gener
 
 - Own one `docs/modules/<domain>/` tree per change.
 - Append meaningful updates to [`docs/log.md`](docs/log.md).
-- Do not duplicate `CONVENTIONS.md` in OKF pages; link it.
+- Do not duplicate `CONVENTIONS.md` in documentation pages; link it.
 
 ## Upstream
 

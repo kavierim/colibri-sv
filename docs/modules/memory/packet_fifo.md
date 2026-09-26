@@ -3,8 +3,8 @@ type: Module
 title: packet_fifo
 description: Single-clock Avalon-ST packet FIFO.
 tags: [domain:memory, module:packet_fifo]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/memory/packet_fifo.sv
 sources:
   - id: upstream
@@ -16,48 +16,46 @@ sources:
 
 Single-clock Avalon-ST packet FIFO.
 
-RTL notes: Single-clock packet FIFO on top of fifo.
-
 # When to use
 
-See the [memory domain index](index.md) for siblings and typical compositions.
+Single-clock AVST packet FIFO; dual-clock CDC: [`packet_cc_ram_fifo`](packet_cc_ram_fifo.md).
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_MAX_PACKET_BYTES  = 256` |
-| | `parameter int g_NUM_PACKETS       = 4` |
-| | `parameter int g_USEDP_BITS        = colibri_utils::log2ceil(g_NUM_PACKETS) + 1` |
-| | `parameter bit g_ENABLE_SIZE_COUNT = 1'b1` |
-| | `parameter int g_PKT_SIZE_BITS     = colibri_utils::log2ceil(g_MAX_PACKET_BYTES) + 1` |
-| | `parameter int g_DATA_WIDTH        = 8` |
+| Declaration |
+| --- |
+| `parameter int g_MAX_PACKET_BYTES  = 256` |
+| `parameter int g_NUM_PACKETS       = 4` |
+| `parameter int g_USEDP_BITS        = colibri_utils::log2ceil(g_NUM_PACKETS) + 1` |
+| `parameter bit g_ENABLE_SIZE_COUNT = 1'b1` |
+| `parameter int g_PKT_SIZE_BITS     = colibri_utils::log2ceil(g_MAX_PACKET_BYTES) + 1` |
+| `parameter int g_DATA_WIDTH        = 8` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `output logic full_o` |
-| | `output logic empty_o` |
-| | `output logic [g_USEDP_BITS-1:0] usedp_o` |
-| | `output logic snk_ready_o` |
-| | `input  logic snk_valid_i` |
-| | `input  logic snk_sop_i` |
-| | `input  logic snk_eop_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] snk_empty_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic src_ready_i` |
-| | `output logic src_valid_o` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] src_empty_o` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic [g_PKT_SIZE_BITS-1:0] src_size_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `output logic full_o` |
+| `output logic empty_o` |
+| `output logic [g_USEDP_BITS-1:0] usedp_o` |
+| `output logic snk_ready_o` |
+| `input  logic snk_valid_i` |
+| `input  logic snk_sop_i` |
+| `input  logic snk_eop_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] snk_empty_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic src_ready_i` |
+| `output logic src_valid_o` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] src_empty_o` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| `output logic [g_PKT_SIZE_BITS-1:0] src_size_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

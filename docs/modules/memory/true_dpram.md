@@ -3,7 +3,7 @@ type: Module
 title: true_dpram
 description: True dual-port RAM (two write and two read ports).
 tags: [domain:memory, module:true_dpram]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/true_dpram.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 True dual-port RAM (two write and two read ports).
 
-RTL notes: True dual-port RAM with mixed-width support. The selected model stores the array as logic and updates it in always_ff.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,35 +24,35 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH   = 16` |
-| | `parameter int g_A_DATA_WIDTH = g_DATA_WIDTH` |
-| | `parameter int g_B_DATA_WIDTH = g_A_DATA_WIDTH` |
-| | `parameter int g_N_WORDS      = 10` |
-| | `parameter int g_A_ADDR_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter int g_B_ADDR_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter bit g_WRITE_FIRST  = 1'b0` |
-| | `parameter bit g_REGISTER_OUT = 1'b0` |
-| | `parameter string g_INIT_FILE = ""` |
-| | `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
-| | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH   = 16` |
+| `parameter int g_A_DATA_WIDTH = g_DATA_WIDTH` |
+| `parameter int g_B_DATA_WIDTH = g_A_DATA_WIDTH` |
+| `parameter int g_N_WORDS      = 10` |
+| `parameter int g_A_ADDR_WIDTH = colibri_utils::log2ceil(` |
+| `parameter int g_B_ADDR_WIDTH = colibri_utils::log2ceil(` |
+| `parameter bit g_WRITE_FIRST  = 1'b0` |
+| `parameter bit g_REGISTER_OUT = 1'b0` |
+| `parameter string g_INIT_FILE = ""` |
+| `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
+| `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clka_i` |
-| | `input  logic wra_i` |
-| | `input  logic [colibri_utils::downto_width(g_A_ADDR_WIDTH)-1:0] addra_i` |
-| | `input  logic [g_A_DATA_WIDTH-1:0] dataa_i` |
-| | `output logic [g_A_DATA_WIDTH-1:0] dataa_o` |
-| | `input  logic clkb_i` |
-| | `input  logic wrb_i` |
-| | `input  logic [colibri_utils::downto_width(g_B_ADDR_WIDTH)-1:0] addrb_i` |
-| | `input  logic [g_B_DATA_WIDTH-1:0] datab_i` |
-| | `output logic [g_B_DATA_WIDTH-1:0] datab_o` |
+| Declaration |
+| --- |
+| `input  logic clka_i` |
+| `input  logic wra_i` |
+| `input  logic [colibri_utils::downto_width(g_A_ADDR_WIDTH)-1:0] addra_i` |
+| `input  logic [g_A_DATA_WIDTH-1:0] dataa_i` |
+| `output logic [g_A_DATA_WIDTH-1:0] dataa_o` |
+| `input  logic clkb_i` |
+| `input  logic wrb_i` |
+| `input  logic [colibri_utils::downto_width(g_B_ADDR_WIDTH)-1:0] addrb_i` |
+| `input  logic [g_B_DATA_WIDTH-1:0] datab_i` |
+| `output logic [g_B_DATA_WIDTH-1:0] datab_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

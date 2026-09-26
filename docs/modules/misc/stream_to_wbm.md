@@ -3,7 +3,7 @@ type: Module
 title: stream_to_wbm
 description: Bidirectional stream to Wishbone B4 master.
 tags: [domain:misc, module:stream_to_wbm, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/stream_to_wbm.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Bidirectional stream to Wishbone B4 master.
 
-RTL notes: Stream to Wishbone Master Memory Mapped Interface. Converts a full duplex stream into a Wishbone.B4 master. 0x01 sets the address, 0x02 is a read, 0x03 is a write, 0x00 is NOP. Replies use the last command plus 0x10 in the high nibble.
-
 # When to use
 
 See the [misc domain index](index.md) for siblings and typical compositions.
@@ -26,32 +24,32 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
-| | `parameter int unsigned g_WB_DATA_WIDTH = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_WB_ADDR_WIDTH = 32` |
+| `parameter int unsigned g_WB_DATA_WIDTH = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [8 + colibri_utils::maximum(int'(g_WB_ADDR_WIDTH), int'(g_WB_DATA_WIDTH)) - 1:0] snk_data_i` |
-| | `input  logic snk_valid_i` |
-| | `output logic snk_ready_o` |
-| | `output logic [8 + colibri_utils::maximum(int'(g_WB_ADDR_WIDTH), int'(g_WB_DATA_WIDTH)) - 1:0] src_data_o` |
-| | `output logic src_valid_o` |
-| | `output logic [g_WB_ADDR_WIDTH-1:0] wb_adr_o` |
-| | `input  logic [g_WB_DATA_WIDTH-1:0] wb_dat_i` |
-| | `output logic [g_WB_DATA_WIDTH-1:0] wb_dat_o` |
-| | `output logic wb_we_o` |
-| | `output logic [colibri_utils::downto_width(int'(g_WB_DATA_WIDTH) / 8)-1:0] wb_sel_o` |
-| | `output logic wb_stb_o` |
-| | `output logic wb_cyc_o` |
-| | `input  logic wb_ack_i` |
-| | `input  logic wb_err_i` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [8 + colibri_utils::maximum(int'(g_WB_ADDR_WIDTH), int'(g_WB_DATA_WIDTH)) - 1:0] snk_data_i` |
+| `input  logic snk_valid_i` |
+| `output logic snk_ready_o` |
+| `output logic [8 + colibri_utils::maximum(int'(g_WB_ADDR_WIDTH), int'(g_WB_DATA_WIDTH)) - 1:0] src_data_o` |
+| `output logic src_valid_o` |
+| `output logic [g_WB_ADDR_WIDTH-1:0] wb_adr_o` |
+| `input  logic [g_WB_DATA_WIDTH-1:0] wb_dat_i` |
+| `output logic [g_WB_DATA_WIDTH-1:0] wb_dat_o` |
+| `output logic wb_we_o` |
+| `output logic [colibri_utils::downto_width(int'(g_WB_DATA_WIDTH) / 8)-1:0] wb_sel_o` |
+| `output logic wb_stb_o` |
+| `output logic wb_cyc_o` |
+| `input  logic wb_ack_i` |
+| `input  logic wb_err_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

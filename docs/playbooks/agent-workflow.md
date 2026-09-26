@@ -1,9 +1,9 @@
 ---
 type: Playbook
 title: Agent workflow
-description: How coding agents read and update the OKF bundle.
+description: How coding agents read and update the documentation bundle.
 tags: [playbook, agents]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream
@@ -12,11 +12,11 @@ sources:
 ---
 # Bundle root
 
-Documentation lives in [`docs/`](../index.md) (OKF v0.2). RTL remains in `src/`.
+Documentation lives in [`docs/`](../index.md). RTL remains in `src/`.
 
 # Editing modules
 
-1. Read the module OKF page and its `resource` RTL file.
+1. Read the module documentation page and its `resource` RTL file.
 2. Follow [`docs/MODULE_TEMPLATE.md`](../MODULE_TEMPLATE.md) when creating or restructuring pages.
 3. Update the domain [`index.md`](../modules/index.md) if `description` changes.
 4. Append significant changes to [`log.md`](../log.md).
@@ -32,4 +32,4 @@ After RTL edits, run the listed testbench or `./verilator/run_all.sh`.
 # Related
 
 - [`AGENTS.md`](../../AGENTS.md)
-- [`.cursor/skills/okf-documentation/project.md`](../../.cursor/skills/okf-documentation/project.md)
+- [`.cursor/skills/documentation/project.md`](../../.cursor/skills/documentation/project.md)

@@ -3,7 +3,7 @@ type: Module
 title: synchro
 description: Clock-domain crossing for a packed vector.
 tags: [domain:common, module:synchro, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Clock-domain crossing for a packed vector.
 
-RTL notes: Clock domain boundary synchronizer (legacy version). Synchronizes a vector across a clock domain. g_NUM_STAGES is at least 2. VHDL requires g_DATA_LENGTH (no default). Default 1 lets Verilator elaborate this module.
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,21 +24,21 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int                       g_DATA_LENGTH = 1` |
-| | `parameter logic [g_DATA_LENGTH-1:0] g_INIT_VALUE  = '0` |
-| | `parameter int                       g_NUM_STAGES  = 2` |
+| Declaration |
+| --- |
+| `parameter int                       g_DATA_LENGTH = 1` |
+| `parameter logic [g_DATA_LENGTH-1:0] g_INIT_VALUE  = '0` |
+| `parameter int                       g_NUM_STAGES  = 2` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     clk_i` |
-| | `input  logic                     reset_i` |
-| | `input  logic [g_DATA_LENGTH-1:0] data_i` |
-| | `output logic [g_DATA_LENGTH-1:0] data_o` |
+| Declaration |
+| --- |
+| `input  logic                     clk_i` |
+| `input  logic                     reset_i` |
+| `input  logic [g_DATA_LENGTH-1:0] data_i` |
+| `output logic [g_DATA_LENGTH-1:0] data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

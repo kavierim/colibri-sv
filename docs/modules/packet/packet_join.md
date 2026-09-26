@@ -3,7 +3,7 @@ type: Module
 title: packet_join
 description: Concatenate consecutive packets into one.
 tags: [domain:packet, module:packet_join]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/packet_join.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Concatenate consecutive packets into one.
 
-RTL notes: Joins consecutive Avalon-ST packets into one. Empty symbols at an input end of packet are removed so the next packet follows directly. Library lint elaborates every module; wave0_elab is the other top.
-
 # When to use
 
 See the [packet domain index](index.md) for siblings and typical compositions.
@@ -26,31 +24,31 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_SYM_WIDTH = 8` |
-| | `parameter int unsigned g_DATA_SYM  = 4` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_SYM_WIDTH = 8` |
+| `parameter int unsigned g_DATA_SYM  = 4` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                   clk_i` |
-| | `input  logic                   reset_i` |
-| | `input  logic                   last_i` |
-| | `input  logic [c_DATA_W-1:0]    snk_data_i` |
-| | `input  logic [c_EMPTY_W-1:0]   snk_empty_i` |
-| | `input  logic                   snk_sop_i` |
-| | `input  logic                   snk_eop_i` |
-| | `input  logic                   snk_valid_i` |
-| | `output logic                   snk_ready_o` |
-| | `output logic [c_DATA_W-1:0]    src_data_o` |
-| | `output logic [c_EMPTY_W-1:0]   src_empty_o` |
-| | `output logic                   src_sop_o` |
-| | `output logic                   src_eop_o` |
-| | `output logic                   src_valid_o` |
-| | `input  logic                   src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic                   clk_i` |
+| `input  logic                   reset_i` |
+| `input  logic                   last_i` |
+| `input  logic [c_DATA_W-1:0]    snk_data_i` |
+| `input  logic [c_EMPTY_W-1:0]   snk_empty_i` |
+| `input  logic                   snk_sop_i` |
+| `input  logic                   snk_eop_i` |
+| `input  logic                   snk_valid_i` |
+| `output logic                   snk_ready_o` |
+| `output logic [c_DATA_W-1:0]    src_data_o` |
+| `output logic [c_EMPTY_W-1:0]   src_empty_o` |
+| `output logic                   src_sop_o` |
+| `output logic                   src_eop_o` |
+| `output logic                   src_valid_o` |
+| `input  logic                   src_ready_i` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

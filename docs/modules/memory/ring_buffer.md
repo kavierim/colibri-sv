@@ -3,7 +3,7 @@ type: Module
 title: ring_buffer
 description: Circular buffer; overwrite oldest when full.
 tags: [domain:memory, module:ring_buffer]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/ring_buffer.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Circular buffer; overwrite oldest when full.
 
-RTL notes: RAM-based ring buffer. A write while full overwrites the oldest word.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,23 +24,23 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_NUM_WORDS  = 4` |
-| | `parameter int g_DATA_WIDTH = 8` |
+| Declaration |
+| --- |
+| `parameter int g_NUM_WORDS  = 4` |
+| `parameter int g_DATA_WIDTH = 8` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic snk_valid_i` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic src_valid_o` |
-| | `input  logic src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic snk_valid_i` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| `output logic src_valid_o` |
+| `input  logic src_ready_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

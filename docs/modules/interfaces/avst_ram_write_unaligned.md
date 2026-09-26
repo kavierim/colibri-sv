@@ -3,7 +3,7 @@ type: Module
 title: avst_ram_write_unaligned
 description: Byte-addressable Avalon-ST RAM writer.
 tags: [domain:interfaces, module:avst_ram_write_unaligned, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/stream/avst_ram_write_unaligned.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Byte-addressable Avalon-ST RAM writer.
 
-RTL notes: Avalon Stream to RAM writer with unaligned (byte-addressable) access. Writes Avalon-ST packets to a word-addressed RAM with a byte-enable vector. start_addr_i is the initial byte address at start of packet. An extra write after end of packet can deassert snk_ready_o for one cycle. RAM outputs are delayed by 2 cycles. flush_i writes any bytes still in the buffer.
-
 # When to use
 
 See the [interfaces domain index](index.md) for siblings and typical compositions.
@@ -26,30 +24,30 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_BYTE_WIDTH = 8` |
-| | `parameter int unsigned g_WORD_BYTES = 8` |
-| | `parameter int unsigned g_RAM_DEPTH  = 16` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_BYTE_WIDTH = 8` |
+| `parameter int unsigned g_WORD_BYTES = 8` |
+| `parameter int unsigned g_RAM_DEPTH  = 16` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                       clk_i` |
-| | `input  logic                       reset_i` |
-| | `input  logic [c_DATA_W-1:0]        snk_data_i` |
-| | `input  logic [c_EMPTY_W-1:0]       snk_empty_i` |
-| | `input  logic                       snk_sop_i` |
-| | `input  logic                       snk_eop_i` |
-| | `input  logic                       snk_valid_i` |
-| | `output logic                       snk_ready_o` |
-| | `input  logic [c_BYTE_ADDR_W-1:0]   start_addr_i` |
-| | `input  logic                       flush_i` |
-| | `output logic [g_WORD_BYTES-1:0]    wr_be_o` |
-| | `output logic [c_ADDR_W-1:0]        wr_addr_o` |
-| | `output logic [c_DATA_W-1:0]        wr_data_o` |
+| Declaration |
+| --- |
+| `input  logic                       clk_i` |
+| `input  logic                       reset_i` |
+| `input  logic [c_DATA_W-1:0]        snk_data_i` |
+| `input  logic [c_EMPTY_W-1:0]       snk_empty_i` |
+| `input  logic                       snk_sop_i` |
+| `input  logic                       snk_eop_i` |
+| `input  logic                       snk_valid_i` |
+| `output logic                       snk_ready_o` |
+| `input  logic [c_BYTE_ADDR_W-1:0]   start_addr_i` |
+| `input  logic                       flush_i` |
+| `output logic [g_WORD_BYTES-1:0]    wr_be_o` |
+| `output logic [c_ADDR_W-1:0]        wr_addr_o` |
+| `output logic [c_DATA_W-1:0]        wr_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

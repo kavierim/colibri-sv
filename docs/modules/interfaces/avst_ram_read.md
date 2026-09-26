@@ -3,7 +3,7 @@ type: Module
 title: avst_ram_read
 description: Read Avalon-ST beats from RAM.
 tags: [domain:interfaces, module:avst_ram_read, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/stream/avst_ram_read.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Read Avalon-ST beats from RAM.
 
-RTL notes: Simple Avalon Stream to RAM reader. Sequential reads through a RAM interface, presented as a packeted Avalon-ST output. length_i is a byte count. A length of 0 reads until stop_i. start_i is accepted only while busy_o is low. stop_i ends the transfer.
-
 # When to use
 
 See the [interfaces domain index](index.md) for siblings and typical compositions.
@@ -26,33 +24,33 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_BYTE_WIDTH = 8` |
-| | `parameter int unsigned g_WORD_BYTES = 8` |
-| | `parameter int unsigned g_RAM_DEPTH  = 16` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_BYTE_WIDTH = 8` |
+| `parameter int unsigned g_WORD_BYTES = 8` |
+| `parameter int unsigned g_RAM_DEPTH  = 16` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     clk_i` |
-| | `input  logic                     reset_i` |
-| | `output logic [c_DATA_W-1:0]      src_data_o` |
-| | `output logic [c_EMPTY_W-1:0]     src_empty_o` |
-| | `output logic                     src_sop_o` |
-| | `output logic                     src_eop_o` |
-| | `output logic                     src_valid_o` |
-| | `input  logic                     src_ready_i` |
-| | `input  logic [c_ADDR_W-1:0]      start_addr_i` |
-| | `input  logic [c_LEN_W-1:0]       length_i` |
-| | `input  logic                     start_i` |
-| | `input  logic                     stop_i` |
-| | `output logic                     busy_o` |
-| | `output logic                     rd_en_o` |
-| | `output logic [c_ADDR_W-1:0]      rd_addr_o` |
-| | `input  logic [c_DATA_W-1:0]      rd_data_i` |
+| Declaration |
+| --- |
+| `input  logic                     clk_i` |
+| `input  logic                     reset_i` |
+| `output logic [c_DATA_W-1:0]      src_data_o` |
+| `output logic [c_EMPTY_W-1:0]     src_empty_o` |
+| `output logic                     src_sop_o` |
+| `output logic                     src_eop_o` |
+| `output logic                     src_valid_o` |
+| `input  logic                     src_ready_i` |
+| `input  logic [c_ADDR_W-1:0]      start_addr_i` |
+| `input  logic [c_LEN_W-1:0]       length_i` |
+| `input  logic                     start_i` |
+| `input  logic                     stop_i` |
+| `output logic                     busy_o` |
+| `output logic                     rd_en_o` |
+| `output logic [c_ADDR_W-1:0]      rd_addr_o` |
+| `input  logic [c_DATA_W-1:0]      rd_data_i` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

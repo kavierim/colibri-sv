@@ -3,8 +3,8 @@ type: Package
 title: colibri_utils
 description: Bit-math, registers, and byte manipulation.
 tags: [package, pkg:utils]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/common/utils.sv
 sources:
   - id: upstream

@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 CERN
 # SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
 # SPDX-License-Identifier: CERN-OHL-W-2.0
-"""Generate OKF v0.2 documentation bundle under docs/."""
+"""Generate the documentation bundle under docs/."""
 
 from __future__ import annotations
 
@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 SRC = ROOT / "src"
 GENERATED_AT = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-GENERATED_BY = "process:generate_okf_bundle/1.0"
+GENERATED_BY = "process:generate_doc_bundle/1.0"
 
 UPSTREAM = (
     "https://gitlab.com/colibri-cern/colibri/-/tree/"
@@ -40,7 +40,7 @@ def doc_href(from_file: Path, under_docs: str) -> str:
 
 
 def expand_doc_links(text: str, from_file: Path) -> str:
-    """Turn OKF bundle-root links (/foo.md) into GitHub-friendly relative links."""
+    """Turn docs-root links (/foo.md) into GitHub-friendly relative links."""
 
     def repl(match: re.Match[str]) -> str:
         return f"]({doc_href(from_file, match.group(1))})"
@@ -131,7 +131,38 @@ WHEN_TO_USE: dict[str, str] = {
     "mmap_fifo_rx": "Full bridge: `mmap_fifo`.",
     "gearbox_up": "Aurora RX upscaler; not [`comms/gearbox`](/modules/comms/gearbox.md).",
     "cc_gearbox_up": "Clock-crossing Aurora upscaler variant in the RX path.",
+    "avst_to_axis": "Place after AVST packet logic; pair with [`axis_to_avst`](/modules/interfaces/axis_to_avst.md) for round-trip. See [stream-interfaces](/playbooks/stream-interfaces.md).",
+    "axis_to_avst": "Ingress from AXI-Stream IP; often follows [`avst_to_axis`](/modules/interfaces/avst_to_axis.md) in the reverse direction.",
+    "avst_width_converter": "Between AVST blocks with different beat widths; keep `g_SYM_WIDTH` consistent. Needs packet `sop`/`eop`/`empty` preserved.",
+    "avst_cdc": "For AVST packet streams across clocks; arbitrary payloads may use [`synchro_handshake`](/modules/common/synchro_handshake.md) instead.",
+    "avst_fifo": "Thin wrapper around [`packet_fifo`](/modules/memory/packet_fifo.md) or width-matched FIFO—check generics against your beat width.",
+    "crc": "Append or check CRC on an AVST packet stream; polynomial from [`colibri_poly`](/packages/colibri_poly.md).",
+    "scrambler": "Line coding before PHY; pair with [`descrambler`](/modules/comms/descrambler.md). Polynomial via `colibri_poly`.",
+    "packet_fifo": "Single-clock AVST packet FIFO; dual-clock CDC: [`packet_cc_ram_fifo`](/modules/memory/packet_cc_ram_fifo.md).",
+    "mmap_fifo": "CPU access to AVST TX/RX packet FIFOs over Wishbone; see CSR packages under `docs/packages/`.",
+    "counter": "Basic timed/event counting; set `g_MODULO` and width explicitly for wrap behaviour.",
+    "comparator": "Registered compare with enable; unsigned `a_i`/`b_i`; use `g_IS_EQUAL` for `>=` instead of `>`.",
 }
+
+STABLE_MODULES = frozenset(
+    {
+        "counter",
+        "comparator",
+        "stream_buffer",
+        "fifo",
+        "packet_fifo",
+        "cc_fifo",
+        "avst_to_axis",
+        "axis_to_avst",
+        "avst_width_converter",
+        "avst_cdc",
+        "crc",
+        "scrambler",
+        "mmap_fifo",
+    }
+)
+
+STABLE_PACKAGES = frozenset({"colibri_utils", "colibri_types"})
 
 DOMAIN_BEHAVIOUR: dict[str, str] = {
     "common": "See RTL for clocking; not every block has `reset_i`.",
@@ -287,7 +318,7 @@ def assign_module_paths() -> None:
             MODULE_DOMAIN[name] = (dom, rel)
 
 
-# Verification rows migrated from area readmes (readmes are slim pointers after OKF migration).
+# Verification rows migrated from area readmes (readmes are slim pointers to docs/).
 VERIFICATION_CATALOG: dict[str, tuple[str, str, str]] = {
     "colibri_utils": ("yes", "sim/common/utils_tb.sv", "fv/common/utils_sva.sv"),
     "colibri_encoders": ("yes", "sim/common/encoders_tb.sv", ""),
@@ -522,6 +553,38 @@ jtag_serdes #(
             "the link loses lock or corrupts framing."
         ),
     },
+    "avst_width_converter": {
+        "behaviour": (
+            "Buffers and serialises beats when `g_INPUT_SYM` and `g_OUTPUT_SYM` differ. "
+            "`snk_*` is the wide side, `src_*` the narrow side (or vice versa per parameterisation). "
+            "Preserves packet boundaries via `sop`/`eop` and `empty`."
+        ),
+    },
+    "avst_to_axis": {
+        "when": (
+            "Connect colibri AVST logic to AXI-Stream IP. Map `tkeep` from beat width; "
+            "see [`colibri_types`](/packages/colibri_types.md)."
+        ),
+    },
+    "crc": {
+        "behaviour": (
+            "Computes CRC over the AVST packet on the fly; configure polynomial width and init via generics. "
+            "Typically sits before [`be_add_trail`](/modules/misc/be_add_trail.md) or after payload logic."
+        ),
+    },
+    "scrambler": {
+        "behaviour": (
+            "Multiplicative self-synchronous scrambler on a bit or byte stream. "
+            "Reset state must match the link partner; pair with `descrambler` on the receive path."
+        ),
+    },
+    "mmap_fifo": {
+        "when": (
+            "Software-driven packet IO: Wishbone register file + TX/RX AVST packet ports. "
+            "Split hierarchy: [`mmap_fifo_tx`](/modules/misc/mmap_fifo_tx.md), "
+            "[`mmap_fifo_rx`](/modules/misc/mmap_fifo_rx.md), CSR blocks in `mmap_fifo/vhdl_if/`."
+        ),
+    },
 }
 
 
@@ -532,6 +595,7 @@ def yaml_frontmatter(
     description: str,
     tags: list[str],
     resource: str | None = None,
+    status: str = "draft",
 ) -> str:
     lines = [
         "---",
@@ -540,7 +604,7 @@ def yaml_frontmatter(
         f"description: {description}",
         f"tags: [{', '.join(tags)}]",
         f"generated: {{ by: {GENERATED_BY}, at: {GENERATED_AT} }}",
-        "status: draft",
+        f"status: {status}",
     ]
     if resource:
         lines.append(f"resource: {resource}")
@@ -612,19 +676,19 @@ def write_module_page(name: str, dom: str, rtl: str) -> Path:
     flist = DOMAIN_META.get(dom, ("", "", "verilator/colibri.f"))[2]
     concept = f"/modules/{dom}/{name}.md"
 
-    param_table = "| Parameter | Declaration |\n| --- | --- |\n"
+    param_table = "| Declaration |\n| --- |\n"
     if params:
         for p in params[:40]:
-            param_table += f"| | `{p}` |\n"
+            param_table += f"| `{p}` |\n"
     else:
-        param_table += "| (none) | |\n"
+        param_table += "| (none) |\n"
 
-    port_table = "| Port | Declaration |\n| --- | --- |\n"
+    port_table = "| Declaration |\n| --- |\n"
     if ports:
         for p in ports[:60]:
-            port_table += f"| | `{p}` |\n"
+            port_table += f"| `{p}` |\n"
     else:
-        port_table += "| (see RTL) | |\n"
+        port_table += "| (see RTL) |\n"
 
     imports = ""
     if "avst" in rtl or dom in ("interfaces", "packet", "misc", "memory"):
@@ -649,13 +713,12 @@ def write_module_page(name: str, dom: str, rtl: str) -> Path:
         else f"Width and typing rules: [`CONVENTIONS.md`]({conv}).\n"
     )
 
-    body = f"""{yaml_frontmatter(type_="Module", title=name, description=desc, tags=tags, resource=rtl)}
+    mod_status = "stable" if name in STABLE_MODULES else "draft"
+    body = f"""{yaml_frontmatter(type_="Module", title=name, description=desc, tags=tags, resource=rtl, status=mod_status)}
 
 # Purpose
 
 {desc}
-
-{('RTL notes: ' + comments) if comments else ''}
 
 # When to use
 
@@ -715,7 +778,8 @@ def write_package_page(pkg: str, rtl: str, desc: str) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     ver = VERIFICATION.get(pkg, {})
     conv = conventions_href(path)
-    body = f"""{yaml_frontmatter(type_="Package", title=pkg, description=desc, tags=["package", pkg.replace("colibri_", "pkg:")], resource=rtl)}
+    pkg_status = "stable" if pkg in STABLE_PACKAGES else "draft"
+    body = f"""{yaml_frontmatter(type_="Package", title=pkg, description=desc, tags=["package", pkg.replace("colibri_", "pkg:")], resource=rtl, status=pkg_status)}
 
 # Purpose
 
@@ -768,11 +832,7 @@ import {pkg}::*;
 
 def write_indexes(modules_by_domain: dict[str, list[str]]) -> None:
     index_path = DOCS / "index.md"
-    index_body = """---
-okf_version: "0.2"
----
-
-# Colibri SystemVerilog knowledge bundle
+    index_body = """# Colibri SystemVerilog documentation
 
 Canonical module and package documentation for the Verilator-oriented SystemVerilog port of [colibri](https://gitlab.com/colibri-cern/colibri).
 
@@ -781,6 +841,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 - [Getting started](/playbooks/getting-started.md)
 - [Simulation](/playbooks/simulation.md)
 - [Stream interfaces](/playbooks/stream-interfaces.md)
+- [Typical datapaths](/playbooks/typical-datapaths.md)
 - [Agent workflow](/playbooks/agent-workflow.md)
 
 ## Reference
@@ -796,7 +857,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 
 RTL, simulation, and formal verification files in this repository are **Covered Source** under [CERN-OHL-W-2.0](../LICENSES/CERN-OHL-W-2.0.txt); see [NOTICE](../NOTICE). Per-file SPDX headers on `src/**/*.sv` and the obligations in NOTICE satisfy redistribution of that hardware Source.
 
-This OKF bundle is descriptive documentation. It is not hardware Source and does not need `SPDX-FileCopyrightText: 2026 CERN` (or `SPDX-License-Identifier: CERN-OHL-W-2.0`) on every page. Upstream colibri provenance is cited in module `sources` and in RTL headers.
+The pages under `docs/` are descriptive documentation. They are not hardware Source and do not need `SPDX-FileCopyrightText: 2026 CERN` (or `SPDX-License-Identifier: CERN-OHL-W-2.0`) on every file. Upstream colibri provenance is cited in module `sources` and in RTL headers.
 
 Translation contract (authoritative): [`CONVENTIONS.md`](../CONVENTIONS.md).
 """
@@ -807,7 +868,8 @@ Translation contract (authoritative): [`CONVENTIONS.md`](../CONVENTIONS.md).
 
 ## 2026-09-26
 
-- Initial OKF v0.2 bundle: scaffold, {sum(len(v) for v in modules_by_domain.values())} module pages, {len(PACKAGES)} package pages, playbooks, and agent entry points.
+- Documentation bundle: module/package pages, playbooks (including typical datapaths), and agent entry points.
+- Reference modules/packages marked `status: stable` after review pass.
 - Generated by `{GENERATED_BY}`.
 """,
         encoding="utf-8",
@@ -863,6 +925,7 @@ def write_playbooks() -> None:
 | [getting-started](/playbooks/getting-started.md) | Licence, layout, first integration |
 | [simulation](/playbooks/simulation.md) | Verilator regression and file lists |
 | [stream-interfaces](/playbooks/stream-interfaces.md) | AVST/AXIS types and adapters |
+| [typical-datapaths](/playbooks/typical-datapaths.md) | Common block chains |
 | [agent-workflow](/playbooks/agent-workflow.md) | How agents maintain this bundle |
 """,
             pb_index,
@@ -945,7 +1008,12 @@ Packages are always pulled in through `verilator/colibri.f`.
             ["playbook", "interface:avst", "interface:axis"],
             """# Types
 
-Stream records and conversion helpers live in [`colibri_types`](/packages/colibri_types.md): Avalon-ST (`t_avst_*`) and AXI-Stream (`t_axis_*`) bundles with `data`, `valid`, `ready`, `startofpacket`, `endofpacket`, and `empty` where applicable.
+Stream helpers live in [`colibri_types`](/packages/colibri_types.md). In RTL you will see either:
+
+- **Split AVST ports** on modules: `snk_*` (sink) and `src_*` (source) with `valid`/`ready`, plus `sop`/`eop`/`empty` on packet beats.
+- **Packed structs** via macros such as `` `COLIBRI_AVST_MASTER_T `` and `` `COLIBRI_AXIS_MASTER_T `` (see [`CONVENTIONS.md`](../../CONVENTIONS.md)).
+
+AXI-Stream uses `tdata`, `tvalid`, `tready`, `tlast`, and `tkeep` (width from `axis_keep_width()`).
 
 # Adapters (`src/interfaces/stream/`)
 
@@ -973,18 +1041,53 @@ Use the helper macros documented in `types.sv` and [`CONVENTIONS.md`](../../CONV
 - [colibri_types](/packages/colibri_types.md)
 """,
         ),
+        "typical-datapaths.md": (
+            "Playbook",
+            "Typical datapaths",
+            "Common module chains for integration (not exhaustive).",
+            ["playbook", "integration"],
+            """# AVST packet + CRC
+
+[`header_add`](/modules/packet/header_add.md) → payload logic → [`crc`](/modules/comms/crc.md) → [`be_add_trail`](/modules/misc/be_add_trail.md) (optional) → [`packet_fifo`](/modules/memory/packet_fifo.md) or PHY adapter.
+
+# Width / protocol bridge
+
+Narrow AVST → [`avst_width_converter`](/modules/interfaces/avst_width_converter.md) → wide AVST → [`avst_to_axis`](/modules/interfaces/avst_to_axis.md) → AXI-Stream IP.
+
+# Clock crossing
+
+Same-width AVST: [`avst_cdc`](/modules/interfaces/avst_cdc.md) or [`packet_cc_ram_fifo`](/modules/memory/packet_cc_ram_fifo.md). Arbitrary payload: [`synchro_handshake`](/modules/common/synchro_handshake.md).
+
+# CPU packet port
+
+[`mmap_fifo`](/modules/misc/mmap_fifo.md) (Wishbone) ↔ software; AVST TX/RX to the datapath. CSR definitions in [`mmap_fifo_csr_pkg`](/packages/mmap_fifo_csr_pkg.md).
+
+# Line coding
+
+[`scrambler`](/modules/comms/scrambler.md) → PHY or [`encode_8b10b`](/modules/endec/encode_8b10b.md) depending on link. Receive: [`descrambler`](/modules/comms/descrambler.md) or [`decode_8b10b`](/modules/endec/decode_8b10b.md).
+
+# Elasticity
+
+Prefer [`stream_buffer`](/modules/common/stream_buffer.md) between blocks with backpressure; [`avst_fifo`](/modules/interfaces/avst_fifo.md) for packetized FIFO storage.
+
+# Related
+
+- [stream-interfaces](/playbooks/stream-interfaces.md)
+- [modules index](/modules/index.md)
+""",
+        ),
         "agent-workflow.md": (
             "Playbook",
             "Agent workflow",
-            "How coding agents read and update the OKF bundle.",
+            "How coding agents read and update the documentation bundle.",
             ["playbook", "agents"],
             """# Bundle root
 
-Documentation lives in [`docs/`](/index.md) (OKF v0.2). RTL remains in `src/`.
+Documentation lives in [`docs/`](/index.md). RTL remains in `src/`.
 
 # Editing modules
 
-1. Read the module OKF page and its `resource` RTL file.
+1. Read the module documentation page and its `resource` RTL file.
 2. Follow [`docs/MODULE_TEMPLATE.md`](/MODULE_TEMPLATE.md) when creating or restructuring pages.
 3. Update the domain [`index.md`](/modules/index.md) if `description` changes.
 4. Append significant changes to [`log.md`](/log.md).
@@ -1000,7 +1103,7 @@ After RTL edits, run the listed testbench or `./verilator/run_all.sh`.
 # Related
 
 - [`AGENTS.md`](../../AGENTS.md)
-- [`.cursor/skills/okf-documentation/project.md`](../../.cursor/skills/okf-documentation/project.md)
+- [`.cursor/skills/documentation/project.md`](../../.cursor/skills/documentation/project.md)
 """,
         ),
     }
@@ -1089,9 +1192,9 @@ def write_agents_and_project() -> None:
 
 ## Documentation
 
-- OKF bundle root: [`docs/`](docs/index.md) (v0.2).
+- Documentation root: [`docs/`](docs/index.md).
 - Module template: [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md).
-- Project OKF settings: [`.cursor/skills/okf-documentation/project.md`](.cursor/skills/okf-documentation/project.md).
+- Project doc settings: [`.cursor/skills/documentation/project.md`](.cursor/skills/documentation/project.md).
 
 ## RTL
 
@@ -1106,7 +1209,7 @@ From repo root: `uv run python tools/generate_okf_bundle.py` — refreshes gener
 
 - Own one `docs/modules/<domain>/` tree per change.
 - Append meaningful updates to [`docs/log.md`](docs/log.md).
-- Do not duplicate `CONVENTIONS.md` in OKF pages; link it.
+- Do not duplicate `CONVENTIONS.md` in documentation pages; link it.
 
 ## Upstream
 
@@ -1116,14 +1219,14 @@ VHDL reference: commit `3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f` on [colibri-ce
         newline="\n",
     )
 
-    proj = ROOT / ".cursor/skills/okf-documentation"
+    proj = ROOT / ".cursor/skills/documentation"
     proj.mkdir(parents=True, exist_ok=True)
     (proj / "project.md").write_text(
-        """# OKF project settings (colibri_sv)
+        """# Documentation project settings (colibri_sv)
 
 ## Bundle root
 
-`docs/` — declare `okf_version: "0.2"` on [`docs/index.md`](../../../docs/index.md).
+`docs/` — start at [`docs/index.md`](../../../docs/index.md).
 
 ## Concept types
 
@@ -1151,8 +1254,8 @@ VHDL reference: commit `3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f` on [colibri-ce
 
 ## Do not
 
-- Duplicate full `CONVENTIONS.md` text in OKF concepts.
-- Add per-file CERN-OHL-W SPDX blocks under `docs/` (see bundle [Licencing](/index.md#licencing)).
+- Duplicate full `CONVENTIONS.md` text in concept pages.
+- Add per-file CERN-OHL-W SPDX blocks under `docs/` (see [Licencing](../../../docs/index.md#licencing)).
 - Rename frozen packages or move bundle root without updating `AGENTS.md`.
 """,
         encoding="utf-8",
@@ -1181,7 +1284,7 @@ def slim_src_readmes() -> None:
         (ROOT / rel).write_text(
             f"""# {title}
 
-Canonical documentation lives in the OKF bundle: [`docs{link}`](../../docs{link}).
+Canonical documentation: [`docs{link}`](../../docs{link}).
 
 - Playbooks: [getting started](../../docs/playbooks/getting-started.md), [simulation](../../docs/playbooks/simulation.md), [stream interfaces](../../docs/playbooks/stream-interfaces.md).
 - Agent entry: [`AGENTS.md`](../../AGENTS.md).
@@ -1198,7 +1301,7 @@ def update_root_readme_components() -> None:
 
 ## Documentation
 
-Canonical module and package documentation is the OKF v0.2 bundle under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
+Canonical module and package documentation is under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
 
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)
@@ -1217,7 +1320,7 @@ Canonical module and package documentation is the OKF v0.2 bundle under [`docs/`
         components.write_text(
             """# Component catalog
 
-The machine-readable catalog lives in the OKF bundle:
+The machine-readable catalog lives under `docs/`:
 
 - [Bundle index](docs/index.md)
 - [Packages](docs/packages/index.md)

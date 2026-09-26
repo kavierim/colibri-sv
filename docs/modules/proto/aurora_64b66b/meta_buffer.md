@@ -3,7 +3,7 @@ type: Module
 title: meta_buffer
 description: Metadata buffer in the RX datapath.
 tags: [domain:aurora, module:meta_buffer]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/include/meta_buffer.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Metadata buffer in the RX datapath.
 
-RTL notes: Metadata propagation buffer. Buffer to propagate metadata in pipelined streams. changelog: - 0.1: initial release
-
 # When to use
 
 See the [aurora_64b66b domain index](index.md) for siblings and typical compositions.
@@ -26,23 +24,23 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 2` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 2` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                          clk_i` |
-| | `input  logic                          reset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]       snk_data_i` |
-| | `input  logic                          snk_valid_i` |
-| | `output logic                          snk_ready_o` |
-| | `output logic                          src_valid_o` |
-| | `input  logic                          src_ready_i` |
-| | `output logic [g_DATA_WIDTH-1:0]       src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                          clk_i` |
+| `input  logic                          reset_i` |
+| `input  logic [g_DATA_WIDTH-1:0]       snk_data_i` |
+| `input  logic                          snk_valid_i` |
+| `output logic                          snk_ready_o` |
+| `output logic                          src_valid_o` |
+| `input  logic                          src_ready_i` |
+| `output logic [g_DATA_WIDTH-1:0]       src_data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

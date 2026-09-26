@@ -3,7 +3,7 @@ type: Module
 title: avst_fifo
 description: Avalon-ST FIFO wrapper.
 tags: [domain:interfaces, module:avst_fifo, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/stream/avst_fifo.sv
 sources:
@@ -16,43 +16,41 @@ sources:
 
 Avalon-ST FIFO wrapper.
 
-RTL notes: Avalon-ST FIFO. Buffers every Avalon-ST signal in parallel. Sink and source clocks may be synchronous or asynchronous; asynchronous clocks select the clock-crossing FIFO.
-
 # When to use
 
-See the [interfaces domain index](index.md) for siblings and typical compositions.
+Thin wrapper around [`packet_fifo`](../memory/packet_fifo.md) or width-matched FIFO—check generics against your beat width.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_SYM_WIDTH    = 8` |
-| | `parameter int unsigned g_DATA_SYM     = 16` |
-| | `parameter int unsigned g_NUM_BEATS    = 4` |
-| | `parameter bit          g_ASYNC_CLOCKS = 1'b0` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_SYM_WIDTH    = 8` |
+| `parameter int unsigned g_DATA_SYM     = 16` |
+| `parameter int unsigned g_NUM_BEATS    = 4` |
+| `parameter bit          g_ASYNC_CLOCKS = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                      snk_clk_i` |
-| | `input  logic                      src_clk_i` |
-| | `input  logic                      snk_reset_i` |
-| | `output logic                      snk_ready_o` |
-| | `input  logic                      snk_valid_i` |
-| | `input  logic                      snk_sop_i` |
-| | `input  logic                      snk_eop_i` |
-| | `input  logic [c_EMPTY_WIDTH-1:0]  snk_empty_i` |
-| | `input  logic [c_DATA_WIDTH-1:0]   snk_data_i` |
-| | `input  logic                      src_ready_i` |
-| | `output logic                      src_valid_o` |
-| | `output logic                      src_sop_o` |
-| | `output logic                      src_eop_o` |
-| | `output logic [c_EMPTY_WIDTH-1:0]  src_empty_o` |
-| | `output logic [c_DATA_WIDTH-1:0]   src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                      snk_clk_i` |
+| `input  logic                      src_clk_i` |
+| `input  logic                      snk_reset_i` |
+| `output logic                      snk_ready_o` |
+| `input  logic                      snk_valid_i` |
+| `input  logic                      snk_sop_i` |
+| `input  logic                      snk_eop_i` |
+| `input  logic [c_EMPTY_WIDTH-1:0]  snk_empty_i` |
+| `input  logic [c_DATA_WIDTH-1:0]   snk_data_i` |
+| `input  logic                      src_ready_i` |
+| `output logic                      src_valid_o` |
+| `output logic                      src_sop_o` |
+| `output logic                      src_eop_o` |
+| `output logic [c_EMPTY_WIDTH-1:0]  src_empty_o` |
+| `output logic [c_DATA_WIDTH-1:0]   src_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

@@ -3,7 +3,7 @@ type: Module
 title: cc_gearbox_up
 description: Clock-crossing upscaling gearbox variant.
 tags: [domain:aurora, module:cc_gearbox_up, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/cc_gearbox_up.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Clock-crossing upscaling gearbox variant.
 
-RTL notes: CDC Streaming Upsizing Gearbox. Generic upscaling gearbox for continuous streams with a clock domain crossing. It includes a slip signal to shift the output (1 bit resolution). Based on gearbox_up and cc_fifo. Release log: - 0.1: initial release
-
 # When to use
 
 Clock-crossing Aurora upscaler variant in the RX path.
@@ -26,25 +24,25 @@ Clock-crossing Aurora upscaler variant in the RX path.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_INPUT_WIDTH  = 8` |
-| | `parameter int unsigned g_OUTPUT_WIDTH = 10` |
-| | `parameter int unsigned g_BUFFER_WORDS = 6` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_INPUT_WIDTH  = 8` |
+| `parameter int unsigned g_OUTPUT_WIDTH = 10` |
+| `parameter int unsigned g_BUFFER_WORDS = 6` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                          snk_clk_i` |
-| | `input  logic                          snk_reset_i` |
-| | `input  logic                          src_clk_i` |
-| | `input  logic                          slip_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0]      snk_data_i` |
-| | `input  logic                          snk_valid_i` |
-| | `output logic [g_OUTPUT_WIDTH-1:0]     src_data_o` |
-| | `output logic                          src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic                          snk_clk_i` |
+| `input  logic                          snk_reset_i` |
+| `input  logic                          src_clk_i` |
+| `input  logic                          slip_i` |
+| `input  logic [g_INPUT_WIDTH-1:0]      snk_data_i` |
+| `input  logic                          snk_valid_i` |
+| `output logic [g_OUTPUT_WIDTH-1:0]     src_data_o` |
+| `output logic                          src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

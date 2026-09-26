@@ -3,7 +3,7 @@ type: Module
 title: arbiter
 description: Round-robin arbiter for multiple stream sources.
 tags: [domain:pipes, module:arbiter]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/pipes/arbiter.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Round-robin arbiter for multiple stream sources.
 
-RTL notes: Round-robin arbiter. Inspired by https://github.com/chclau/arbiter_rr Grants one requester. The priority mask rotates after a grant is released.
-
 # When to use
 
 See the [pipes domain index](index.md) for siblings and typical compositions.
@@ -26,19 +24,19 @@ See the [pipes domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_NUM_INPUTS = 4` |
+| Declaration |
+| --- |
+| `parameter int g_NUM_INPUTS = 4` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                    clk_i` |
-| | `input  logic                    reset_i` |
-| | `input  logic [g_NUM_INPUTS-1:0] requests_i` |
-| | `output logic [g_NUM_INPUTS-1:0] grants_o` |
+| Declaration |
+| --- |
+| `input  logic                    clk_i` |
+| `input  logic                    reset_i` |
+| `input  logic [g_NUM_INPUTS-1:0] requests_i` |
+| `output logic [g_NUM_INPUTS-1:0] grants_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

@@ -3,7 +3,7 @@ type: Module
 title: rom
 description: Read-only memory loaded from a hex init file.
 tags: [domain:memory, module:rom]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/rom.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Read-only memory loaded from a hex init file.
 
-RTL notes: Read-only memory. Contents come from a hex file, one word per line. g_N_WORDS and g_DATA_WIDTH have elaboration defaults; the VHDL generics do not.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,20 +24,20 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_N_WORDS    = 16` |
-| | `parameter int g_DATA_WIDTH = 8` |
-| | `parameter string g_INIT_FILE = ""` |
+| Declaration |
+| --- |
+| `parameter int g_N_WORDS    = 16` |
+| `parameter int g_DATA_WIDTH = 8` |
+| `parameter string g_INIT_FILE = ""` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_i` |
-| | `output logic [g_DATA_WIDTH-1:0] data_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_i` |
+| `output logic [g_DATA_WIDTH-1:0] data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

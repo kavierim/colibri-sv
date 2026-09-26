@@ -35,7 +35,7 @@ VHDL packages use a `colibri_` prefix: `utils` is `colibri_utils`, and the same 
 
 ## Documentation
 
-Canonical module and package documentation is the OKF v0.2 bundle under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
+Canonical module and package documentation is under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
 
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)

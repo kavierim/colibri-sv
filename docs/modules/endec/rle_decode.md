@@ -3,7 +3,7 @@ type: Module
 title: rle_decode
 description: Run-length decoder.
 tags: [domain:endec, module:rle_decode]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/endec/rle_decode.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Run-length decoder.
 
-RTL notes: Run-Length Decoder Some of the work was inspired by VHDL Whiz Release log: - 0.1 first release Library entity. Lint alongside verilator/wave0_elab.sv reports multiple tops.
-
 # When to use
 
 See the [endec domain index](index.md) for siblings and typical compositions.
@@ -26,24 +24,24 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_WORD_WIDTH  = 16` |
-| | `parameter int unsigned g_COUNT_WIDTH = 3` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_WORD_WIDTH  = 16` |
+| `parameter int unsigned g_COUNT_WIDTH = 3` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                                      clk_i` |
-| | `input  logic                                      reset_i` |
-| | `output logic                                      snk_ready_o` |
-| | `input  logic                                      snk_valid_i` |
-| | `input  logic [g_WORD_WIDTH+g_COUNT_WIDTH-1:0]     snk_data_i` |
-| | `input  logic                                      src_ready_i` |
-| | `output logic                                      src_valid_o` |
-| | `output logic [g_WORD_WIDTH-1:0]                   src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                                      clk_i` |
+| `input  logic                                      reset_i` |
+| `output logic                                      snk_ready_o` |
+| `input  logic                                      snk_valid_i` |
+| `input  logic [g_WORD_WIDTH+g_COUNT_WIDTH-1:0]     snk_data_i` |
+| `input  logic                                      src_ready_i` |
+| `output logic                                      src_valid_o` |
+| `output logic [g_WORD_WIDTH-1:0]                   src_data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

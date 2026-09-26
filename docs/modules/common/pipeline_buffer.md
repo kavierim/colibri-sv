@@ -3,7 +3,7 @@ type: Module
 title: pipeline_buffer
 description: Legacy two-stage decoupled buffer; prefer `stream_buffer`.
 tags: [domain:common, module:pipeline_buffer]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/pipeline_buffer.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Legacy two-stage decoupled buffer; prefer `stream_buffer`.
 
-RTL notes: Pipeline buffer (two-stage fifo) to propagate back-pressure and register combinational paths. Use this for better performance and full decoupling, use skid buffer if low latency is needed. Release log: - 0.1 first release
-
 # When to use
 
 Prefer [`stream_buffer`](stream_buffer.md) with `g_REGISTER_DATAPATH = 1`.
@@ -26,31 +24,31 @@ Prefer [`stream_buffer`](stream_buffer.md) with `g_REGISTER_DATAPATH = 1`.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH = 32` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] snk_empty_i` |
-| | `input  logic [colibri_utils::downto_width(g_DATA_WIDTH / 8)-1:0] snk_keep_i` |
-| | `input  logic snk_sop_i` |
-| | `input  logic snk_eop_i` |
-| | `input  logic snk_valid_i` |
-| | `output logic snk_ready_o` |
-| | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] src_empty_o` |
-| | `output logic [colibri_utils::downto_width(g_DATA_WIDTH / 8)-1:0] src_keep_o` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic src_valid_o` |
-| | `input  logic src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [g_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] snk_empty_i` |
+| `input  logic [colibri_utils::downto_width(g_DATA_WIDTH / 8)-1:0] snk_keep_i` |
+| `input  logic snk_sop_i` |
+| `input  logic snk_eop_i` |
+| `input  logic snk_valid_i` |
+| `output logic snk_ready_o` |
+| `output logic [g_DATA_WIDTH-1:0] src_data_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_DATA_WIDTH / 8))-1:0] src_empty_o` |
+| `output logic [colibri_utils::downto_width(g_DATA_WIDTH / 8)-1:0] src_keep_o` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic src_valid_o` |
+| `input  logic src_ready_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

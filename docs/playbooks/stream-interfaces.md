@@ -3,7 +3,7 @@ type: Playbook
 title: Stream interfaces
 description: Avalon-ST and AXI-Stream records, adapters, and CDC patterns.
 tags: [playbook, interface:avst, interface:axis]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream
@@ -12,7 +12,12 @@ sources:
 ---
 # Types
 
-Stream records and conversion helpers live in [`colibri_types`](../packages/colibri_types.md): Avalon-ST (`t_avst_*`) and AXI-Stream (`t_axis_*`) bundles with `data`, `valid`, `ready`, `startofpacket`, `endofpacket`, and `empty` where applicable.
+Stream helpers live in [`colibri_types`](../packages/colibri_types.md). In RTL you will see either:
+
+- **Split AVST ports** on modules: `snk_*` (sink) and `src_*` (source) with `valid`/`ready`, plus `sop`/`eop`/`empty` on packet beats.
+- **Packed structs** via macros such as `` `COLIBRI_AVST_MASTER_T `` and `` `COLIBRI_AXIS_MASTER_T `` (see [`CONVENTIONS.md`](../../CONVENTIONS.md)).
+
+AXI-Stream uses `tdata`, `tvalid`, `tready`, `tlast`, and `tkeep` (width from `axis_keep_width()`).
 
 # Adapters (`src/interfaces/stream/`)
 

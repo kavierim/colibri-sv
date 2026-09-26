@@ -3,7 +3,7 @@ type: Module
 title: cc_gearbox
 description: Dual-clock width gearbox.
 tags: [domain:comms, module:cc_gearbox, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/cc_gearbox.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Dual-clock width gearbox.
 
-RTL notes: Dual-clock gearbox. Uses cc_fifo, or cc_ram_fifo when g_USE_BLOCK_RAM is set.
-
 # When to use
 
 Use [`gearbox`](gearbox.md) for single-clock width conversion.
@@ -26,28 +24,28 @@ Use [`gearbox`](gearbox.md) for single-clock width conversion.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_INPUT_WIDTH = 8` |
-| | `parameter int unsigned g_OUTPUT_WIDTH = 10` |
-| | `parameter int unsigned g_BUFFER_WORDS = 6` |
-| | `parameter bit          g_USE_BLOCK_RAM = 1'b0` |
-| | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_INPUT_WIDTH = 8` |
+| `parameter int unsigned g_OUTPUT_WIDTH = 10` |
+| `parameter int unsigned g_BUFFER_WORDS = 6` |
+| `parameter bit          g_USE_BLOCK_RAM = 1'b0` |
+| `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                      snk_clk_i` |
-| | `input  logic                      snk_reset_i` |
-| | `input  logic                      src_clk_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0]  snk_data_i` |
-| | `input  logic                      snk_valid_i` |
-| | `output logic                      snk_ready_o` |
-| | `output logic [g_OUTPUT_WIDTH-1:0] src_data_o` |
-| | `output logic                      src_valid_o` |
-| | `input  logic                      src_ready_i` |
+| Declaration |
+| --- |
+| `input  logic                      snk_clk_i` |
+| `input  logic                      snk_reset_i` |
+| `input  logic                      src_clk_i` |
+| `input  logic [g_INPUT_WIDTH-1:0]  snk_data_i` |
+| `input  logic                      snk_valid_i` |
+| `output logic                      snk_ready_o` |
+| `output logic [g_OUTPUT_WIDTH-1:0] src_data_o` |
+| `output logic                      src_valid_o` |
+| `input  logic                      src_ready_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

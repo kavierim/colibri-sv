@@ -3,7 +3,7 @@ type: Module
 title: cc_ram_fifo
 description: Dual-clock RAM-based FIFO with asymmetric ports.
 tags: [domain:memory, module:cc_ram_fifo, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/cc_ram_fifo.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Dual-clock RAM-based FIFO with asymmetric ports.
 
-RTL notes: Dual-clock FIFO built around simple_dpram. g_NUM_WORDS and g_INPUT_WIDTH have elaboration defaults; the VHDL generics do not. Reset and pointer crossing use synchro_reset and synchro (src/common).
-
 # When to use
 
 Use [`cc_fifo`](cc_fifo.md) when a logic FIFO is sufficient or widths match.
@@ -26,34 +24,34 @@ Use [`cc_fifo`](cc_fifo.md) when a logic FIFO is sufficient or widths match.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_NUM_WORDS    = 4` |
-| | `parameter int g_INPUT_WIDTH  = 8` |
-| | `parameter int g_OUTPUT_WIDTH = g_INPUT_WIDTH` |
-| | `parameter bit g_ENABLE_FWFT  = 1'b0` |
-| | `parameter int g_INPUT_USEDW_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter int g_OUTPUT_USEDW_WIDTH = colibri_utils::log2ceil(` |
-| | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
+| Declaration |
+| --- |
+| `parameter int g_NUM_WORDS    = 4` |
+| `parameter int g_INPUT_WIDTH  = 8` |
+| `parameter int g_OUTPUT_WIDTH = g_INPUT_WIDTH` |
+| `parameter bit g_ENABLE_FWFT  = 1'b0` |
+| `parameter int g_INPUT_USEDW_WIDTH = colibri_utils::log2ceil(` |
+| `parameter int g_OUTPUT_USEDW_WIDTH = colibri_utils::log2ceil(` |
+| `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic reset_i` |
-| | `input  logic wrclk_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0] data_i` |
-| | `input  logic wrreq_i` |
-| | `output logic [colibri_utils::downto_width(g_INPUT_USEDW_WIDTH)-1:0] wrusedw_o` |
-| | `output logic wrempty_o` |
-| | `output logic wrfull_o` |
-| | `input  logic rdclk_i` |
-| | `input  logic rdreq_i` |
-| | `output logic [g_OUTPUT_WIDTH-1:0] q_o` |
-| | `output logic [colibri_utils::downto_width(g_OUTPUT_USEDW_WIDTH)-1:0] rdusedw_o` |
-| | `output logic rdempty_o` |
-| | `output logic rdfull_o` |
+| Declaration |
+| --- |
+| `input  logic reset_i` |
+| `input  logic wrclk_i` |
+| `input  logic [g_INPUT_WIDTH-1:0] data_i` |
+| `input  logic wrreq_i` |
+| `output logic [colibri_utils::downto_width(g_INPUT_USEDW_WIDTH)-1:0] wrusedw_o` |
+| `output logic wrempty_o` |
+| `output logic wrfull_o` |
+| `input  logic rdclk_i` |
+| `input  logic rdreq_i` |
+| `output logic [g_OUTPUT_WIDTH-1:0] q_o` |
+| `output logic [colibri_utils::downto_width(g_OUTPUT_USEDW_WIDTH)-1:0] rdusedw_o` |
+| `output logic rdempty_o` |
+| `output logic rdfull_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

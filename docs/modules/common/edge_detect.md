@@ -3,7 +3,7 @@ type: Module
 title: edge_detect
 description: Rising and falling edge detection.
 tags: [domain:common, module:edge_detect]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/edge_detect.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Rising and falling edge detection.
 
-RTL notes: Edge detect. Release log: - 0.1 first release
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,18 +24,18 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter logic g_RESET_VAL = 1'b0` |
+| Declaration |
+| --- |
+| `parameter logic g_RESET_VAL = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic data_i` |
-| | `output logic pulse_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic data_i` |
+| `output logic pulse_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

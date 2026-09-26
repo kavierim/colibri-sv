@@ -3,7 +3,7 @@ type: Module
 title: packet_cc_ram_fifo
 description: Dual-clock packet FIFO with RAM and mixed widths.
 tags: [domain:memory, module:packet_cc_ram_fifo, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/packet_cc_ram_fifo.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Dual-clock packet FIFO with RAM and mixed widths.
 
-RTL notes: Packet FIFO in a simple dual-port RAM, with a latency fifo and a size cc_fifo. g_MAX_PACKET_BYTES and g_NUM_PACKETS have elaboration defaults; the VHDL generics do not. Sink shaping uses skid_buffer and stream_buffer (src/common). Resets use synchro_reset (src/common). The read-side state names are SRC_IDLE and SRC_PACKET. SystemVerilog enum labels share the module scope, so they cannot repeat the write-side S_IDLE and S_PACKET.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,37 +24,37 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH       = 32` |
-| | `parameter int g_MAX_PACKET_BYTES = 256` |
-| | `parameter int g_NUM_PACKETS      = 4` |
-| | `parameter int g_SNK_DATA_WIDTH   = g_DATA_WIDTH` |
-| | `parameter int g_SRC_DATA_WIDTH   = g_DATA_WIDTH` |
-| | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH       = 32` |
+| `parameter int g_MAX_PACKET_BYTES = 256` |
+| `parameter int g_NUM_PACKETS      = 4` |
+| `parameter int g_SNK_DATA_WIDTH   = g_DATA_WIDTH` |
+| `parameter int g_SRC_DATA_WIDTH   = g_DATA_WIDTH` |
+| `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic reset_i` |
-| | `input  logic snk_clk_i` |
-| | `input  logic src_clk_i` |
-| | `input  logic snk_sop_i` |
-| | `input  logic snk_eop_i` |
-| | `input  logic [g_SNK_DATA_WIDTH-1:0] snk_data_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_SNK_DATA_WIDTH / 8))-1:0] snk_empty_i` |
-| | `input  logic snk_valid_i` |
-| | `output logic snk_ready_o` |
-| | `input  logic snk_drop_i` |
-| | `output logic src_sop_o` |
-| | `output logic src_eop_o` |
-| | `output logic [g_SRC_DATA_WIDTH-1:0] src_data_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_SRC_DATA_WIDTH / 8))-1:0] src_empty_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_MAX_PACKET_BYTES * g_NUM_PACKETS))-1:0] src_size_o` |
-| | `input  logic src_ready_i` |
-| | `output logic src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic reset_i` |
+| `input  logic snk_clk_i` |
+| `input  logic src_clk_i` |
+| `input  logic snk_sop_i` |
+| `input  logic snk_eop_i` |
+| `input  logic [g_SNK_DATA_WIDTH-1:0] snk_data_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_SNK_DATA_WIDTH / 8))-1:0] snk_empty_i` |
+| `input  logic snk_valid_i` |
+| `output logic snk_ready_o` |
+| `input  logic snk_drop_i` |
+| `output logic src_sop_o` |
+| `output logic src_eop_o` |
+| `output logic [g_SRC_DATA_WIDTH-1:0] src_data_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_SRC_DATA_WIDTH / 8))-1:0] src_empty_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_MAX_PACKET_BYTES * g_NUM_PACKETS))-1:0] src_size_o` |
+| `input  logic src_ready_i` |
+| `output logic src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

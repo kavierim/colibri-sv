@@ -3,7 +3,7 @@ type: Playbook
 title: Simulation
 description: Verilator 5 regression via run_all.sh and per-domain file lists.
 tags: [playbook, verilator, simulation]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream

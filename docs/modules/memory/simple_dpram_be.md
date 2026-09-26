@@ -3,7 +3,7 @@ type: Module
 title: simple_dpram_be
 description: `simple_dpram` with byte-enable on the write port.
 tags: [domain:memory, module:simple_dpram_be]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/simple_dpram_be.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 `simple_dpram` with byte-enable on the write port.
 
-RTL notes: Simple dual-port RAM with a write byte-enable. g_WORD_BYTES and g_N_WORDS have elaboration defaults; the VHDL generics do not. The memory file list elaborates every uninstantiated module together with wave0_elab. Verilator -Wall treats that as MULTITOP.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,27 +24,27 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_BYTE_WIDTH = 8` |
-| | `parameter int g_WORD_BYTES = 4` |
-| | `parameter int g_N_WORDS    = 16` |
-| | `parameter string g_INIT_FILE = ""` |
-| | `parameter logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] g_INIT_WORD = '0` |
+| Declaration |
+| --- |
+| `parameter int g_BYTE_WIDTH = 8` |
+| `parameter int g_WORD_BYTES = 4` |
+| `parameter int g_N_WORDS    = 16` |
+| `parameter string g_INIT_FILE = ""` |
+| `parameter logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] g_INIT_WORD = '0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic wrclk_i` |
-| | `input  logic [g_WORD_BYTES-1:0] wren_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] wraddr_i` |
-| | `input  logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] wrdata_i` |
-| | `input  logic rdclk_i` |
-| | `input  logic rden_i` |
-| | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] rdaddr_i` |
-| | `output logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] rddata_o` |
+| Declaration |
+| --- |
+| `input  logic wrclk_i` |
+| `input  logic [g_WORD_BYTES-1:0] wren_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] wraddr_i` |
+| `input  logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] wrdata_i` |
+| `input  logic rdclk_i` |
+| `input  logic rden_i` |
+| `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] rdaddr_i` |
+| `output logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] rddata_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

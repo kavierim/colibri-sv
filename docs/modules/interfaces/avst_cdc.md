@@ -3,8 +3,8 @@ type: Module
 title: avst_cdc
 description: Avalon-ST clock-domain crossing.
 tags: [domain:interfaces, module:avst_cdc, interface:avst, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/interfaces/stream/avst_cdc.sv
 sources:
   - id: upstream
@@ -16,40 +16,38 @@ sources:
 
 Avalon-ST clock-domain crossing.
 
-RTL notes: Avalon-ST simple clock domain crossing. Library modules are tops alongside wave0_elab until a later wave instantiates them.
-
 # When to use
 
-See the [interfaces domain index](index.md) for siblings and typical compositions.
+For AVST packet streams across clocks; arbitrary payloads may use [`synchro_handshake`](../common/synchro_handshake.md) instead.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 16` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 16` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     reset_i` |
-| | `input  logic                     snk_clk_i` |
-| | `input  logic                     src_clk_i` |
-| | `output logic                     snk_ready_o` |
-| | `input  logic                     snk_valid_i` |
-| | `input  logic                     snk_sop_i` |
-| | `input  logic                     snk_eop_i` |
-| | `input  logic [c_EMPTY_W-1:0]     snk_empty_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
-| | `input  logic                     src_ready_i` |
-| | `output logic                     src_valid_o` |
-| | `output logic                     src_sop_o` |
-| | `output logic                     src_eop_o` |
-| | `output logic [c_EMPTY_W-1:0]     src_empty_o` |
-| | `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                     reset_i` |
+| `input  logic                     snk_clk_i` |
+| `input  logic                     src_clk_i` |
+| `output logic                     snk_ready_o` |
+| `input  logic                     snk_valid_i` |
+| `input  logic                     snk_sop_i` |
+| `input  logic                     snk_eop_i` |
+| `input  logic [c_EMPTY_W-1:0]     snk_empty_i` |
+| `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
+| `input  logic                     src_ready_i` |
+| `output logic                     src_valid_o` |
+| `output logic                     src_sop_o` |
+| `output logic                     src_eop_o` |
+| `output logic [c_EMPTY_W-1:0]     src_empty_o` |
+| `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

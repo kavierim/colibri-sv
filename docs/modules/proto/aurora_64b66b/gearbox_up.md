@@ -3,7 +3,7 @@ type: Module
 title: gearbox_up
 description: Continuous upscaling gearbox (RX path).
 tags: [domain:aurora, module:gearbox_up]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/gearbox_up.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Continuous upscaling gearbox (RX path).
 
-RTL notes: Continuous Stream Upsizing Gearbox. Generic upscaling gearbox for continuous streams on a single clock domain. It includes a slip signal to shift the output (1 bit resolution). Inspired by the work of Timon Heim for Yarr. changelog: - 0.1: initial release
-
 # When to use
 
 Aurora RX upscaler; not [`comms/gearbox`](../../comms/gearbox.md).
@@ -26,23 +24,23 @@ Aurora RX upscaler; not [`comms/gearbox`](../../comms/gearbox.md).
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_INPUT_WIDTH` |
-| | `parameter int g_OUTPUT_WIDTH` |
+| Declaration |
+| --- |
+| `parameter int g_INPUT_WIDTH` |
+| `parameter int g_OUTPUT_WIDTH` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                         clk_i` |
-| | `input  logic                         reset_i` |
-| | `input  logic                         slip_i` |
-| | `input  logic [g_INPUT_WIDTH-1:0]     snk_data_i` |
-| | `input  logic                         snk_valid_i` |
-| | `output logic [g_OUTPUT_WIDTH-1:0]    src_data_o` |
-| | `output logic                         src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic                         clk_i` |
+| `input  logic                         reset_i` |
+| `input  logic                         slip_i` |
+| `input  logic [g_INPUT_WIDTH-1:0]     snk_data_i` |
+| `input  logic                         snk_valid_i` |
+| `output logic [g_OUTPUT_WIDTH-1:0]    src_data_o` |
+| `output logic                         src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

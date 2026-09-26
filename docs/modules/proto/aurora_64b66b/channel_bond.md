@@ -3,7 +3,7 @@ type: Module
 title: channel_bond
 description: Multi-lane channel bonding.
 tags: [domain:aurora, module:channel_bond]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/channel_bond.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Multi-lane channel bonding.
 
-RTL notes: Aurora Multi Lane Bonding. Each lane is fed to a dedicated FIFO. The FIFOs are read until a channel bond word is seen. Once every FIFO shows a bond word, skew is compensated and src_bond_o is asserted. changelog: - 0.1 first release - 0.1b: update to lhcb vhdl style guideline
-
 # When to use
 
 See the [aurora_64b66b domain index](index.md) for siblings and typical compositions.
@@ -26,24 +24,24 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_N_LANES      = 1` |
-| | `parameter int unsigned g_BUF_SIZE     = 8` |
-| | `parameter bit          g_REGISTER_OUT = 1'b1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_N_LANES      = 1` |
+| `parameter int unsigned g_BUF_SIZE     = 8` |
+| `parameter bit          g_REGISTER_OUT = 1'b1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic [colibri_aurora_const::c_AURORA_ENC_WIDTH-1:0] snk_data_i [0:g_N_LANES-1]` |
-| | `input  logic [g_N_LANES-1:0] snk_valid_i` |
-| | `output logic [colibri_aurora_const::c_AURORA_ENC_WIDTH-1:0] src_data_o [0:g_N_LANES-1]` |
-| | `output logic [g_N_LANES-1:0] src_valid_o` |
-| | `output logic src_bond_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic [colibri_aurora_const::c_AURORA_ENC_WIDTH-1:0] snk_data_i [0:g_N_LANES-1]` |
+| `input  logic [g_N_LANES-1:0] snk_valid_i` |
+| `output logic [colibri_aurora_const::c_AURORA_ENC_WIDTH-1:0] src_data_o [0:g_N_LANES-1]` |
+| `output logic [g_N_LANES-1:0] src_valid_o` |
+| `output logic src_bond_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

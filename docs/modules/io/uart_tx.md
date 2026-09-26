@@ -3,7 +3,7 @@ type: Module
 title: uart_tx
 description: UART transmitter only.
 tags: [domain:io, module:uart_tx]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/uart/uart_tx.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 UART transmitter only.
 
-RTL notes: UART transmitter module Author: Alberto Perro (alberto.perro at cern.ch) Date: 20-03-2024 Version: 0.1 This module implements a simple uart transmitter. Release log: - 0.1 first release
-
 # When to use
 
 Use [`uart`](uart.md) for a combined transceiver.
@@ -26,22 +24,22 @@ Use [`uart`](uart.md) for a combined transceiver.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter time g_CLOCK_PERIOD = time'(100ns)` |
-| | `parameter int unsigned g_BAUD_RATE = 115200` |
+| Declaration |
+| --- |
+| `parameter time g_CLOCK_PERIOD = time'(100ns)` |
+| `parameter int unsigned g_BAUD_RATE = 115200` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic       clk_i` |
-| | `input  logic       reset_i` |
-| | `input  logic [7:0] tx_data_i` |
-| | `input  logic       tx_valid_i` |
-| | `output logic       tx_ready_o` |
-| | `output logic       tx_pin_o` |
+| Declaration |
+| --- |
+| `input  logic       clk_i` |
+| `input  logic       reset_i` |
+| `input  logic [7:0] tx_data_i` |
+| `input  logic       tx_valid_i` |
+| `output logic       tx_ready_o` |
+| `output logic       tx_pin_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

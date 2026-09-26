@@ -3,7 +3,7 @@ type: Module
 title: stream_buffer_generic
 description: Same buffer with a parameterized data type.
 tags: [domain:common, module:stream_buffer_generic, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/stream_buffer_generic.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Same buffer with a parameterized data type.
 
-RTL notes: Simple stream buffer with a generic type. Zero latency (skid) when g_REGISTER_DATAPATH is 0. One clock of latency (pipeline) when g_REGISTER_DATAPATH is 1. VHDL requires data_t (no default). logic [7:0] lets Verilator elaborate this module.
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,24 +24,24 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter type data_t             = logic [7:0]` |
-| | `parameter bit  g_REGISTER_DATAPATH = 1'b0` |
+| Declaration |
+| --- |
+| `parameter type data_t             = logic [7:0]` |
+| `parameter bit  g_REGISTER_DATAPATH = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic  reset_i` |
-| | `input  logic  clk_i` |
-| | `input  data_t snk_data_i` |
-| | `input  logic  snk_valid_i` |
-| | `output logic  snk_ready_o` |
-| | `output data_t src_data_o` |
-| | `input  logic  src_ready_i` |
-| | `output logic  src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic  reset_i` |
+| `input  logic  clk_i` |
+| `input  data_t snk_data_i` |
+| `input  logic  snk_valid_i` |
+| `output logic  snk_ready_o` |
+| `output data_t src_data_o` |
+| `input  logic  src_ready_i` |
+| `output logic  src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

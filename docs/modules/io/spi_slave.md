@@ -3,7 +3,7 @@ type: Module
 title: spi_slave
 description: SPI slave.
 tags: [domain:io, module:spi_slave]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/spi/spi_slave.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 SPI slave.
 
-RTL notes: Serial Peripheral Interface Slave Author: Alberto Perro (alberto.perro at cern.ch) Date: 31-01-2025 Version: 0.1 0.1 initial release
-
 # When to use
 
 See the [io domain index](index.md) for siblings and typical compositions.
@@ -26,27 +24,27 @@ See the [io domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_WORD_SIZE = 8` |
-| | `parameter logic g_SCK_POLARITY = 1'b0,  // 0 -> active high` |
-| | `parameter logic g_SCK_PHASE = 1'b0      // 0 -> rising edge` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_WORD_SIZE = 8` |
+| `parameter logic g_SCK_POLARITY = 1'b0,  // 0 -> active high` |
+| `parameter logic g_SCK_PHASE = 1'b0      // 0 -> rising edge` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                       clk_i` |
-| | `output logic                       miso_o,  // Master In Slave Out` |
-| | `input  logic                       mosi_i,  // Master Out Slave In` |
-| | `input  logic                       cs_n_i,  // Chip Select (active low)` |
-| | `input  logic                       sck_i,   // SPI clock` |
-| | `output logic [g_WORD_SIZE-1:0]     src_data_o` |
-| | `output logic                       src_valid_o` |
-| | `input  logic [g_WORD_SIZE-1:0]     snk_data_i` |
-| | `input  logic                       snk_valid_i` |
-| | `output logic                       snk_ready_o` |
+| Declaration |
+| --- |
+| `input  logic                       clk_i` |
+| `output logic                       miso_o,  // Master In Slave Out` |
+| `input  logic                       mosi_i,  // Master Out Slave In` |
+| `input  logic                       cs_n_i,  // Chip Select (active low)` |
+| `input  logic                       sck_i,   // SPI clock` |
+| `output logic [g_WORD_SIZE-1:0]     src_data_o` |
+| `output logic                       src_valid_o` |
+| `input  logic [g_WORD_SIZE-1:0]     snk_data_i` |
+| `input  logic                       snk_valid_i` |
+| `output logic                       snk_ready_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

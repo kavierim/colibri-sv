@@ -3,7 +3,7 @@ type: Module
 title: uart_rx
 description: UART receiver only.
 tags: [domain:io, module:uart_rx]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/uart/uart_rx.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 UART receiver only.
 
-RTL notes: UART receiver module Author: Alberto Perro (alberto.perro at cern.ch) Date: 20-03-2024 Version: 0.1 This module implements a simple uart receiver. Release log: - 0.1 first release
-
 # When to use
 
 Use `uart` for a combined transceiver.
@@ -26,21 +24,21 @@ Use `uart` for a combined transceiver.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter time g_CLOCK_PERIOD = time'(100ns)` |
-| | `parameter int unsigned g_BAUD_RATE = 115200` |
+| Declaration |
+| --- |
+| `parameter time g_CLOCK_PERIOD = time'(100ns)` |
+| `parameter int unsigned g_BAUD_RATE = 115200` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic       clk_i` |
-| | `input  logic       reset_i` |
-| | `output logic [7:0] rx_data_o` |
-| | `output logic       rx_valid_o` |
-| | `input  logic       rx_pin_i` |
+| Declaration |
+| --- |
+| `input  logic       clk_i` |
+| `input  logic       reset_i` |
+| `output logic [7:0] rx_data_o` |
+| `output logic       rx_valid_o` |
+| `input  logic       rx_pin_i` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

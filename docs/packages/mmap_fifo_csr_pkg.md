@@ -3,7 +3,7 @@ type: Package
 title: mmap_fifo_csr_pkg
 description: Top-level mmap FIFO register definitions.
 tags: [package, mmap_fifo_csr_pkg]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/mmap_fifo/vhdl_if/mmap_fifo_csr_pkg.sv
 sources:

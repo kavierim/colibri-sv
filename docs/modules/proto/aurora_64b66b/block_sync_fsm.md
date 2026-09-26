@@ -3,7 +3,7 @@ type: Module
 title: block_sync_fsm
 description: Block synchronization state machine.
 tags: [domain:aurora, module:block_sync_fsm]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/block_sync_fsm.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Block synchronization state machine.
 
-RTL notes: Block Sync FSM. Determines and checks the link lock status. See Aurora FSM flowchart and IEEE 802.3ae fig 49-14 (rev.2022). changelog: - 0.1 first release - 0.1b: update to lhcb vhdl style guideline
-
 # When to use
 
 See the [aurora_64b66b domain index](index.md) for siblings and typical compositions.
@@ -26,23 +24,23 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_SH_CNT_MAX         = 64` |
-| | `parameter int unsigned g_SH_INVALID_CNT_MAX = 16` |
-| | `parameter int unsigned g_SLIP_CNT_MAX       = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_SH_CNT_MAX         = 64` |
+| `parameter int unsigned g_SH_INVALID_CNT_MAX = 16` |
+| `parameter int unsigned g_SLIP_CNT_MAX       = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic       clk_i` |
-| | `input  logic       reset_i` |
-| | `input  logic [1:0] snk_meta_i` |
-| | `input  logic       snk_valid_i` |
-| | `output logic       snk_slip_o` |
-| | `output logic       src_sync_o` |
+| Declaration |
+| --- |
+| `input  logic       clk_i` |
+| `input  logic       reset_i` |
+| `input  logic [1:0] snk_meta_i` |
+| `input  logic       snk_valid_i` |
+| `output logic       snk_slip_o` |
+| `output logic       src_sync_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).

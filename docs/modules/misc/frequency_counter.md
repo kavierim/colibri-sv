@@ -3,7 +3,7 @@ type: Module
 title: frequency_counter
 description: Measure an input clock against a reference.
 tags: [domain:misc, module:frequency_counter]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/frequency_counter.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Measure an input clock against a reference.
 
-RTL notes: Frequency counter. Measures arbitrary clocks against a known reference and returns the frequency in Hz.
-
 # When to use
 
 See the [misc domain index](index.md) for siblings and typical compositions.
@@ -26,23 +24,23 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_CLK_REF_FREQ_HZ = 100_000_000` |
-| | `parameter int unsigned g_NUM_CLOCKS     = 1` |
-| | `parameter int unsigned g_DATA_WIDTH     = 32` |
-| | `parameter int unsigned g_SAMPLE_FREQ_HZ = 1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_CLK_REF_FREQ_HZ = 100_000_000` |
+| `parameter int unsigned g_NUM_CLOCKS     = 1` |
+| `parameter int unsigned g_DATA_WIDTH     = 32` |
+| `parameter int unsigned g_SAMPLE_FREQ_HZ = 1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_ref_i` |
-| | `input  logic reset_i` |
-| | `input  logic [g_NUM_CLOCKS-1:0] clk_meas_i` |
-| | `output `COLIBRI_UNS_ARRAY(freq_data_o, 0, g_NUM_CLOCKS - 1, g_DATA_WIDTH)` |
-| | `output logic [g_NUM_CLOCKS-1:0] freq_valid_o` |
+| Declaration |
+| --- |
+| `input  logic clk_ref_i` |
+| `input  logic reset_i` |
+| `input  logic [g_NUM_CLOCKS-1:0] clk_meas_i` |
+| `output `COLIBRI_UNS_ARRAY(freq_data_o, 0, g_NUM_CLOCKS - 1, g_DATA_WIDTH)` |
+| `output logic [g_NUM_CLOCKS-1:0] freq_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

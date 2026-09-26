@@ -3,7 +3,7 @@ type: Module
 title: bert
 description: PRBS bit-error-rate tester.
 tags: [domain:comms, module:bert]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/bert.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 PRBS bit-error-rate tester.
 
-RTL notes: Bit error rate tester. A PRBS scrambler feeds the DUT; g_DUT_DELAY absorbs the loopback latency before statistics are counted.
-
 # When to use
 
 See the [comms domain index](index.md) for siblings and typical compositions.
@@ -26,28 +24,28 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_DATA_WIDTH = 32` |
-| | `parameter int unsigned g_STATS_WIDTH = 64` |
-| | `parameter g_PRBS_POLY = colibri_poly::c_PRBS_7` |
-| | `parameter int unsigned g_DUT_DELAY = 1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_DATA_WIDTH = 32` |
+| `parameter int unsigned g_STATS_WIDTH = 64` |
+| `parameter g_PRBS_POLY = colibri_poly::c_PRBS_7` |
+| `parameter int unsigned g_DUT_DELAY = 1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                     clk_i` |
-| | `input  logic                     reset_i` |
-| | `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
-| | `input  logic                     snk_valid_i` |
-| | `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
-| | `output logic                     src_valid_o` |
-| | `output logic [g_STATS_WIDTH-1:0] bit_errors_o` |
-| | `output logic [g_STATS_WIDTH-1:0] total_bits_o` |
-| | `output logic [g_STATS_WIDTH-1:0] word_errors_o` |
-| | `output logic [g_STATS_WIDTH-1:0] invalid_words_o` |
+| Declaration |
+| --- |
+| `input  logic                     clk_i` |
+| `input  logic                     reset_i` |
+| `input  logic [g_DATA_WIDTH-1:0]  snk_data_i` |
+| `input  logic                     snk_valid_i` |
+| `output logic [g_DATA_WIDTH-1:0]  src_data_o` |
+| `output logic                     src_valid_o` |
+| `output logic [g_STATS_WIDTH-1:0] bit_errors_o` |
+| `output logic [g_STATS_WIDTH-1:0] total_bits_o` |
+| `output logic [g_STATS_WIDTH-1:0] word_errors_o` |
+| `output logic [g_STATS_WIDTH-1:0] invalid_words_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

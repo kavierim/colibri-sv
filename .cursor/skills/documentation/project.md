@@ -1,8 +1,8 @@
-# OKF project settings (colibri_sv)
+# Documentation project settings (colibri_sv)
 
 ## Bundle root
 
-`docs/` — declare `okf_version: "0.2"` on [`docs/index.md`](../../../docs/index.md).
+`docs/` — start at [`docs/index.md`](../../../docs/index.md).
 
 ## Concept types
 
@@ -30,6 +30,6 @@
 
 ## Do not
 
-- Duplicate full `CONVENTIONS.md` text in OKF concepts.
-- Add per-file CERN-OHL-W SPDX blocks under `docs/` (see bundle [Licencing](/index.md#licencing)).
+- Duplicate full `CONVENTIONS.md` text in concept pages.
+- Add per-file CERN-OHL-W SPDX blocks under `docs/` (see [Licencing](../../../docs/index.md#licencing)).
 - Rename frozen packages or move bundle root without updating `AGENTS.md`.

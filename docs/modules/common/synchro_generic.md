@@ -3,7 +3,7 @@ type: Module
 title: synchro_generic
 description: CDC for a user-defined payload type.
 tags: [domain:common, module:synchro_generic, cdc]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_generic.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 CDC for a user-defined payload type.
 
-RTL notes: Generic clock domain boundary synchronizer. Synchronizes an arbitrary data type across a clock domain. g_NUM_STAGES is at least 2. VHDL requires data_t and g_INIT_VALUE. The defaults exist so Verilator can elaborate this module.
-
 # When to use
 
 See the [common domain index](index.md) for siblings and typical compositions.
@@ -26,21 +24,21 @@ See the [common domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter type data_t         = logic [7:0]` |
-| | `parameter g_INIT_VALUE        = 8'h00` |
-| | `parameter int g_NUM_STAGES    = 2` |
+| Declaration |
+| --- |
+| `parameter type data_t         = logic [7:0]` |
+| `parameter g_INIT_VALUE        = 8'h00` |
+| `parameter int g_NUM_STAGES    = 2` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic  clk_i` |
-| | `input  logic  reset_i` |
-| | `input  data_t data_i` |
-| | `output data_t data_o` |
+| Declaration |
+| --- |
+| `input  logic  clk_i` |
+| `input  logic  reset_i` |
+| `input  data_t data_i` |
+| `output data_t data_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

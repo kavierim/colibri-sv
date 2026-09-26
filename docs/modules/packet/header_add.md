@@ -3,7 +3,7 @@ type: Module
 title: header_add
 description: Prepend a fixed header to each packet.
 tags: [domain:packet, module:header_add]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/header_add.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Prepend a fixed header to each packet.
 
-RTL notes: Inserts snk_header_i, sampled at the input start of packet, in front of an Avalon-ST packet.
-
 # When to use
 
 See the [packet domain index](index.md) for siblings and typical compositions.
@@ -26,31 +24,31 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_HEADER_BYTES = 14` |
-| | `parameter int unsigned g_DATA_WIDTH   = 32` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_HEADER_BYTES = 14` |
+| `parameter int unsigned g_DATA_WIDTH   = 32` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                    clk_i` |
-| | `input  logic                    reset_i` |
-| | `input  logic                    snk_sop_i` |
-| | `input  logic                    snk_eop_i` |
-| | `input  logic                    snk_valid_i` |
-| | `output logic                    snk_ready_o` |
-| | `input  logic [c_DATA_W-1:0]     snk_data_i` |
-| | `input  logic [c_EMPTY_W-1:0]    snk_empty_i` |
-| | `input  logic [c_HDR_BITS-1:0]   snk_header_i` |
-| | `output logic                    src_sop_o` |
-| | `output logic                    src_eop_o` |
-| | `output logic                    src_valid_o` |
-| | `input  logic                    src_ready_i` |
-| | `output logic [c_DATA_W-1:0]     src_data_o` |
-| | `output logic [c_EMPTY_W-1:0]    src_empty_o` |
+| Declaration |
+| --- |
+| `input  logic                    clk_i` |
+| `input  logic                    reset_i` |
+| `input  logic                    snk_sop_i` |
+| `input  logic                    snk_eop_i` |
+| `input  logic                    snk_valid_i` |
+| `output logic                    snk_ready_o` |
+| `input  logic [c_DATA_W-1:0]     snk_data_i` |
+| `input  logic [c_EMPTY_W-1:0]    snk_empty_i` |
+| `input  logic [c_HDR_BITS-1:0]   snk_header_i` |
+| `output logic                    src_sop_o` |
+| `output logic                    src_eop_o` |
+| `output logic                    src_valid_o` |
+| `input  logic                    src_ready_i` |
+| `output logic [c_DATA_W-1:0]     src_data_o` |
+| `output logic [c_EMPTY_W-1:0]    src_empty_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.

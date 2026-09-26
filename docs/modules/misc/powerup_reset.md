@@ -3,7 +3,7 @@ type: Module
 title: powerup_reset
 description: Power-up reset stretcher.
 tags: [domain:misc, module:powerup_reset]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/powerup_reset.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Power-up reset stretcher.
 
-RTL notes: Power-up reset generator. Generates a fixed duration reset pulse at start-up. Polarity and duration come from `g_POLARITY` and `g_DURATION`. `reset_ext_i` is asynchronous and active high. `reset_o` is synchronous to `clk_i`.
-
 # When to use
 
 See the [misc domain index](index.md) for siblings and typical compositions.
@@ -26,19 +24,19 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter logic g_POLARITY = 1'b1` |
-| | `parameter int unsigned g_DURATION = 16` |
+| Declaration |
+| --- |
+| `parameter logic g_POLARITY = 1'b1` |
+| `parameter int unsigned g_DURATION = 16` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_ext_i` |
-| | `output logic reset_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_ext_i` |
+| `output logic reset_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

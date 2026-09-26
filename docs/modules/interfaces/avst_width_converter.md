@@ -3,8 +3,8 @@ type: Module
 title: avst_width_converter
 description: Avalon-ST data-width converter.
 tags: [domain:interfaces, module:avst_width_converter, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/interfaces/stream/avst_width_converter.sv
 sources:
   - id: upstream
@@ -16,41 +16,39 @@ sources:
 
 Avalon-ST data-width converter.
 
-RTL notes: Avalon-ST width converter. Converts the data width of an Avalon stream, including packet delimiters (start and end of packet) and empty symbols. Symbol width is unchanged.
-
 # When to use
 
-See the [interfaces domain index](index.md) for siblings and typical compositions.
+Between AVST blocks with different beat widths; keep `g_SYM_WIDTH` consistent. Needs packet `sop`/`eop`/`empty` preserved.
 
 # Schema
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int unsigned g_SYM_WIDTH  = 8` |
-| | `parameter int unsigned g_INPUT_SYM  = 16` |
-| | `parameter int unsigned g_OUTPUT_SYM = 1` |
+| Declaration |
+| --- |
+| `parameter int unsigned g_SYM_WIDTH  = 8` |
+| `parameter int unsigned g_INPUT_SYM  = 16` |
+| `parameter int unsigned g_OUTPUT_SYM = 1` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                       clk_i` |
-| | `input  logic                       reset_i` |
-| | `output logic                       snk_ready_o` |
-| | `input  logic                       snk_valid_i` |
-| | `input  logic                       snk_sop_i` |
-| | `input  logic                       snk_eop_i` |
-| | `input  logic [c_SNK_EMPTY_W-1:0]   snk_empty_i` |
-| | `input  logic [c_INPUT_WIDTH-1:0]   snk_data_i` |
-| | `input  logic                       src_ready_i` |
-| | `output logic                       src_valid_o` |
-| | `output logic                       src_sop_o` |
-| | `output logic                       src_eop_o` |
-| | `output logic [c_SRC_EMPTY_W-1:0]   src_empty_o` |
-| | `output logic [c_OUTPUT_WIDTH-1:0]  src_data_o` |
+| Declaration |
+| --- |
+| `input  logic                       clk_i` |
+| `input  logic                       reset_i` |
+| `output logic                       snk_ready_o` |
+| `input  logic                       snk_valid_i` |
+| `input  logic                       snk_sop_i` |
+| `input  logic                       snk_eop_i` |
+| `input  logic [c_SNK_EMPTY_W-1:0]   snk_empty_i` |
+| `input  logic [c_INPUT_WIDTH-1:0]   snk_data_i` |
+| `input  logic                       src_ready_i` |
+| `output logic                       src_valid_o` |
+| `output logic                       src_sop_o` |
+| `output logic                       src_eop_o` |
+| `output logic [c_SRC_EMPTY_W-1:0]   src_empty_o` |
+| `output logic [c_OUTPUT_WIDTH-1:0]  src_data_o` |
 
 
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
@@ -58,7 +56,7 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 # Behaviour
 
-Avalon-ST width converter. Converts the data width of an Avalon stream, including packet delimiters (start and end of packet) and empty symbols. Symbol width is unchanged. Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
+Avalon-ST width converter. Converts the data width of an Avalon stream, including packet delimiters (start and end of packet) and empty symbols. Symbol width is unchanged. Buffers and serialises beats when `g_INPUT_SYM` and `g_OUTPUT_SYM` differ. `snk_*` is the wide side, `src_*` the narrow side (or vice versa per parameterisation). Preserves packet boundaries via `sop`/`eop` and `empty`.
 
 # Integration
 

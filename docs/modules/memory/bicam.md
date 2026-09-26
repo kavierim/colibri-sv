@@ -3,7 +3,7 @@ type: Module
 title: bicam
 description: Binary content-addressable memory.
 tags: [domain:memory, module:bicam]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/bicam.sv
 sources:
@@ -16,8 +16,6 @@ sources:
 
 Binary content-addressable memory.
 
-RTL notes: Binary content-addressable memory. g_N_WORDS and g_DATA_WIDTH have elaboration defaults; the VHDL generics do not.
-
 # When to use
 
 See the [memory domain index](index.md) for siblings and typical compositions.
@@ -26,26 +24,26 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_N_WORDS    = 16` |
-| | `parameter int g_DATA_WIDTH = 8` |
+| Declaration |
+| --- |
+| `parameter int g_N_WORDS    = 16` |
+| `parameter int g_DATA_WIDTH = 8` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic clk_i` |
-| | `input  logic reset_i` |
-| | `input  logic rdreq_i` |
-| | `input  logic wrreq_i` |
-| | `input  logic clear_i` |
-| | `input  logic [g_DATA_WIDTH-1:0] data_i` |
-| | `output logic full_o` |
-| | `output logic busy_o` |
-| | `output logic match_o` |
-| | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_o` |
+| Declaration |
+| --- |
+| `input  logic clk_i` |
+| `input  logic reset_i` |
+| `input  logic rdreq_i` |
+| `input  logic wrreq_i` |
+| `input  logic clear_i` |
+| `input  logic [g_DATA_WIDTH-1:0] data_i` |
+| `output logic full_o` |
+| `output logic busy_o` |
+| `output logic match_o` |
+| `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).

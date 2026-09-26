@@ -3,8 +3,8 @@ type: Module
 title: stream_buffer
 description: Elastic stream buffer (skid or pipeline via generic).
 tags: [domain:common, module:stream_buffer, interface:avst]
-generated: { by: process:generate_okf_bundle/1.0, at: 2026-09-26T11:35:23Z }
-status: draft
+generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
+status: stable
 resource: src/common/stream_buffer.sv
 sources:
   - id: upstream
@@ -16,8 +16,6 @@ sources:
 
 Elastic stream buffer (skid or pipeline via generic).
 
-RTL notes: Simple generic stream buffer. Zero latency (skid) when g_REGISTER_DATAPATH is 0. One clock of latency (pipeline) when g_REGISTER_DATAPATH is 1. g_DATA_WIDTH is VHDL natural. downto_width keeps a 0-wide vector off the [ -1 : 0 ] range.
-
 # When to use
 
 Default elastic buffer for valid/ready streams. Set `g_REGISTER_DATAPATH = 0` for skid (minimum latency 0) or `1` for pipeline (minimum latency 1). Prefer over legacy [`skid_buffer`](skid_buffer.md) and [`pipeline_buffer`](pipeline_buffer.md).
@@ -26,24 +24,24 @@ Default elastic buffer for valid/ready streams. Set `g_REGISTER_DATAPATH = 0` fo
 
 ## Parameters
 
-| Parameter | Declaration |
-| --- | --- |
-| | `parameter int g_DATA_WIDTH        = 8` |
-| | `parameter bit g_REGISTER_DATAPATH = 1'b0` |
+| Declaration |
+| --- |
+| `parameter int g_DATA_WIDTH        = 8` |
+| `parameter bit g_REGISTER_DATAPATH = 1'b0` |
 
 
 ## Ports
 
-| Port | Declaration |
-| --- | --- |
-| | `input  logic                                                      reset_i` |
-| | `input  logic                                                      clk_i` |
-| | `input  logic [colibri_utils::downto_width(g_DATA_WIDTH)-1:0]      snk_data_i` |
-| | `input  logic                                                      snk_valid_i` |
-| | `output logic                                                      snk_ready_o` |
-| | `output logic [colibri_utils::downto_width(g_DATA_WIDTH)-1:0]      src_data_o` |
-| | `input  logic                                                      src_ready_i` |
-| | `output logic                                                      src_valid_o` |
+| Declaration |
+| --- |
+| `input  logic                                                      reset_i` |
+| `input  logic                                                      clk_i` |
+| `input  logic [colibri_utils::downto_width(g_DATA_WIDTH)-1:0]      snk_data_i` |
+| `input  logic                                                      snk_valid_i` |
+| `output logic                                                      snk_ready_o` |
+| `output logic [colibri_utils::downto_width(g_DATA_WIDTH)-1:0]      src_data_o` |
+| `input  logic                                                      src_ready_i` |
+| `output logic                                                      src_valid_o` |
 
 
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
