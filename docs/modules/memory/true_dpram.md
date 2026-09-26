@@ -3,7 +3,6 @@ type: Module
 title: true_dpram
 description: True dual-port RAM (two write and two read ports).
 tags: [domain:memory, module:true_dpram]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/true_dpram.sv
 sources:

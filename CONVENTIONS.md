@@ -1,11 +1,7 @@
 <!--
-SPDX-FileCopyrightText: 2026 CERN
 SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
-SPDX-License-Identifier: CERN-OHL-W-2.0
 
-Modified: 2026-09-25, Kari Vierimaa, Kempele, Finland.
-Translated from VHDL to SystemVerilog.
-Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
 -->
 
 # Colibri SystemVerilog conventions
@@ -30,7 +26,7 @@ These packages are the shared API. Do not rename them. `verilator/colibri.f` lis
 
 The tree mirrors the upstream sources: `src/`, and later `sim/` and `fv/`. One VHDL entity becomes one module in the matching `.sv` file. There is no architecture name. File names stay the VHDL stem (`counter.vhdl` -> `counter.sv`).
 
-Every new file starts with:
+Every new **Covered Source** file under `src/`, `sim/`, or `fv/` (and SystemVerilog harness files such as `verilator/wave0_elab.sv`) starts with:
 
 ```systemverilog
 // SPDX-FileCopyrightText: 2026 CERN
@@ -42,7 +38,17 @@ Every new file starts with:
 // Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
 ```
 
-Use `<!-- -->` in Markdown and `#` in plain text. Keep the PoC Library sentence in any translation of a file that has it upstream. Keep the CERN copyright line on **translated RTL** (`src/`, `sim/`, `fv/`). Documentation under `docs/` is descriptive: no per-file CERN-OHL-W SPDX block (see [Licencing](docs/index.md#licencing) on the docs index). SystemVerilog sources use LF line endings. `LICENSES/CERN-OHL-W-2.0.txt` is an unmodified copy, including its CRLF line endings, and it has no added header.
+Use `<!-- -->` in Markdown and `#` in plain text for SPDX where needed. Keep the PoC Library sentence in any translation of a file that has it upstream.
+
+| Category | Paths (examples) | Per-file header |
+| --- | --- | --- |
+| Covered Source | `src/**/*.sv`, `sim/**/*.sv`, `fv/**/*.sv`, `verilator/wave0_elab.sv` | CERN + Kari + `SPDX-License-Identifier: CERN-OHL-W-2.0` + translation block |
+| Licence / notice | `LICENSES/CERN-OHL-W-2.0.txt`, `NOTICE` | No SPDX header on either file. `NOTICE` is plain modification text; the licence file is an unmodified copy of CERN-OHL-W-2.0. |
+| REUSE sidecar | `*.license` next to a data file (e.g. `sim/memory/rom/rom_contents.txt.license`) | SPDX lines declare the licence of the **companion** file only (not Covered Source RTL headers) |
+| Documentation | `docs/**` | None (see [Licencing](docs/index.md#licencing)) |
+| Ancillary | `verilator/*.f`, `verilator/run_all.sh`, `.github/**`, `.gitignore`, `README.md`, this file | Kari copyright only; **no** CERN line and **no** `SPDX-License-Identifier: CERN-OHL-W-2.0` |
+
+Ancillary headers may note that RTL is under CERN-OHL-W and point to `NOTICE`. SystemVerilog sources use LF line endings.
 
 Every `.sv` file sets `` `timescale 1ns/1ps `` after the header.
 

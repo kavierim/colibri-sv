@@ -3,7 +3,6 @@ type: Module
 title: i2c_controller
 description: I2C master controller.
 tags: [domain:io, module:i2c_controller]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/i2c/i2c_controller.sv
 sources:

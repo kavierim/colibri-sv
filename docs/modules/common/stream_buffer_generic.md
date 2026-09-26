@@ -3,7 +3,6 @@ type: Module
 title: stream_buffer_generic
 description: Same buffer with a parameterized data type.
 tags: [domain:common, module:stream_buffer_generic, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/stream_buffer_generic.sv
 sources:

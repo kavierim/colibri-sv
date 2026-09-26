@@ -3,7 +3,6 @@ type: Module
 title: uart
 description: UART transceiver (TX + RX).
 tags: [domain:io, module:uart]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/uart/uart.sv
 sources:

@@ -3,7 +3,6 @@ type: Module
 title: gearbox_up
 description: Continuous upscaling gearbox (RX path).
 tags: [domain:aurora, module:gearbox_up]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/gearbox_up.sv
 sources:

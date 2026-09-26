@@ -3,7 +3,6 @@ type: Module
 title: pipeline_buffer
 description: Legacy two-stage decoupled buffer; prefer `stream_buffer`.
 tags: [domain:common, module:pipeline_buffer]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/pipeline_buffer.sv
 sources:

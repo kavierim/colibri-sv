@@ -3,7 +3,6 @@ type: Module
 title: packet_join
 description: Concatenate consecutive packets into one.
 tags: [domain:packet, module:packet_join]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/packet_join.sv
 sources:

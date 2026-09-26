@@ -3,7 +3,6 @@ type: Module
 title: comparator
 description: Comparator with enable.
 tags: [domain:common, module:comparator]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/common/comparator.sv
 sources:

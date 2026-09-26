@@ -3,7 +3,6 @@ type: Module
 title: gearbox
 description: Single-clock width gearbox.
 tags: [domain:comms, module:gearbox]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/gearbox.sv
 sources:

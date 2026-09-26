@@ -3,7 +3,6 @@ type: Module
 title: simple_dpram
 description: Simple dual-port RAM (one write, one read); dual clock.
 tags: [domain:memory, module:simple_dpram]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/simple_dpram.sv
 sources:

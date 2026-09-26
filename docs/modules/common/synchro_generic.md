@@ -3,7 +3,6 @@ type: Module
 title: synchro_generic
 description: CDC for a user-defined payload type.
 tags: [domain:common, module:synchro_generic, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_generic.sv
 sources:

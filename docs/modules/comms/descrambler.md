@@ -3,7 +3,6 @@ type: Module
 title: descrambler
 description: Matching descrambler.
 tags: [domain:comms, module:descrambler]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/descrambler.sv
 sources:

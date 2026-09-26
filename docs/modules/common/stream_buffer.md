@@ -3,7 +3,6 @@ type: Module
 title: stream_buffer
 description: Elastic stream buffer (skid or pipeline via generic).
 tags: [domain:common, module:stream_buffer, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/common/stream_buffer.sv
 sources:

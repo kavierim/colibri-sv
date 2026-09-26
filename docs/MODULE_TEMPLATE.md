@@ -8,7 +8,6 @@ type: Module
 title: <module_name>
 description: <one line>
 tags: [domain:<area>, module:<name>]
-generated: { by: <actor>, at: <ISO8601Z> }
 status: draft
 resource: src/<domain>/<module>.sv
 ---

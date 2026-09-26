@@ -3,7 +3,6 @@ type: Module
 title: mmap_fifo_csr
 description: Top CSR block for mmap FIFO.
 tags: [domain:misc, module:mmap_fifo_csr]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/mmap_fifo/vhdl_if/mmap_fifo_csr.sv
 sources:

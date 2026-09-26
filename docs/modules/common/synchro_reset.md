@@ -3,7 +3,6 @@ type: Module
 title: synchro_reset
 description: Reset synchronizer.
 tags: [domain:common, module:synchro_reset, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/synchro_reset.sv
 sources:

@@ -3,7 +3,6 @@ type: Module
 title: be_add_trail
 description: Append a trailing word (e.g. CRC).
 tags: [domain:misc, module:be_add_trail]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/be_add_trail.sv
 sources:

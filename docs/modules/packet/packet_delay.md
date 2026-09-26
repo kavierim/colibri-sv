@@ -3,7 +3,6 @@ type: Module
 title: packet_delay
 description: Delay packets by a fixed number of clocks.
 tags: [domain:packet, module:packet_delay]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/packet_delay.sv
 sources:

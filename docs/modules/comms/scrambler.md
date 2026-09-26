@@ -3,7 +3,6 @@ type: Module
 title: scrambler
 description: Self-synchronous (multiplicative) scrambler.
 tags: [domain:comms, module:scrambler]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/comms/scrambler.sv
 sources:

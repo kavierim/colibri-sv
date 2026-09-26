@@ -3,7 +3,6 @@ type: Package
 title: colibri_types
 description: Avalon-ST and AXI-Stream types and conversion helpers.
 tags: [package, pkg:types]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/common/types.sv
 sources:

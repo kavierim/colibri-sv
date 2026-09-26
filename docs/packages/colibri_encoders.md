@@ -3,7 +3,6 @@ type: Package
 title: colibri_encoders
 description: Gray, one-hot, and related encodings.
 tags: [package, pkg:encoders]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/encoders.sv
 sources:

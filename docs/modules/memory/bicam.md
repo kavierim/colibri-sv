@@ -3,7 +3,6 @@ type: Module
 title: bicam
 description: Binary content-addressable memory.
 tags: [domain:memory, module:bicam]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/bicam.sv
 sources:

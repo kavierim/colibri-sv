@@ -3,7 +3,6 @@ type: Module
 title: block_sync_fsm
 description: Block synchronization state machine.
 tags: [domain:aurora, module:block_sync_fsm]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/block_sync_fsm.sv
 sources:

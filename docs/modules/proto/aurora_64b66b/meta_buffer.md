@@ -3,7 +3,6 @@ type: Module
 title: meta_buffer
 description: Metadata buffer in the RX datapath.
 tags: [domain:aurora, module:meta_buffer]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/include/meta_buffer.sv
 sources:

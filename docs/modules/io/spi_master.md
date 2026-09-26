@@ -3,7 +3,6 @@ type: Module
 title: spi_master
 description: SPI master.
 tags: [domain:io, module:spi_master]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/spi/spi_master.sv
 sources:

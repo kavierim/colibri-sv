@@ -3,7 +3,6 @@ type: Module
 title: aurora_st_decoder
 description: Aurora stream decoder block.
 tags: [domain:aurora, module:aurora_st_decoder]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/aurora_st_decoder.sv
 sources:

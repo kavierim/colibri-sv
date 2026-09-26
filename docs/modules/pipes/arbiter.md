@@ -3,7 +3,6 @@ type: Module
 title: arbiter
 description: Round-robin arbiter for multiple stream sources.
 tags: [domain:pipes, module:arbiter]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/pipes/arbiter.sv
 sources:

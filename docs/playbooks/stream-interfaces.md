@@ -3,7 +3,6 @@ type: Playbook
 title: Stream interfaces
 description: Avalon-ST and AXI-Stream records, adapters, and CDC patterns.
 tags: [playbook, interface:avst, interface:axis]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream

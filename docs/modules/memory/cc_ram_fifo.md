@@ -3,7 +3,6 @@ type: Module
 title: cc_ram_fifo
 description: Dual-clock RAM-based FIFO with asymmetric ports.
 tags: [domain:memory, module:cc_ram_fifo, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/cc_ram_fifo.sv
 sources:

@@ -3,7 +3,6 @@ type: Package
 title: reg_utils
 description: CSR field read/write helpers.
 tags: [package, reg_utils]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/mmap_fifo/vhdl_if/reg_utils.sv
 sources:

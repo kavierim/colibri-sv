@@ -3,7 +3,6 @@ type: Module
 title: slip_buffer
 description: Slip buffer for stream bit alignment.
 tags: [domain:comms, module:slip_buffer]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/comms/slip_buffer.sv
 sources:

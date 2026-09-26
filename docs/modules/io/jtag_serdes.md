@@ -3,7 +3,6 @@ type: Module
 title: jtag_serdes
 description: JTAG USER-register duplex stream bridge.
 tags: [domain:io, module:jtag_serdes]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/jtag/jtag_serdes.sv
 sources:

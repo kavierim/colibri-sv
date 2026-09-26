@@ -3,7 +3,6 @@ type: Module
 title: stream_to_wbm
 description: Bidirectional stream to Wishbone B4 master.
 tags: [domain:misc, module:stream_to_wbm, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/stream_to_wbm.sv
 sources:

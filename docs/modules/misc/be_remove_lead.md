@@ -3,7 +3,6 @@ type: Module
 title: be_remove_lead
 description: Remove the leading word (e.g. header).
 tags: [domain:misc, module:be_remove_lead]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/be_remove_lead.sv
 sources:

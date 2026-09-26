@@ -3,7 +3,6 @@ type: Module
 title: mmap_fifo_tx
 description: TX half of `mmap_fifo`.
 tags: [domain:misc, module:mmap_fifo_tx]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/mmap_fifo/mmap_fifo_tx.sv
 sources:

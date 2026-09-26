@@ -26,7 +26,7 @@
 2. Keep parameters/ports in sync with elaborated RTL.
 3. Update domain `index.md` descriptions when frontmatter changes.
 4. Link to playbooks instead of copying stream/CDC prose.
-5. Regenerate with `uv run python tools/generate_okf_bundle.py` when the catalog or verification tables change.
+5. Update catalog indexes (`docs/modules/index.md`, domain `index.md`) and verification tables on the module page when RTL or benches change.
 
 ## Do not
 

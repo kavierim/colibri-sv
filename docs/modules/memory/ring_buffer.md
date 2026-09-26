@@ -3,7 +3,6 @@ type: Module
 title: ring_buffer
 description: Circular buffer; overwrite oldest when full.
 tags: [domain:memory, module:ring_buffer]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/ring_buffer.sv
 sources:

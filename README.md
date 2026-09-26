@@ -1,11 +1,7 @@
 <!--
-SPDX-FileCopyrightText: 2026 CERN
 SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
-SPDX-License-Identifier: CERN-OHL-W-2.0
 
-Modified: 2026-09-25, Kari Vierimaa, Kempele, Finland.
-Translated from VHDL to SystemVerilog.
-Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
 -->
 
 # Colibri SystemVerilog
@@ -35,7 +31,7 @@ VHDL packages use a `colibri_` prefix: `utils` is `colibri_utils`, and the same 
 
 ## Documentation
 
-Canonical module and package documentation is under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
+Canonical module and package documentation is under [`docs/`](docs/index.md), maintained directly in the repo. Coding agents should start from [`AGENTS.md`](AGENTS.md).
 
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)
@@ -53,4 +49,5 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `src/` | RTL and packages |
 | `sim/` | Self-checking testbenches |
 | `fv/` | SystemVerilog assertions |
+| `docs/` | Module and package documentation |
 | `verilator/run_all.sh` | Full regression |

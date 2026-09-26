@@ -3,7 +3,6 @@ type: Module
 title: packet_cc_fifo
 description: Dual-clock Avalon-ST packet FIFO (legacy style).
 tags: [domain:memory, module:packet_cc_fifo, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/packet_cc_fifo.sv
 sources:

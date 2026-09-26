@@ -3,7 +3,6 @@ type: Module
 title: simple_dpram_altera
 description: Vendor-style simple DPRAM for Intel/Altera inference.
 tags: [domain:memory, module:simple_dpram_altera]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/optimized/simple_dpram_altera.sv
 sources:

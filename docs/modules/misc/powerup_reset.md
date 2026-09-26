@@ -3,7 +3,6 @@ type: Module
 title: powerup_reset
 description: Power-up reset stretcher.
 tags: [domain:misc, module:powerup_reset]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/powerup_reset.sv
 sources:

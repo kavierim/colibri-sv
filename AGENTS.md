@@ -11,9 +11,9 @@
 - Sources under `src/`. Follow [`CONVENTIONS.md`](CONVENTIONS.md).
 - Verify with `sim/**/*_tb.sv` and [`verilator/run_all.sh`](verilator/run_all.sh).
 
-## Regenerating docs
+## Maintaining docs
 
-From repo root: `uv run python tools/generate_okf_bundle.py` — refreshes generated module/package pages, playbooks, pointer readmes, and this file. Extend enrichments in `tools/generate_okf_bundle.py` instead of one-off edits that the next regen will overwrite.
+Edit pages under `docs/` directly (see [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md)). Keep each module page in sync with its `resource` RTL file. There is no in-repo doc generator; `tools/` is not published (see `.gitignore`).
 
 ## Parallel work
 

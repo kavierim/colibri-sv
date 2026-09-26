@@ -3,7 +3,6 @@ type: Module
 title: cc_gearbox_up
 description: Clock-crossing upscaling gearbox variant.
 tags: [domain:aurora, module:cc_gearbox_up, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/rx/cc_gearbox_up.sv
 sources:

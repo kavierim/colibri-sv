@@ -3,7 +3,6 @@ type: Module
 title: uart_tx
 description: UART transmitter only.
 tags: [domain:io, module:uart_tx]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/uart/uart_tx.sv
 sources:

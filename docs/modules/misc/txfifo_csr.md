@@ -3,7 +3,6 @@ type: Module
 title: txfifo_csr
 description: TX FIFO CSR block.
 tags: [domain:misc, module:txfifo_csr]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/mmap_fifo/vhdl_if/txfifo_csr.sv
 sources:

@@ -3,7 +3,6 @@ type: Module
 title: simple_dpram_be
 description: `simple_dpram` with byte-enable on the write port.
 tags: [domain:memory, module:simple_dpram_be]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/simple_dpram_be.sv
 sources:

@@ -3,7 +3,6 @@ type: Module
 title: avst_cdc
 description: Avalon-ST clock-domain crossing.
 tags: [domain:interfaces, module:avst_cdc, interface:avst, cdc]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/interfaces/stream/avst_cdc.sv
 sources:

@@ -3,7 +3,6 @@ type: Module
 title: decode_8b10b
 description: 8b/10b decoder.
 tags: [domain:endec, module:decode_8b10b]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/endec/decode_8b10b.sv
 sources:

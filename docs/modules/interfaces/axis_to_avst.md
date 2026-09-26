@@ -3,7 +3,6 @@ type: Module
 title: axis_to_avst
 description: AXI-Stream to Avalon-ST adapter.
 tags: [domain:interfaces, module:axis_to_avst, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/interfaces/stream/axis_to_avst.sv
 sources:

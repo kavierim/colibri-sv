@@ -3,7 +3,6 @@ type: Module
 title: counter
 description: Simple counter with optional modulo and enable.
 tags: [domain:common, module:counter]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/common/counter.sv
 sources:

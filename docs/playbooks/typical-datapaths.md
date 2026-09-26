@@ -3,7 +3,6 @@ type: Playbook
 title: Typical datapaths
 description: Common module chains for integration (not exhaustive).
 tags: [playbook, integration]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream

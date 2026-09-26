@@ -3,7 +3,6 @@ type: Module
 title: deinterleaver
 description: Split one stream into multiple outputs.
 tags: [domain:packet, module:deinterleaver]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/deinterleaver.sv
 sources:

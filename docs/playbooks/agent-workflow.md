@@ -3,7 +3,6 @@ type: Playbook
 title: Agent workflow
 description: How coding agents read and update the documentation bundle.
 tags: [playbook, agents]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 sources:
   - id: upstream
@@ -12,7 +11,7 @@ sources:
 ---
 # Bundle root
 
-Documentation lives in [`docs/`](../index.md). RTL remains in `src/`.
+Documentation lives in [`docs/`](../index.md). RTL remains in `src/`. Pages are edited in the repository; there is no doc generator on GitHub.
 
 # Editing modules
 

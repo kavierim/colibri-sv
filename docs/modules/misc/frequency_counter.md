@@ -3,7 +3,6 @@ type: Module
 title: frequency_counter
 description: Measure an input clock against a reference.
 tags: [domain:misc, module:frequency_counter]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/misc/frequency_counter.sv
 sources:

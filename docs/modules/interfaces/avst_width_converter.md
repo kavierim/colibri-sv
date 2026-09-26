@@ -3,7 +3,6 @@ type: Module
 title: avst_width_converter
 description: Avalon-ST data-width converter.
 tags: [domain:interfaces, module:avst_width_converter, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/interfaces/stream/avst_width_converter.sv
 sources:

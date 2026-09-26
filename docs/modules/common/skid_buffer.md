@@ -3,7 +3,6 @@ type: Module
 title: skid_buffer
 description: Legacy low-latency elastic buffer; prefer `stream_buffer`.
 tags: [domain:common, module:skid_buffer]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/skid_buffer.sv
 sources:

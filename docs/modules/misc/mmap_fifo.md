@@ -3,7 +3,6 @@ type: Module
 title: mmap_fifo
 description: Wishbone slave to full-duplex Avalon-ST packet FIFO.
 tags: [domain:misc, module:mmap_fifo]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: stable
 resource: src/misc/mmap_fifo/mmap_fifo.sv
 sources:

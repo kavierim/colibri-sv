@@ -3,7 +3,6 @@ type: Module
 title: edge_detect
 description: Rising and falling edge detection.
 tags: [domain:common, module:edge_detect]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/common/edge_detect.sv
 sources:

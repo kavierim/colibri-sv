@@ -3,7 +3,6 @@ type: Package
 title: colibri_aurora_const
 description: Aurora 64b/66b protocol constants.
 tags: [package, pkg:aurora_const]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/proto/aurora_64b66b/include/aurora_const_pkg.sv
 sources:

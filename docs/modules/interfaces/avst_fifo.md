@@ -3,7 +3,6 @@ type: Module
 title: avst_fifo
 description: Avalon-ST FIFO wrapper.
 tags: [domain:interfaces, module:avst_fifo, interface:avst]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/interfaces/stream/avst_fifo.sv
 sources:

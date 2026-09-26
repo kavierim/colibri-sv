@@ -3,7 +3,6 @@ type: Module
 title: header_remove
 description: Strip a fixed header from each packet.
 tags: [domain:packet, module:header_remove]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/packet/header_remove.sv
 sources:

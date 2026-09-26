@@ -3,7 +3,6 @@ type: Module
 title: spi_slave
 description: SPI slave.
 tags: [domain:io, module:spi_slave]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/io/spi/spi_slave.sv
 sources:

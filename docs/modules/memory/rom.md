@@ -3,7 +3,6 @@ type: Module
 title: rom
 description: Read-only memory loaded from a hex init file.
 tags: [domain:memory, module:rom]
-generated: { by: process:generate_doc_bundle/1.0, at: 2026-09-26T11:42:07Z }
 status: draft
 resource: src/memory/rom.sv
 sources:
