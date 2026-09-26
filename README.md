@@ -33,9 +33,18 @@ The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes
 
 VHDL packages use a `colibri_` prefix: `utils` is `colibri_utils`, and the same for `types`, `encoders`, `poly`, `mem`, `common_8b10b`, `aurora_const`, and `binaryio`. Module and port names are unchanged. The translation rules are in [`CONVENTIONS.md`](CONVENTIONS.md).
 
+## Documentation
+
+Canonical module and package documentation is the OKF v0.2 bundle under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
+
+- [Bundle index](docs/index.md)
+- [Playbooks](docs/playbooks/index.md)
+- [Module catalog](docs/modules/index.md)
+- [Packages](docs/packages/index.md)
+
 ## Components
 
-Full list of modules and packages with short descriptions: [`COMPONENTS.md`](COMPONENTS.md).
+Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and [`docs/packages/index.md`](docs/packages/index.md). [`COMPONENTS.md`](COMPONENTS.md) points to the bundle.
 
 ## Layout
 

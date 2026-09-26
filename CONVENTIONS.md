@@ -42,7 +42,7 @@ Every new file starts with:
 // Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
 ```
 
-Use `<!-- -->` in Markdown and `#` in plain text. Keep the PoC Library sentence in any translation of a file that has it upstream. Keep the CERN copyright line. SystemVerilog sources use LF line endings. `LICENSES/CERN-OHL-W-2.0.txt` is an unmodified copy, including its CRLF line endings, and it has no added header.
+Use `<!-- -->` in Markdown and `#` in plain text. Keep the PoC Library sentence in any translation of a file that has it upstream. Keep the CERN copyright line on **translated RTL** (`src/`, `sim/`, `fv/`). The OKF bundle under `docs/` is descriptive documentation: no per-file CERN-OHL-W SPDX block (see [Licencing](docs/index.md#licencing) on the bundle index). SystemVerilog sources use LF line endings. `LICENSES/CERN-OHL-W-2.0.txt` is an unmodified copy, including its CRLF line endings, and it has no added header.
 
 Every `.sv` file sets `` `timescale 1ns/1ps `` after the header.
 
