@@ -33,6 +33,10 @@ The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes
 
 VHDL packages use a `colibri_` prefix: `utils` is `colibri_utils`, and the same for `types`, `encoders`, `poly`, `mem`, `common_8b10b`, `aurora_const`, and `binaryio`. Module and port names are unchanged. The translation rules are in [`CONVENTIONS.md`](CONVENTIONS.md).
 
+## Components
+
+Full list of modules and packages with short descriptions: [`COMPONENTS.md`](COMPONENTS.md).
+
 ## Layout
 
 | Path | Contents |
