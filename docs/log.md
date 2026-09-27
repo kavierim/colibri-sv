@@ -2,6 +2,7 @@
 
 ## 2026-09-27
 
+- OKF v0.2 requirement frontmatter on [`counter`](modules/common/counter.md) (`requirements[].statement`, `provenance`); `satisfy requirement` on `part def counter`; stub `doc` uses `OKF: path#id`. Reconciliation: [req-okf-reconciliation](reference/req-okf-reconciliation.md). Checker enforces frontmatter/body/stub/part alignment.
 - Each part file references its own definition (`part wbRamUse : wb_ram` in the same package). Metadata definitions in `ArchitectureMeta.sysml` document `@OKFReference` and `@ArtifactTrace`.
 - SysML v2 is the structural source: edit `sysml/parts/` before RTL. Generators removed. Requirement stubs kept only for [`counter`](modules/common/counter.md); dumped `$fatal` and PSL fragments removed from other module pages. `tools/check_sysml_ssot.py` reports divergence. Textual notation checked with sysml-v2-lsp 0.29.0: no syntax or semantic errors (unused-definition warnings only, because the parts are a library).
 - [`CHANGELOG.md`](../CHANGELOG.md) for release **0.1.0** (release-level notes).

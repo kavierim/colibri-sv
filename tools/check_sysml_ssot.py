@@ -30,8 +30,18 @@ REQ_SYSML = ROOT / "sysml" / "requirements.sysml"
 REQ_HEADING = re.compile(r"^##\s+(REQ-[A-Z0-9_]+-\d+)\s*$", re.MULTILINE)
 REQ_ANCHOR = re.compile(r'<a id="(REQ-[A-Z0-9_]+-\d+)"></a>')
 STUB_REQ = re.compile(r"requirement def <'(REQ-[A-Z0-9_]+-\d+)'>")
+STUB_OKF_DOC = re.compile(
+    r"requirement def <'(REQ-[A-Z0-9_]+-\d+)'> (\w+) \{[^}]*doc /\* OKF: ([^#]+)#(REQ-[A-Z0-9_]+-\d+) \*/",
+    re.DOTALL,
+)
+REQ_FM_ENTRY = re.compile(
+    r"^\s+-\s+id:\s+(REQ-[A-Z0-9_]+-\d+)\s*\n\s+statement:\s+(.+?)\s*$",
+    re.MULTILINE,
+)
+FRONTMATTER = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 PART_DEF = re.compile(r"part def (\w+)")
 IN_ITEM = re.compile(r"^\s*(in|out|inout) item (\w+);", re.MULTILINE)
+SATISFY_REQ = re.compile(r"satisfy\s+requirement\s+(REQ_[A-Z0-9_]+)\s*;")
 SHALL_IN_STUB = re.compile(r"\bshall\b", re.IGNORECASE)
 CERN_IN_PART = re.compile(r"SPDX-License-Identifier:\s*CERN-OHL-W")
 CERN_IN_STUB = re.compile(r"SPDX-License-Identifier:\s*CERN-OHL-W")
@@ -241,6 +251,37 @@ def module_filter(req_id: str, module: str) -> bool:
     return f"-{token}-" in req_id or req_id.endswith(f"-{token}-001")
 
 
+def stub_short_name(req_id: str) -> str:
+    parts = req_id.split("-")
+    if len(parts) < 3 or parts[0] != "REQ":
+        return ""
+    return f"REQ_{parts[1]}_{parts[2]}"
+
+
+def split_frontmatter(text: str) -> tuple[str, str]:
+    m = FRONTMATTER.match(text)
+    if not m:
+        return "", text
+    return m.group(1), text[m.end() :]
+
+
+def requirements_section_body(body: str) -> str:
+    m = re.search(r"^# Requirements\s*\n(.*?)(?=^# |\Z)", body, re.MULTILINE | re.DOTALL)
+    return m.group(1) if m else ""
+
+
+def frontmatter_requirements(fm: str) -> dict[str, str]:
+    out: dict[str, str] = {}
+    for m in REQ_FM_ENTRY.finditer(fm):
+        out[m.group(1)] = m.group(2).strip()
+    return out
+
+
+def doc_path_for_module(md: Path) -> str:
+    rel = md.relative_to(ROOT).as_posix()
+    return rel
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--module", help="Only check REQ stubs for this module (e.g. counter)")
@@ -259,23 +300,60 @@ def main() -> int:
     ):
         if SHALL_IN_STUB.search(match.group(0)):
             errors.append("requirement stub contains SHALL text in body")
+    for m in STUB_OKF_DOC.finditer(stub_text):
+        rid, short, doc_path, anchor = m.group(1), m.group(2), m.group(3), m.group(4)
+        if rid != anchor:
+            errors.append(f"requirements.sysml: stub {rid} OKF anchor mismatch {anchor}")
+        if short != stub_short_name(rid):
+            errors.append(f"requirements.sysml: stub {rid} short name {short} != {stub_short_name(rid)}")
 
     doc_ids: set[str] = set()
+    module_req_short: dict[str, set[str]] = {}
     for md in sorted(DOCS.rglob("*.md")):
         if md.name == "index.md":
             continue
         if args.module and md.stem != args.module:
             continue
         text = md.read_text(encoding="utf-8")
+        fm, body = split_frontmatter(text)
+        fm_reqs = frontmatter_requirements(fm) if fm else {}
         headings = {m.group(1) for m in REQ_HEADING.finditer(text)}
         anchors = {m.group(1) for m in REQ_ANCHOR.finditer(text)}
+        expected_doc = doc_path_for_module(md)
+        for rid, statement in sorted(fm_reqs.items()):
+            if not SHALL_IN_STUB.search(statement):
+                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} statement missing shall")
+            if rid not in headings:
+                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} without ## heading")
+            if rid not in anchors:
+                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} without anchor")
+            module_req_short.setdefault(md.stem, set()).add(stub_short_name(rid))
+        if fm_reqs:
+            req_body = requirements_section_body(body)
+            anchor_start = re.search(r"^<a id=", req_body, re.MULTILINE)
+            if anchor_start:
+                req_body = req_body[anchor_start.start() :]
+            if req_body and SHALL_IN_STUB.search(req_body):
+                errors.append(
+                    f"{md.relative_to(ROOT)}: duplicate SHALL in # Requirements body; use frontmatter only"
+                )
         for hid in headings:
             doc_ids.add(hid)
             if hid not in anchors:
                 errors.append(f"{md.relative_to(ROOT)}: heading {hid} without matching anchor")
+            if fm_reqs and hid not in fm_reqs:
+                errors.append(f"{md.relative_to(ROOT)}: heading {hid} missing frontmatter requirements entry")
         for aid in anchors:
             if aid not in headings:
                 errors.append(f"{md.relative_to(ROOT)}: anchor {aid} without ## heading")
+        for rid in fm_reqs:
+            doc_ids.add(rid)
+        for rid in fm_reqs:
+            if not any(
+                sm.group(1) == rid and sm.group(3) == expected_doc
+                for sm in STUB_OKF_DOC.finditer(stub_text)
+            ):
+                errors.append(f"missing OKF stub doc link for {rid} -> {expected_doc}")
 
     for rid in sorted(doc_ids):
         if rid not in stub_ids:
@@ -314,6 +392,18 @@ def main() -> int:
             errors.append(
                 f"{part_path.relative_to(ROOT)}: RTL ports differ from the model; edit the model first, then RTL. missing_in_rtl={sorted(extra)} missing_in_model={sorted(missing)}"
             )
+        satisfied = {m.group(1) for m in SATISFY_REQ.finditer(content)}
+        expected = module_req_short.get(module, set())
+        for short in sorted(expected):
+            if short not in satisfied:
+                errors.append(
+                    f"{part_path.relative_to(ROOT)}: part {module} missing satisfy requirement {short}"
+                )
+        for short in satisfied:
+            if expected and short not in expected:
+                errors.append(
+                    f"{part_path.relative_to(ROOT)}: satisfy {short} not listed for module {module}"
+                )
 
     if errors:
         for err in errors:

@@ -9,6 +9,7 @@
 package Colibri_Common_counter {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/common/counter.sv";
@@ -26,6 +27,11 @@ package Colibri_Common_counter {
         out item value_o;
         attribute value_o_sv : String = "logic [((g_COUNTER_WIDTH > 0) ? g_COUNTER_WIDTH : 1)-1:0] value_o";
         out item wraparound_o;
+
+        satisfy requirement REQ_COUNTER_001;
+        satisfy requirement REQ_COUNTER_002;
+        satisfy requirement REQ_COUNTER_003;
+        satisfy requirement REQ_COUNTER_004;
     }
 
     part counterUse : counter;
