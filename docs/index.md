@@ -5,6 +5,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 ## Playbooks
 
 - [Getting started](playbooks/getting-started.md)
+- [Package managers and integration](playbooks/package-managers.md)
 - [Simulation](playbooks/simulation.md)
 - [Stream interfaces](playbooks/stream-interfaces.md)
 - [Typical datapaths](playbooks/typical-datapaths.md)

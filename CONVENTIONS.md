@@ -10,7 +10,7 @@ This file is the contract for every later translation. `counter` in `src/common/
 
 ## Frozen files
 
-These packages are the shared API. Do not rename them. `verilator/colibri.f` lists them in dependency order. `LICENSES/CERN-OHL-W-2.0.txt` stays unmodified.
+These packages are the shared API. Do not rename them. `verilator/colibri.f` lists them for wave-0 regression; the full library order is in root `colibri.f`, `Bender.yml`, and `colibri.core`. `LICENSES/CERN-OHL-W-2.0.txt` stays unmodified.
 
 | VHDL library `colibri` | SystemVerilog package | File |
 | --- | --- | --- |
@@ -46,7 +46,7 @@ Use `<!-- -->` in Markdown and `#` in plain text for SPDX where needed. Keep the
 | Licence / notice | `LICENSES/CERN-OHL-W-2.0.txt`, `NOTICE` | No SPDX header on either file. `NOTICE` is plain modification text; the licence file is an unmodified copy of CERN-OHL-W-2.0. |
 | REUSE sidecar | `*.license` next to a data file (e.g. `sim/memory/rom/rom_contents.txt.license`) | SPDX lines declare the licence of the **companion** file only (not Covered Source RTL headers) |
 | Documentation | `docs/**` | None (see [Licencing](docs/index.md#licencing)) |
-| Ancillary | `verilator/*.f`, `verilator/run_all.sh`, `.github/**`, `.gitignore`, `README.md`, this file | Kari copyright only; **no** CERN line and **no** `SPDX-License-Identifier: CERN-OHL-W-2.0` |
+| Ancillary | `colibri.f`, `Bender.yml`, `colibri.core`, `tools/**`, `verilator/*.f`, `verilator/run_all.sh`, `.github/**`, `.gitignore`, `README.md`, this file | Kari copyright only; **no** CERN line and **no** `SPDX-License-Identifier: CERN-OHL-W-2.0` |
 
 Ancillary headers may note that RTL is under CERN-OHL-W and point to `NOTICE`. SystemVerilog sources use LF line endings.
 

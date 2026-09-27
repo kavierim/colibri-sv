@@ -10,10 +10,11 @@
 
 - Sources under `src/`. Follow [`CONVENTIONS.md`](CONVENTIONS.md).
 - Verify with `sim/**/*_tb.sv` and [`verilator/run_all.sh`](verilator/run_all.sh).
+- Root integration manifests: [`colibri.f`](colibri.f), [`Bender.yml`](Bender.yml), [`colibri.core`](colibri.core). After changing `verilator/files/*.f`, run [`tools/gen_packaging.py`](tools/gen_packaging.py).
 
 ## Maintaining docs
 
-Edit pages under `docs/` directly (see [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md)). Keep each module page in sync with its `resource` RTL file. There is no in-repo doc generator; `tools/` is not published (see `.gitignore`).
+Edit pages under `docs/` directly (see [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md)). Keep each module page in sync with its `resource` RTL file.
 
 ## Parallel work
 

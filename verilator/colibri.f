@@ -2,7 +2,8 @@
 //
 // Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
 
-// Colibri SystemVerilog file list, dependency order.
+// Wave-0 packages and regression base list (not the full library).
+// Full src/ order: colibri.f at the repository root.
 // Run from the colibri_sv directory:
 //   verilator --lint-only -Wall -Wno-DECLFILENAME -f verilator/colibri.f
 //

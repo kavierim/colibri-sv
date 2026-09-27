@@ -6,9 +6,18 @@ Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOT
 
 # Colibri SystemVerilog
 
-Unofficial SystemVerilog port of the CERN [colibri](https://gitlab.com/colibri-cern/colibri) library, pinned to commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f). CERN has not endorsed this port.
+Open-source SystemVerilog port of the CERN **colibri** VHDL library for [Verilator](https://www.veripool.org/verilator/) and other free EDA tooling: reusable FPGA/ASIC RTL components (memory, buses, I/O, packet handling, and more).
 
-The port is for free SystemVerilog tools, especially [Verilator](https://www.veripool.org/verilator/).
+This repository is an **unofficial** port. CERN has not endorsed it. It is pinned to upstream commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f).
+
+## CERN upstream (colibri)
+
+| Resource | Link |
+| --- | --- |
+| Official GitLab repository | [gitlab.com/colibri-cern/colibri](https://gitlab.com/colibri-cern/colibri) |
+| CERN GitLab mirror | [gitlab.cern.ch/colibri/colibri](https://gitlab.cern.ch/colibri/colibri) |
+| Project documentation | [colibri.docs.cern.ch](https://colibri.docs.cern.ch) |
+| CERN Open Hardware Repository | [ohwr.org](https://ohwr.org/) (upstream registers via `.ohwr.yaml`; see the GitLab repo) |
 
 ## Licence
 
@@ -24,6 +33,16 @@ sudo apt install verilator
 ```
 
 The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes. GitHub Actions runs the same script.
+
+## Package managers and integration
+
+| Artifact | Use |
+| --- | --- |
+| [`colibri.f`](colibri.f) | Full `src/` compile order and `+incdir+src` for simulators |
+| [`Bender.yml`](Bender.yml) | [Bender](https://github.com/pulp-platform/bender) package `colibri-sv` |
+| [`colibri.core`](colibri.core) | FuseSoC core `kavierim:colibri:sv:0.1.0` (`default` = RTL, `sim` = Verilator testbenches) |
+
+Details: [Package managers and integration](docs/playbooks/package-managers.md).
 
 ## Names
 
@@ -50,4 +69,6 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `sim/` | Self-checking testbenches |
 | `fv/` | SystemVerilog assertions |
 | `docs/` | Module and package documentation |
+| `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests (see above) |
+| `tools/gen_packaging.py` | Regenerates those manifests from `verilator/files/` |
 | `verilator/run_all.sh` | Full regression |

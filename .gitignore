@@ -2,9 +2,6 @@
 #
 # Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
 
-# Optional local scripts; not part of the published repository.
-tools/
-
 obj_dir/
 sim/fileio/testfile.bin
 obj_dir_log_*.txt

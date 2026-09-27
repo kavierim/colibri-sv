@@ -25,19 +25,30 @@ The script discovers every `sim/**/*_tb.sv`, selects a matching `verilator/files
 
 # File lists
 
-| Path prefix | Typical `.f` file |
-| --- | --- |
-| `sim/common/` | `verilator/files/common.f` |
-| `sim/memory/` | `verilator/files/memory.f` |
-| `sim/comms/` | `verilator/files/comms.f` |
-| `sim/interfaces/` | `verilator/files/interfaces.f` |
-| `sim/packet/`, `sim/pipes/` | `verilator/files/packet_pipes.f` |
-| `sim/misc/` | `verilator/files/misc.f` |
-| `sim/proto/aurora_64b66b/` | `verilator/files/aurora.f` |
+## Full RTL (`colibri.f`)
 
-Packages are always pulled in through `verilator/colibri.f`.
+[`colibri.f`](../../colibri.f) at the repository root lists every `src/**/*.sv` file in dependency order (same order as the `verilator/files/*.f` fragments combined). Use it for lint or integration builds. Regression uses the split lists below so each testbench compiles only the RTL it needs.
+
+## Per-testbench lists (`verilator/`)
+
+`run_all.sh` always passes `verilator/colibri.f`, then the lists below.
+
+| Testbench path | Additional file lists under `verilator/files/` |
+| --- | --- |
+| `sim/common/` | `common.f` |
+| `sim/memory/`, `sim/comms/` | `common.f`, `memory.f`, `comms.f` |
+| `sim/endec/` | `common.f`, `endec.f` |
+| `sim/io/` | `common.f`, `io.f` |
+| `sim/interfaces/` | `common.f`, `memory.f`, `interfaces.f` |
+| `sim/packet/`, `sim/pipes/` | `common.f`, `memory.f`, `interfaces.f`, `misc.f`, `packet_pipes.f` |
+| `sim/misc/` | `common.f`, `memory.f`, `interfaces.f`, `misc.f` |
+| `sim/proto/` | `common.f`, `memory.f`, `comms.f`, `endec.f`, `aurora.f` |
+| `sim/fileio/` | `fileio.f` |
+
+Bound checkers under `fv/` are selected per testbench by `run_all.sh`, not by these lists.
 
 # Related
 
 - [getting-started](getting-started.md)
+- [package-managers](package-managers.md)
 - Module pages list per-module testbenches under **Verification**.
