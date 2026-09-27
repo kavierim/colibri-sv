@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::gearbox
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ Use [`cc_gearbox`](cc_gearbox.md) when the two sides use different clocks.
 | `parameter int g_INPUT_WIDTH = 8` |
 | `parameter int g_OUTPUT_WIDTH = 8` |
 
-
 ## Ports
 
 | Declaration |
@@ -42,9 +42,7 @@ Use [`cc_gearbox`](cc_gearbox.md) when the two sides use different clocks.
 | `output logic                     src_valid_o` |
 | `input  logic                     src_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -54,7 +52,6 @@ Single-clock gearbox. Input and output widths are independent. Stream-facing mod
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/gearbox.sv`.
-
 
 - Upstream entity name matches module name `gearbox`.
 

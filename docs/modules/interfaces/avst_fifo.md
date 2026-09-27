@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Interfaces_Stream::avst_fifo
 ---
 
 # Purpose
@@ -30,7 +31,6 @@ Thin wrapper around [`packet_fifo`](../memory/packet_fifo.md) or width-matched F
 | `parameter int unsigned g_NUM_BEATS    = 4` |
 | `parameter bit          g_ASYNC_CLOCKS = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -51,9 +51,7 @@ Thin wrapper around [`packet_fifo`](../memory/packet_fifo.md) or width-matched F
 | `output logic [c_EMPTY_WIDTH-1:0]  src_empty_o` |
 | `output logic [c_DATA_WIDTH-1:0]   src_data_o` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -65,7 +63,6 @@ Avalon-ST FIFO. Buffers every Avalon-ST signal in parallel. Sink and source cloc
 - RTL path: `src/interfaces/stream/avst_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `avst_fifo`.
 

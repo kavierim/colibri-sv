@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::bit_shifter
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | `parameter int unsigned g_DATA_WIDTH = 8` |
 | `parameter bit          g_MSB_RIGHT = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -39,9 +39,7 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | `input  logic [g_DATA_WIDTH-1:0]                                       data_i` |
 | `output logic [g_DATA_WIDTH-1:0]                                       data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Bit-shift a continuous stream. g_MSB_RIGHT 1 joins the new word on the MSB side.
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/bit_shifter.sv`.
-
 
 - Upstream entity name matches module name `bit_shifter`.
 

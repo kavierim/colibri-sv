@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Endec::decode_8b10b
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 | --- |
 | (none) |
 
-
 ## Ports
 
 | Declaration |
@@ -39,9 +39,7 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 | `output logic       src_control_o, // is K code` |
 | `output logic       src_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 - Verilator: add `verilator/files/endec.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/endec/decode_8b10b.sv`.
-
 
 - Upstream entity name matches module name `decode_8b10b`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::simple_dpram
 ---
 
 # Purpose
@@ -36,7 +37,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter logic [g_A_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
 | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
-
 ## Ports
 
 | Declaration |
@@ -50,9 +50,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `input  logic [colibri_utils::downto_width(g_B_ADDR_WIDTH)-1:0] rdaddr_i` |
 | `output logic [g_B_DATA_WIDTH-1:0] rddata_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -64,7 +62,6 @@ Simple Dual-Port RAM. A signal or shared-variable memory is a logic array update
 - RTL path: `src/memory/simple_dpram.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `simple_dpram`.
 

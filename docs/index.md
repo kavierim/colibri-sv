@@ -10,6 +10,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 - [Stream interfaces](playbooks/stream-interfaces.md)
 - [Typical datapaths](playbooks/typical-datapaths.md)
 - [Agent workflow](playbooks/agent-workflow.md)
+- [SysML v2](playbooks/sysml.md)
 
 ## Reference
 
@@ -22,7 +23,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 
 ## Licencing
 
-RTL, simulation, and formal verification files in this repository are **Covered Source** under [CERN-OHL-W-2.0](../LICENSES/CERN-OHL-W-2.0.txt); see [NOTICE](../NOTICE) for modification and provenance (plain text, no SPDX header). Per-file SPDX headers on `src/**/*.sv`, `sim/**/*.sv`, and `fv/**/*.sv` satisfy redistribution of that hardware Source.
+RTL, simulation, formal verification, and the SysML structural model (`sysml/parts/**/*.sysml`) in this repository are **Covered Source** under [CERN-OHL-W-2.0](../LICENSES/CERN-OHL-W-2.0.txt); see [NOTICE](../NOTICE) for modification and provenance (plain text, no SPDX header). Per-file SPDX headers on `src/**/*.sv`, `sim/**/*.sv`, `fv/**/*.sv`, and `sysml/parts/**/*.sysml` satisfy redistribution of that Source. `sysml/Colibri.sysml`, `sysml/ArchitectureMeta.sysml`, and `sysml/requirements.sysml` are ancillary.
 
 The pages under `docs/` are descriptive documentation, maintained directly in the repository (no bundled doc generator). They are not hardware Source and do not need per-file CERN-OHL-W SPDX blocks. The same applies to ancillary repository files (Verilator file lists and `run_all.sh`, CI workflows, and similar): Kari copyright only, with hardware licencing described in `NOTICE`. Upstream colibri provenance is cited in module `sources` and in RTL headers.
 

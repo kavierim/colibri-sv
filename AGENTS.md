@@ -16,6 +16,8 @@
 
 Edit pages under `docs/` directly (see [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md)). Keep each module page in sync with its `resource` RTL file.
 
+SysML v2: edit `sysml/parts/` before the matching RTL. SHALL text stays on the module page. Add a stub in `sysml/requirements.sysml` when you add a `REQ-*` heading. Check with `tools/check_sysml_ssot.py`. See [`docs/playbooks/sysml.md`](docs/playbooks/sysml.md). Do not copy SHALL text into stubs.
+
 ## Parallel work
 
 - Own one `docs/modules/<domain>/` tree per change.

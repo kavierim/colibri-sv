@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Endec::rle_decode
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 | `parameter int unsigned g_WORD_WIDTH  = 16` |
 | `parameter int unsigned g_COUNT_WIDTH = 3` |
 
-
 ## Ports
 
 | Declaration |
@@ -42,9 +42,7 @@ See the [endec domain index](index.md) for siblings and typical compositions.
 | `output logic                                      src_valid_o` |
 | `output logic [g_WORD_WIDTH-1:0]                   src_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -54,7 +52,6 @@ Run-Length Decoder Some of the work was inspired by VHDL Whiz Release log: - 0.1
 
 - Verilator: add `verilator/files/endec.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/endec/rle_decode.sv`.
-
 
 - Upstream entity name matches module name `rle_decode`.
 

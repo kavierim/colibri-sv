@@ -46,7 +46,8 @@ Use `<!-- -->` in Markdown and `#` in plain text for SPDX where needed. Keep the
 | Licence / notice | `LICENSES/CERN-OHL-W-2.0.txt`, `NOTICE` | No SPDX header on either file. `NOTICE` is plain modification text; the licence file is an unmodified copy of CERN-OHL-W-2.0. |
 | REUSE sidecar | `*.license` next to a data file (e.g. `sim/memory/rom/rom_contents.txt.license`) | SPDX lines declare the licence of the **companion** file only (not Covered Source RTL headers) |
 | Documentation | `docs/**` | None (see [Licencing](docs/index.md#licencing)) |
-| Ancillary | `colibri.f`, `Bender.yml`, `colibri.core`, `tools/**`, `verilator/*.f`, `verilator/run_all.sh`, `.github/**`, `.gitignore`, `README.md`, this file | Kari copyright only; **no** CERN line and **no** `SPDX-License-Identifier: CERN-OHL-W-2.0` |
+| SysML structural model | `sysml/parts/**/*.sysml` | Same as Covered Source (CERN + Kari + `SPDX-License-Identifier: CERN-OHL-W-2.0`). Edit the part before the RTL. |
+| Ancillary | `CHANGELOG.md`, `colibri.f`, `Bender.yml`, `colibri.core`, `tools/**`, `sysml/requirements.sysml`, `sysml/ArchitectureMeta.sysml`, `sysml/Colibri.sysml`, `verilator/*.f`, `verilator/run_all.sh`, `.github/**`, `.gitignore`, `README.md`, this file | Kari copyright only; **no** CERN line and **no** `SPDX-License-Identifier: CERN-OHL-W-2.0` |
 
 Ancillary headers may note that RTL is under CERN-OHL-W and point to `NOTICE`. SystemVerilog sources use LF line endings.
 

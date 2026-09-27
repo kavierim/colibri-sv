@@ -6,6 +6,10 @@ library, made under section 3 of CERN-OHL-W-2.0. The modification is a
 translation from VHDL to SystemVerilog. Module names, generic names, port
 names, and behaviour are kept where the language allows.
 
+sysml/parts/ is a SysML v2 structural model of those modules (parameters
+and ports). It is Covered Source under the same licence. Edit the part
+before the matching SystemVerilog module.
+
 Upstream:
   https://gitlab.com/colibri-cern/colibri
   commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f

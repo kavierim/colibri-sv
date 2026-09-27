@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::cc_gearbox
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ Use [`gearbox`](gearbox.md) for single-clock width conversion.
 | `parameter bit          g_USE_BLOCK_RAM = 1'b0` |
 | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
-
 ## Ports
 
 | Declaration |
@@ -46,9 +46,7 @@ Use [`gearbox`](gearbox.md) for single-clock width conversion.
 | `output logic                      src_valid_o` |
 | `input  logic                      src_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -58,7 +56,6 @@ Dual-clock gearbox. Uses cc_fifo, or cc_ram_fifo when g_USE_BLOCK_RAM is set. St
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/cc_gearbox.sv`.
-
 
 - Upstream entity name matches module name `cc_gearbox`.
 

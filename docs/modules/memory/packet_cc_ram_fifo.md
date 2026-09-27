@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::packet_cc_ram_fifo
 ---
 
 # Purpose
@@ -32,7 +33,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter int g_SRC_DATA_WIDTH   = g_DATA_WIDTH` |
 | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
-
 ## Ports
 
 | Declaration |
@@ -55,9 +55,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `input  logic src_ready_i` |
 | `output logic src_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -69,7 +67,6 @@ Packet FIFO in a simple dual-port RAM, with a latency fifo and a size cc_fifo. g
 - RTL path: `src/memory/packet_cc_ram_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `packet_cc_ram_fifo`.
 

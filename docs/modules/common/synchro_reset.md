@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::synchro_reset
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `parameter logic g_OUT_POLARITY = 1'b1` |
 | `parameter int   g_DURATION     = 1` |
 
-
 ## Ports
 
 | Declaration |
@@ -38,9 +38,7 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `input  logic reset_i` |
 | `output logic reset_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -50,7 +48,6 @@ Reset signal synchronizer. Synchronizes an asynchronous reset into the destinati
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/synchro_reset.sv`.
-
 
 - Upstream entity name matches module name `synchro_reset`.
 

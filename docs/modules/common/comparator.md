@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::comparator
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ Registered compare with enable; unsigned `a_i`/`b_i`; use `g_IS_EQUAL` for `>=` 
 | `parameter int g_DATA_WIDTH = 32` |
 | `parameter bit g_IS_EQUAL   = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -39,9 +39,7 @@ Registered compare with enable; unsigned `a_i`/`b_i`; use `g_IS_EQUAL` for `>=` 
 | `input  logic [g_DATA_WIDTH-1:0] b_i` |
 | `output logic                    a_gt_b_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Simple Comparator. Asserts a_gt_b_o when a is greater than b, and only while ena
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/comparator.sv`.
-
 
 - Upstream entity name matches module name `comparator`.
 

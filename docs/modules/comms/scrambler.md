@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::scrambler
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ Line coding before PHY; pair with [`descrambler`](descrambler.md). Polynomial vi
 | `parameter bit g_INVERT_IN = 1'b1` |
 | `parameter bit g_INVERT_OUT = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -45,9 +45,7 @@ Line coding before PHY; pair with [`descrambler`](descrambler.md). Polynomial vi
 | `input  logic                    src_ready_i` |
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -57,7 +55,6 @@ Self-synchronous scrambler. Multiplicative self-synchronous scrambler on a bit o
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/scrambler.sv`.
-
 
 - Upstream entity name matches module name `scrambler`.
 

@@ -12,18 +12,9 @@ Open-source SystemVerilog port of the CERN **colibri** VHDL library for [Verilat
 
 This repository is an **unofficial** port. CERN has not endorsed it. It is pinned to upstream commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f).
 
-## CERN upstream (colibri)
-
-| Resource | Link |
-| --- | --- |
-| Official GitLab repository | [gitlab.com/colibri-cern/colibri](https://gitlab.com/colibri-cern/colibri) |
-| CERN GitLab mirror | [gitlab.cern.ch/colibri/colibri](https://gitlab.cern.ch/colibri/colibri) |
-| Project documentation | [colibri.docs.cern.ch](https://colibri.docs.cern.ch) |
-| CERN Open Hardware Repository | [ohwr.org](https://ohwr.org/) (upstream registers via `.ohwr.yaml`; see the GitLab repo) |
-
 ## Licence
 
-CERN-OHL-W-2.0. The text is [`LICENSES/CERN-OHL-W-2.0.txt`](LICENSES/CERN-OHL-W-2.0.txt). [`NOTICE`](NOTICE) records the modification and the source location.
+CERN-OHL-W-2.0. The text is [`LICENSES/CERN-OHL-W-2.0.txt`](LICENSES/CERN-OHL-W-2.0.txt). [`NOTICE`](NOTICE) records the modification and the source location. Release history: [`CHANGELOG.md`](CHANGELOG.md).
 
 ## Simulation
 
@@ -59,6 +50,15 @@ Canonical module and package documentation is under [`docs/`](docs/index.md), ma
 - [Module catalog](docs/modules/index.md)
 - [Packages](docs/packages/index.md)
 
+## SysML v2
+
+The structural model lives in [`sysml/`](sysml/Colibri.sysml). There is one `part def` per SystemVerilog module. Edit that part before the matching file under `src/`. SHALL sentences stay on the module page in [`docs/modules/`](docs/modules/index.md). [`sysml/requirements.sysml`](sysml/requirements.sysml) stores only the requirement identifier and a link to that page.
+
+`sysml/parts/` is Covered Source under CERN-OHL-W-2.0, like the RTL. The library index, metadata, and requirement stubs are ancillary.
+
+- [SysML playbook](docs/playbooks/sysml.md)
+- Check agreement of the model, the stubs, and the RTL ports: `uv run python tools/check_sysml_ssot.py`
+
 ## Components
 
 Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and [`docs/packages/index.md`](docs/packages/index.md). [`COMPONENTS.md`](COMPONENTS.md) points to the bundle.
@@ -71,6 +71,17 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `sim/` | Self-checking testbenches |
 | `fv/` | SystemVerilog assertions |
 | `docs/` | Module and package documentation |
+| `sysml/` | SysML v2 structural model (`parts/`), requirement stubs, library index. Edit the model before RTL. |
 | `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests (see above) |
 | `tools/gen_packaging.py` | Regenerates those manifests from `verilator/files/` |
+| `tools/check_sysml_ssot.py` | Checks that the SysML model, requirement stubs, and RTL ports still match (see [sysml playbook](docs/playbooks/sysml.md)) |
 | `verilator/run_all.sh` | Full regression |
+
+## CERN upstream (colibri)
+
+| Resource | Link |
+| --- | --- |
+| Official GitLab repository | [gitlab.com/colibri-cern/colibri](https://gitlab.com/colibri-cern/colibri) |
+| CERN GitLab mirror | [gitlab.cern.ch/colibri/colibri](https://gitlab.cern.ch/colibri/colibri) |
+| Project documentation | [colibri.docs.cern.ch](https://colibri.docs.cern.ch) |
+| CERN Open Hardware Repository | [ohwr.org](https://ohwr.org/) (upstream registers via `.ohwr.yaml`; see the GitLab repo) |

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Proto_Aurora_64b66b::aurora_tx
 ---
 
 # Purpose
@@ -30,7 +31,6 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `parameter int unsigned g_GBX_BUF_SIZE      = 16 * colibri_aurora_const::c_AURORA_ENC_WIDTH` |
 | `parameter bit          g_DISABLE_SCRAMBLER = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -48,9 +48,7 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `output logic [g_N_LANES-1:0]    src_valid_o` |
 | `input  logic [g_N_LANES-1:0]    src_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -60,7 +58,6 @@ Aurora 64b/66b Transmitter. Simplex multi-lane Aurora 64b/66b transmitter chain 
 
 - Verilator: add `verilator/files/aurora.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/proto/aurora_64b66b/aurora_tx.sv`.
-
 
 - Upstream entity name matches module name `aurora_tx`.
 

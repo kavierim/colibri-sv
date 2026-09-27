@@ -1,0 +1,27 @@
+// SPDX-FileCopyrightText: 2026 CERN
+// SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
+// SPDX-License-Identifier: CERN-OHL-W-2.0
+//
+// Structural model. Edit this file before the matching SystemVerilog module.
+// Baseline extracted from src/ on 2026-09-27.
+// Upstream: https://gitlab.com/colibri-cern/colibri commit 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+
+package Colibri_Common_synchro_reset {
+    private import ScalarValues::*;
+    private import ArchitectureMeta::*;
+
+    @ArtifactTrace {
+        rtlPath = "src/common/synchro_reset.sv";
+        verifPath = "sim/common/synchro_reset_tb.sv";
+    }
+    part def synchro_reset {
+        doc /* Structural contract for the SystemVerilog module. RTL follows this part. */
+        attribute g_IN_POLARITY : Boolean = true;
+        attribute g_OUT_POLARITY : Boolean = true;
+        attribute g_DURATION : Integer = 1;
+
+        in item clk_i;
+        in item reset_i;
+        out item reset_o;
+    }
+}

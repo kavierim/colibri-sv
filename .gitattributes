@@ -6,4 +6,6 @@
 *.sv text eol=lf
 *.f text eol=lf
 *.md text eol=lf
+*.sysml text eol=lf
+*.py text eol=lf
 LICENSES/CERN-OHL-W-2.0.txt text eol=crlf

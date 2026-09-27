@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::bicam
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter int g_N_WORDS    = 16` |
 | `parameter int g_DATA_WIDTH = 8` |
 
-
 ## Ports
 
 | Declaration |
@@ -44,9 +44,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `output logic match_o` |
 | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -58,7 +56,6 @@ Binary content-addressable memory. g_N_WORDS and g_DATA_WIDTH have elaboration d
 - RTL path: `src/memory/bicam.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `bicam`.
 

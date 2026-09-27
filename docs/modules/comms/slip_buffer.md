@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::slip_buffer
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | --- |
 | `parameter int unsigned g_DATA_WIDTH = 64` |
 
-
 ## Ports
 
 | Declaration |
@@ -42,9 +42,7 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | `input  logic                    src_ready_i` |
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -54,7 +52,6 @@ Slip buffer for stream synchronization. Stream-facing modules use Avalon-ST reco
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/slip_buffer.sv`.
-
 
 - Upstream entity name matches module name `slip_buffer`.
 

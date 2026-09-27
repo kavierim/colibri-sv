@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::stream_buffer_generic
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `parameter type data_t             = logic [7:0]` |
 | `parameter bit  g_REGISTER_DATAPATH = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -42,9 +42,7 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `input  logic  src_ready_i` |
 | `output logic  src_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -54,7 +52,6 @@ Simple stream buffer with a generic type. Zero latency (skid) when g_REGISTER_DA
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/stream_buffer_generic.sv`.
-
 
 - Upstream entity name matches module name `stream_buffer_generic`.
 

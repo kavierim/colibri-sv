@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Pipes::arbiter
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [pipes domain index](index.md) for siblings and typical compositions.
 | --- |
 | `parameter int g_NUM_INPUTS = 4` |
 
-
 ## Ports
 
 | Declaration |
@@ -37,9 +37,7 @@ See the [pipes domain index](index.md) for siblings and typical compositions.
 | `input  logic [g_NUM_INPUTS-1:0] requests_i` |
 | `output logic [g_NUM_INPUTS-1:0] grants_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -49,7 +47,6 @@ Round-robin arbiter. Inspired by https://github.com/chclau/arbiter_rr Grants one
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/pipes/arbiter.sv`.
-
 
 - Upstream entity name matches module name `arbiter`.
 

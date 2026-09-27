@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::ram
 ---
 
 # Purpose
@@ -33,7 +34,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter logic [g_DATA_WIDTH-1:0] g_INIT_WORD = '0` |
 | `parameter bit g_WRITE_FIRST  = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -45,9 +45,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `input  logic [g_DATA_WIDTH-1:0] data_i` |
 | `output logic [g_DATA_WIDTH-1:0] q_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -59,7 +57,6 @@ Single-port RAM. Hex init file, one word per line. g_N_WORDS and g_DATA_WIDTH ha
 - RTL path: `src/memory/ram.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `ram`.
 

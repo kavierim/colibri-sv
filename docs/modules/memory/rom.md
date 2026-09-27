@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::rom
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter int g_DATA_WIDTH = 8` |
 | `parameter string g_INIT_FILE = ""` |
 
-
 ## Ports
 
 | Declaration |
@@ -38,9 +38,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `input  logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_i` |
 | `output logic [g_DATA_WIDTH-1:0] data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -52,7 +50,6 @@ Read-only memory. Contents come from a hex file, one word per line. g_N_WORDS an
 - RTL path: `src/memory/rom.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `rom`.
 

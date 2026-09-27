@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::synchro_handshake
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `parameter int g_DATA_WIDTH = 1` |
 | `parameter int g_NUM_STAGES = 2` |
 
-
 ## Ports
 
 | Declaration |
@@ -43,9 +43,7 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `output logic                     src_valid_o` |
 | `input  logic                     src_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -55,7 +53,6 @@ Clock domain boundary synchronizer with handshake. Synchronizes a data/valid/rea
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/synchro_handshake.sv`.
-
 
 - Upstream entity name matches module name `synchro_handshake`.
 

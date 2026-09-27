@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::cc_fifo
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ For asymmetric widths at lower LUT cost, compare [`cc_ram_fifo`](cc_ram_fifo.md)
 | `parameter bit g_ENABLE_FWFT  = 1'b0` |
 | `parameter bit g_PEEK_NEXT    = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -52,9 +52,7 @@ For asymmetric widths at lower LUT cost, compare [`cc_ram_fifo`](cc_ram_fifo.md)
 | `output logic [g_INPUT_WIDTH-1:0] wrq_o` |
 | `output logic wrq_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -66,7 +64,6 @@ Dual-clock FIFO with optional mixed width, FWFT, and write-side peek. Reset and 
 - RTL path: `src/memory/cc_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `cc_fifo`.
 

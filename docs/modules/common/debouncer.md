@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::debouncer
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `parameter time g_DEBOUNCE_TIME     = 10ms` |
 | `parameter time g_CLOCK_PERIOD      = 10ns` |
 
-
 ## Ports
 
 | Declaration |
@@ -39,9 +39,7 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `input  logic [$bits(g_RESET_VAL)-1:0] data_i` |
 | `output logic [$bits(g_RESET_VAL)-1:0] data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Debouncer. Release log: - 0.1 first release g_RESET_VAL is an unconstrained std_
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/debouncer.sv`.
-
 
 - Upstream entity name matches module name `debouncer`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Io_I2c::i2c_controller
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | --- |
 | `parameter time g_CLOCK_PERIOD = time'(10ns)` |
 | `parameter time g_I2C_PERIOD = time'(10us)` |
-
 
 ## Ports
 
@@ -49,9 +49,7 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | `output logic       rd_valid_o` |
 | `input  logic       rd_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -61,7 +59,6 @@ I2C Master Controller module Author: Alberto Perro (alberto.perro at cern.ch) Da
 
 - Verilator: add `verilator/files/io.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/io/i2c/i2c_controller.sv`.
-
 
 - Upstream entity name matches module name `i2c_controller`.
 

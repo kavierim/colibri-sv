@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Packet::deinterleaver
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 | --- |
 | `parameter int unsigned g_NUM_OUTPUTS = 3` |
 | `parameter int unsigned g_DATA_WIDTH  = 32` |
-
 
 ## Ports
 
@@ -49,9 +49,7 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 | `output logic [c_DATA_W-1:0]          src_data_o [g_NUM_OUTPUTS-1:0]` |
 | `output logic [c_EMPTY_W-1:0]         src_empty_o [g_NUM_OUTPUTS-1:0]` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -63,7 +61,6 @@ Deinterleaves one Avalon-ST stream into g_NUM_OUTPUTS streams using the sideband
 - RTL path: `src/packet/deinterleaver.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `deinterleaver`.
 

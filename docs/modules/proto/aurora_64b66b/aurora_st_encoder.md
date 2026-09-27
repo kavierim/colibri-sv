@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Proto_Aurora_64b66b_Tx::aurora_st_encoder
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `parameter int unsigned g_FIFO_WORDS = 8` |
 | `parameter int unsigned g_LANE_WIDTH = 32` |
 
-
 ## Ports
 
 | Declaration |
@@ -46,9 +46,7 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `input  logic [g_N_LANES-1:0] src_ready_i` |
 | `output logic [g_N_LANES-1:0] src_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -58,7 +56,6 @@ Aurora 64b/66b Encoder. Simplex multi-lane encoder. A 64-bit Avalon packet strea
 
 - Verilator: add `verilator/files/aurora.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/proto/aurora_64b66b/tx/aurora_st_encoder.sv`.
-
 
 - Upstream entity name matches module name `aurora_st_encoder`.
 

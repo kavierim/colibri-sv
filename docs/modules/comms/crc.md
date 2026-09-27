@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::crc
 ---
 
 # Purpose
@@ -32,7 +33,6 @@ Append or check CRC on an AVST packet stream; polynomial from [`colibri_poly`](.
 | `parameter bit g_INVERT_IN = 1'b0` |
 | `parameter bit g_INVERT_OUT = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -53,9 +53,7 @@ Append or check CRC on an AVST packet stream; polynomial from [`colibri_poly`](.
 | `input  logic                    src_ready_i` |
 | `output logic [$bits(g_CRC_POLY)-1:0] src_crc_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -65,7 +63,6 @@ Cyclic redundancy check for a packet stream. The CRC is presented with the end-o
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/crc.sv`.
-
 
 - Upstream entity name matches module name `crc`.
 

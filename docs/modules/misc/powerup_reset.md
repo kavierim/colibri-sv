@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Misc::powerup_reset
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `parameter logic g_POLARITY = 1'b1` |
 | `parameter int unsigned g_DURATION = 16` |
 
-
 ## Ports
 
 | Declaration |
@@ -37,9 +37,7 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `input  logic reset_ext_i` |
 | `output logic reset_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Power-up reset generator. Generates a fixed duration reset pulse at start-up. Po
 - RTL path: `src/misc/powerup_reset.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `powerup_reset`.
 

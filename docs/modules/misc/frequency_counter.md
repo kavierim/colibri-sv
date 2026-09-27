@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Misc::frequency_counter
 ---
 
 # Purpose
@@ -30,7 +31,6 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `parameter int unsigned g_DATA_WIDTH     = 32` |
 | `parameter int unsigned g_SAMPLE_FREQ_HZ = 1` |
 
-
 ## Ports
 
 | Declaration |
@@ -41,9 +41,7 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `output `COLIBRI_UNS_ARRAY(freq_data_o, 0, g_NUM_CLOCKS - 1, g_DATA_WIDTH)` |
 | `output logic [g_NUM_CLOCKS-1:0] freq_valid_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -55,7 +53,6 @@ Frequency counter. Measures arbitrary clocks against a known reference and retur
 - RTL path: `src/misc/frequency_counter.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `frequency_counter`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Packet::packet_join
 ---
 
 # Purpose
@@ -27,7 +28,6 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 | --- |
 | `parameter int unsigned g_SYM_WIDTH = 8` |
 | `parameter int unsigned g_DATA_SYM  = 4` |
-
 
 ## Ports
 
@@ -49,9 +49,7 @@ See the [packet domain index](index.md) for siblings and typical compositions.
 | `output logic                   src_valid_o` |
 | `input  logic                   src_ready_i` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -63,7 +61,6 @@ Joins consecutive Avalon-ST packets into one. Empty symbols at an input end of p
 - RTL path: `src/packet/packet_join.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `packet_join`.
 

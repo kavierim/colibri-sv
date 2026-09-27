@@ -10,6 +10,7 @@ description: <one line>
 tags: [domain:<area>, module:<name>]
 status: draft
 resource: src/<domain>/<module>.sv
+model: sysml://Colibri::<Domain>::<module>   # optional; URI of the part def
 ---
 ```
 
@@ -19,10 +20,12 @@ resource: src/<domain>/<module>.sv
 2. **# When to use**
 3. **# Schema** (parameters and ports tables)
 4. **# Behaviour**
-5. **# Integration**
-6. **# Examples**
-7. **# Verification**
-8. **# Agent notes**
-9. **# Related**
+5. **# Requirements** (optional; add when `fv/` bind or self-checking `sim/` exists — see [sysml playbook](playbooks/sysml.md) and [counter](modules/common/counter.md))
+6. **# Assumptions** (optional; only for documented `assume property` collateral, not RTL reads)
+7. **# Integration**
+8. **# Examples**
+9. **# Verification**
+10. **# Agent notes**
+11. **# Related**
 
 Link using bundle-root paths: `[counter](/modules/common/counter.md)`.

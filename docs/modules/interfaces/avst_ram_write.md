@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Interfaces_Stream::avst_ram_write
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 | `parameter int unsigned g_DATA_WIDTH = 8` |
 | `parameter int unsigned g_ADDR_WIDTH = 8` |
 
-
 ## Ports
 
 | Declaration |
@@ -44,9 +44,7 @@ See the [interfaces domain index](index.md) for siblings and typical composition
 | `output logic [g_ADDR_WIDTH-1:0]   wr_addr_o` |
 | `output logic [g_DATA_WIDTH-1:0]   wr_data_o` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -58,7 +56,6 @@ Simple Avalon Stream to RAM writer. Sequential writes of a packeted Avalon-ST in
 - RTL path: `src/interfaces/stream/avst_ram_write.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `avst_ram_write`.
 

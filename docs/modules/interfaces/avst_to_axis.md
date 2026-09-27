@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Interfaces_Stream::avst_to_axis
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ Connect colibri AVST logic to AXI-Stream IP. Map `tkeep` from beat width; see [`
 | `parameter colibri_types::endian_t  g_AVST_ENDIANNESS = colibri_types::BIG` |
 | `parameter bit                      g_ADD_REGISTERS   = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -48,9 +48,7 @@ Connect colibri AVST logic to AXI-Stream IP. Map `tkeep` from beat width; see [`
 | `output logic [c_KEEP_W-1:0]     src_tkeep_o` |
 | `output logic [g_DATA_WIDTH-1:0] src_tdata_o` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -62,7 +60,6 @@ Avalon ST to AXI Stream adapter. Release log: - 0.1 first release - 0.2 changed 
 - RTL path: `src/interfaces/stream/avst_to_axis.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `avst_to_axis`.
 

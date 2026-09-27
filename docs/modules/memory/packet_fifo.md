@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::packet_fifo
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ Single-clock AVST packet FIFO; dual-clock CDC: [`packet_cc_ram_fifo`](packet_cc_
 | `parameter bit g_ENABLE_SIZE_COUNT = 1'b1` |
 | `parameter int g_PKT_SIZE_BITS     = colibri_utils::log2ceil(g_MAX_PACKET_BYTES) + 1` |
 | `parameter int g_DATA_WIDTH        = 8` |
-
 
 ## Ports
 
@@ -56,9 +56,7 @@ Single-clock AVST packet FIFO; dual-clock CDC: [`packet_cc_ram_fifo`](packet_cc_
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 | `output logic [g_PKT_SIZE_BITS-1:0] src_size_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -70,7 +68,6 @@ Single-clock packet FIFO on top of fifo. FIFOs support optional first-word fall-
 - RTL path: `src/memory/packet_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `packet_fifo`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::cc_ram_fifo
 ---
 
 # Purpose
@@ -33,7 +34,6 @@ Use [`cc_fifo`](cc_fifo.md) when a logic FIFO is sufficient or widths match.
 | `parameter int g_OUTPUT_USEDW_WIDTH = colibri_utils::log2ceil(` |
 | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
 
-
 ## Ports
 
 | Declaration |
@@ -52,9 +52,7 @@ Use [`cc_fifo`](cc_fifo.md) when a logic FIFO is sufficient or widths match.
 | `output logic rdempty_o` |
 | `output logic rdfull_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -66,7 +64,6 @@ Dual-clock FIFO built around simple_dpram. g_NUM_WORDS and g_INPUT_WIDTH have el
 - RTL path: `src/memory/cc_ram_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `cc_ram_fifo`.
 

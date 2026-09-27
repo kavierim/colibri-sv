@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Misc::be_add_trail
 ---
 
 # Purpose
@@ -26,7 +27,6 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | Declaration |
 | --- |
 | `parameter int unsigned g_DATA_WIDTH = 32` |
-
 
 ## Ports
 
@@ -49,9 +49,7 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `output logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] src_empty_o` |
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -63,7 +61,6 @@ Big-endian add-trailing-word module. Adds `snk_trail_i` at the end of an Avalon-
 - RTL path: `src/misc/be_add_trail.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `be_add_trail`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Io_Spi::spi_master
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | `parameter logic g_SCK_POLARITY = 1'b0,  // 0 -> active high` |
 | `parameter logic g_SCK_PHASE = 1'b0      // 0 -> rising edge` |
 
-
 ## Ports
 
 | Declaration |
@@ -47,9 +47,7 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | `input  logic                   snk_valid_i` |
 | `output logic                   snk_ready_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -59,7 +57,6 @@ Serial Peripheral Interface Master Author: Alberto Perro (alberto.perro at cern.
 
 - Verilator: add `verilator/files/io.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/io/spi/spi_master.sv`.
-
 
 - Upstream entity name matches module name `spi_master`.
 

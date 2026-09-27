@@ -2,6 +2,8 @@
 
 ## 2026-09-27
 
+- SysML v2 is the structural source: edit `sysml/parts/` before RTL. Generators removed. Requirement stubs kept only for [`counter`](modules/common/counter.md); dumped `$fatal` and PSL fragments removed from other module pages. `tools/check_sysml_ssot.py` reports divergence. Textual notation checked with sysml-v2-lsp 0.29.0: no syntax or semantic errors (unused-definition warnings only, because the parts are a library).
+- [`CHANGELOG.md`](../CHANGELOG.md) for release **0.1.0** (release-level notes).
 - Root integration manifests: `colibri.f`, `Bender.yml`, `colibri.core` (RTL order aligned with `verilator/files/*.f`).
 - Playbook [package-managers](playbooks/package-managers.md); README and simulation/getting-started cross-links.
 - FuseSoC `sim` target uses Verilator `binary` mode. `depend` example sits in a fileset. Simulation playbook lists every `run_all.sh` file-list group.

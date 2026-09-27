@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Misc::heartbeat
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `parameter time g_BEAT_PERIOD = 1s` |
 | `parameter time g_CLK_PERIOD  = 8ns` |
 
-
 ## Ports
 
 | Declaration |
@@ -37,9 +37,7 @@ See the [misc domain index](index.md) for siblings and typical compositions.
 | `input  logic reset_i` |
 | `output logic heartbeat_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Clock heartbeat generator. Divides `clk_i` down to `heartbeat_o`. Many blocks ar
 - RTL path: `src/misc/heartbeat.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `heartbeat`.
 

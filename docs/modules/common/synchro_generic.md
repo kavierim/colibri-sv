@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Common::synchro_generic
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `parameter g_INIT_VALUE        = 8'h00` |
 | `parameter int g_NUM_STAGES    = 2` |
 
-
 ## Ports
 
 | Declaration |
@@ -39,9 +39,7 @@ See the [common domain index](index.md) for siblings and typical compositions.
 | `input  data_t data_i` |
 | `output data_t data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -51,7 +49,6 @@ Generic clock domain boundary synchronizer. Synchronizes an arbitrary data type 
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/common/synchro_generic.sv`.
-
 
 - Upstream entity name matches module name `synchro_generic`.
 

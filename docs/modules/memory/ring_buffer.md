@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Memory::ring_buffer
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `parameter int g_NUM_WORDS  = 4` |
 | `parameter int g_DATA_WIDTH = 8` |
 
-
 ## Ports
 
 | Declaration |
@@ -41,9 +41,7 @@ See the [memory domain index](index.md) for siblings and typical compositions.
 | `output logic src_valid_o` |
 | `input  logic src_ready_i` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -55,7 +53,6 @@ RAM-based ring buffer. A write while full overwrites the oldest word. FIFOs supp
 - RTL path: `src/memory/ring_buffer.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `ring_buffer`.
 

@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Io_Uart::uart
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | `parameter time g_CLOCK_PERIOD = time'(100ns)` |
 | `parameter int unsigned g_BAUD_RATE = 115200` |
 
-
 ## Ports
 
 | Declaration |
@@ -43,9 +43,7 @@ See the [io domain index](index.md) for siblings and typical compositions.
 | `input  logic       rx_pin_i` |
 | `output logic       tx_pin_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -55,7 +53,6 @@ UART Controller module Author: Alberto Perro (alberto.perro at cern.ch) Date: 20
 
 - Verilator: add `verilator/files/io.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/io/uart/uart.sv`.
-
 
 - Upstream entity name matches module name `uart`.
 

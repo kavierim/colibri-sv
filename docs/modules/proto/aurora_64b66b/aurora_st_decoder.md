@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Proto_Aurora_64b66b_Rx::aurora_st_decoder
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `parameter int unsigned g_FIFO_WORDS = 8` |
 | `parameter int unsigned g_LANE_WIDTH = 32` |
 
-
 ## Ports
 
 | Declaration |
@@ -47,9 +47,7 @@ See the [aurora_64b66b domain index](index.md) for siblings and typical composit
 | `output logic [colibri_aurora_const::c_AURORA_DATA_WIDTH-1:0] src_data_o` |
 | `output logic [colibri_utils::log2ceil(colibri_aurora_const::c_AURORA_DATA_WIDTH / 8)-1:0] src_empty_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -59,7 +57,6 @@ Aurora 64b/66b Decoder. Simplex multi-lane decoder. snk_link_up_i marks the end 
 
 - Verilator: add `verilator/files/aurora.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/proto/aurora_64b66b/rx/aurora_st_decoder.sv`.
-
 
 - Upstream entity name matches module name `aurora_st_decoder`.
 

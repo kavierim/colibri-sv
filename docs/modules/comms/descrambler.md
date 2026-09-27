@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Comms::descrambler
 ---
 
 # Purpose
@@ -31,7 +32,6 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | `parameter bit g_INVERT_IN = 1'b1` |
 | `parameter bit g_INVERT_OUT = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -45,9 +45,7 @@ See the [comms domain index](index.md) for siblings and typical compositions.
 | `input  logic                    src_ready_i` |
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -57,7 +55,6 @@ Self-synchronous descrambler. Stream-facing modules use Avalon-ST records from `
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.
 - RTL path: `src/comms/descrambler.sv`.
-
 
 - Upstream entity name matches module name `descrambler`.
 

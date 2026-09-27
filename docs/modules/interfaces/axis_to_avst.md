@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Interfaces_Stream::axis_to_avst
 ---
 
 # Purpose
@@ -29,7 +30,6 @@ Ingress from AXI-Stream IP; often follows [`avst_to_axis`](avst_to_axis.md) in t
 | `parameter colibri_types::endian_t  g_AVST_ENDIANNESS = colibri_types::BIG` |
 | `parameter bit                      g_ADD_REGISTERS   = 1'b1` |
 
-
 ## Ports
 
 | Declaration |
@@ -48,9 +48,7 @@ Ingress from AXI-Stream IP; often follows [`avst_to_axis`](avst_to_axis.md) in t
 | `output logic [c_EMPTY_W-1:0]    src_empty_o` |
 | `output logic [g_DATA_WIDTH-1:0] src_data_o` |
 
-
 Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`colibri_types`](../../packages/colibri_types.md) when stream records are used.
-
 
 # Behaviour
 
@@ -62,7 +60,6 @@ AXI Stream to Avalon ST adapter. AXI-Stream byte order is little-endian (first b
 - RTL path: `src/interfaces/stream/axis_to_avst.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `axis_to_avst`.
 

@@ -15,7 +15,7 @@ Documentation lives in [`docs/`](../index.md). RTL remains in `src/`. Pages are 
 
 # Editing modules
 
-1. Read the module documentation page and its `resource` RTL file.
+1. Edit the part definition in `sysml/parts/` first, then the module page, then the RTL. See [sysml](sysml.md).
 2. Follow [`docs/MODULE_TEMPLATE.md`](../MODULE_TEMPLATE.md) when creating or restructuring pages.
 3. Update the domain [`index.md`](../modules/index.md) if `description` changes.
 4. Append significant changes to [`log.md`](../log.md).

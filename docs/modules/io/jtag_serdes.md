@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Io_Jtag::jtag_serdes
 ---
 
 # Purpose
@@ -28,7 +29,6 @@ Bridge parallel stream beats to a JTAG USER data register. Often paired with [`s
 | `parameter int unsigned g_DATA_WIDTH = 8` |
 | `parameter bit g_REG_FALLING = 1'b0` |
 
-
 ## Ports
 
 | Declaration |
@@ -45,9 +45,7 @@ Bridge parallel stream beats to a JTAG USER data register. Often paired with [`s
 | `input  logic ser_data_i` |
 | `output logic ser_data_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 

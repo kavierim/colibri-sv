@@ -9,6 +9,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
+model: sysml://Colibri::Misc_Mmap_fifo::mmap_fifo
 ---
 
 # Purpose
@@ -32,7 +33,6 @@ Software-driven packet IO: Wishbone register file + TX/RX AVST packet ports. Spl
 | `parameter int unsigned g_NUM_CH = 4` |
 | `parameter bit g_USE_BLOCK_RAM = 1'b0` |
 | `parameter colibri_utils::compiler_t g_IMPL_STYLE = colibri_utils::get_compiler()` |
-
 
 ## Ports
 
@@ -67,9 +67,7 @@ Software-driven packet IO: Wishbone register file + TX/RX AVST packet ports. Spl
 | `output logic rx_intr_o` |
 | `output logic tx_intr_o` |
 
-
 Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
-
 
 # Behaviour
 
@@ -81,7 +79,6 @@ Memory Mapped Stream FIFO. Wishbone slave in front of full-duplex Avalon-ST pack
 - RTL path: `src/misc/mmap_fifo/mmap_fifo.sv`.
 
 Import [`colibri_types`](../../packages/colibri_types.md) when the ports use AVST/AXIS structs.
-
 
 - Upstream entity name matches module name `mmap_fifo`.
 
