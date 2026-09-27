@@ -6,6 +6,8 @@ Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOT
 
 # Colibri SystemVerilog
 
+[![CI Status](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml)
+
 Open-source SystemVerilog port of the CERN **colibri** VHDL library for [Verilator](https://www.veripool.org/verilator/) and other free EDA tooling: reusable FPGA/ASIC RTL components (memory, buses, I/O, packet handling, and more).
 
 This repository is an **unofficial** port. CERN has not endorsed it. It is pinned to upstream commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f).
