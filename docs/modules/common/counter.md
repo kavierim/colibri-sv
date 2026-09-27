@@ -13,17 +13,7 @@ sources:
   - id: upstream
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
-requirements:
-  - id: REQ-COUNTER-001
-    statement: On the cycle after reset_i is released, value_o and wraparound_o shall be 0.
-  - id: REQ-COUNTER-002
-    statement: When reset_i is low and enable_i is low, the internal count register shall hold its value on the next clock edge.
-  - id: REQ-COUNTER-003
-    statement: When g_MODULO is greater than zero, reset_i is low, and enable_i is high, the internal count register shall increment by one on the next clock edge while it is not already at the last code g_MODULO - 1.
-  - id: REQ-COUNTER-004
-    statement: When g_MODULO is greater than zero, reset_i is low, and enable_i is high with the internal count register at the last code, the next clock edge shall clear the register to zero and wraparound_o shall have been high in the previous cycle.
 ---
-
 # Purpose
 
 Simple counter with optional modulo and enable.
@@ -62,11 +52,11 @@ Simple Counter Some of the work was inspired by the PoC Library (https://github.
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-COUNTER-001"></a>
 
 ## REQ-COUNTER-001
+
+On the cycle after reset_i is released, value_o and wraparound_o shall be 0.
 
 - Kind: extracted
 - Verified by: `fv/common/counter_sva.sv` property `t_valid_reset`
@@ -75,6 +65,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-COUNTER-002
 
+When reset_i is low and enable_i is low, the internal count register shall hold its value on the next clock edge.
+
 - Kind: extracted
 - Verified by: `fv/common/counter_sva.sv` property `t_not_counting`
 
@@ -82,12 +74,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-COUNTER-003
 
+When g_MODULO is greater than zero, reset_i is low, and enable_i is high, the internal count register shall increment by one on the next clock edge while it is not already at the last code g_MODULO - 1.
+
 - Kind: extracted
 - Verified by: `fv/common/counter_sva.sv` property `t_count`
 
 <a id="REQ-COUNTER-004"></a>
 
 ## REQ-COUNTER-004
+
+When g_MODULO is greater than zero, reset_i is low, and enable_i is high with the internal count register at the last code, the next clock edge shall clear the register to zero and wraparound_o shall have been high in the previous cycle.
 
 - Kind: extracted
 - Verified by: `fv/common/counter_sva.sv` property `t_wraparound`

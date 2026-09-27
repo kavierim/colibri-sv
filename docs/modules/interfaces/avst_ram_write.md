@@ -13,17 +13,6 @@ model: sysml://Colibri::Interfaces_Stream::avst_ram_write
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-AVST_RAM_WRITE-001
-    statement: The cycle after reset_i, wr_en_o shall be low and write address and data shall be zero.
-  - id: REQ-AVST_RAM_WRITE-002
-    statement: On a valid start-of-packet beat, wr_en_o shall pulse with data and address taken from the beat and start_addr_i.
-  - id: REQ-AVST_RAM_WRITE-003
-    statement: During an active packet, each valid beat shall produce wr_en_o with the captured snk_data_i.
-  - id: REQ-AVST_RAM_WRITE-004
-    statement: Successive writes in one packet shall use incrementing wr_addr_o.
-  - id: REQ-AVST_RAM_WRITE-005
-    statement: Outside an active packet without a valid beat, wr_en_o shall stay low on the next cycle.
 ---
 # Purpose
 
@@ -65,11 +54,11 @@ Simple Avalon Stream to RAM writer. Sequential writes of a packeted Avalon-ST in
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-AVST_RAM_WRITE-001"></a>
 
 ## REQ-AVST_RAM_WRITE-001
+
+The cycle after reset_i, wr_en_o shall be low and write address and data shall be zero.
 
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_reset_quiet`
@@ -78,12 +67,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-AVST_RAM_WRITE-002
 
+On a valid start-of-packet beat, wr_en_o shall pulse with data and address taken from the beat and start_addr_i.
+
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_sop_write`
 
 <a id="REQ-AVST_RAM_WRITE-003"></a>
 
 ## REQ-AVST_RAM_WRITE-003
+
+During an active packet, each valid beat shall produce wr_en_o with the captured snk_data_i.
 
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_packet_write`
@@ -92,6 +85,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-AVST_RAM_WRITE-004
 
+Successive writes in one packet shall use incrementing wr_addr_o.
+
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_addr_increment`
 
@@ -99,8 +94,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-AVST_RAM_WRITE-005
 
+Outside an active packet without a valid beat, wr_en_o shall stay low on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_wr_en_idle`
+
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

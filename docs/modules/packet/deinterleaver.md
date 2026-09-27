@@ -13,13 +13,6 @@ model: sysml://Colibri::Packet::deinterleaver
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-DEINTERLEAVER-001
-    statement: On each output, when idle and a beat is presented, src_sop_o shall be high.
-  - id: REQ-DEINTERLEAVER-002
-    statement: On each output, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
-  - id: REQ-DEINTERLEAVER-003
-    statement: While reset_i is low, at most one snk_ready_o shall be high.
 ---
 # Purpose
 
@@ -66,11 +59,11 @@ Deinterleaves one Avalon-ST stream into g_NUM_OUTPUTS streams using the sideband
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-DEINTERLEAVER-001"></a>
 
 ## REQ-DEINTERLEAVER-001
+
+On each output, when idle and a beat is presented, src_sop_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/packet/deinterleaver_sva.sv` property `a_valid_out_sop`
@@ -79,6 +72,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-DEINTERLEAVER-002
 
+On each output, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
+
 - Kind: extracted
 - Verified by: `fv/packet/deinterleaver_sva.sv` property `a_valid_out_multi`
 
@@ -86,8 +81,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-DEINTERLEAVER-003
 
+While reset_i is low, at most one snk_ready_o shall be high.
+
 - Kind: extracted
 - Verified by: `fv/packet/deinterleaver_sva.sv` property `a_only_one_snk_active`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

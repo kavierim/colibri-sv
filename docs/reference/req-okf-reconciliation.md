@@ -22,14 +22,14 @@ Reconcile external review terminology (`module-spec`, `REQ_SYNC_STAGES`, `Colibr
 
 # SHALL single source of truth
 
-1. **Observable SHALL prose** lives in the module page YAML frontmatter under `requirements[].statement` (must contain `shall`).
-2. The `# Requirements` body section holds **anchors**, **headings**, and **verification metadata** only — not a second copy of the sentence.
+1. **Observable SHALL prose** lives in the module page **`# Requirements`** section: one English paragraph per `## REQ-<MODULE>-<NNN>` heading (must contain `shall`), immediately after the heading and before `- Kind:` / `- Verified by:` metadata.
+2. YAML frontmatter holds OKF fields (`type`, `title`, `resource`, `model`, `provenance`, `sources`) — **not** `requirements[]` or duplicate SHALL text.
 3. [`sysml/requirements.sysml`](../../sysml/requirements.sysml) stubs carry **`OKF: <docPath>#<id>`** in `doc` and `@OKFReference`; they do **not** repeat SHALL text.
 4. The matching `part def` declares **`satisfy`** usages for each stub the module implements.
 
-# When to add `requirements` frontmatter
+# When to add a `# Requirements` section
 
-Add the block only when the module has at least one observable requirement (typically when `fv/` or self-checking `sim/` exists). Structure-only modules omit `requirements` entirely; no placeholder REQ ids.
+Add the section when the module has at least one observable requirement (typically when `fv/` or self-checking `sim/` exists). Structure-only modules omit `# Requirements` entirely; no placeholder REQ ids.
 
 # Related
 

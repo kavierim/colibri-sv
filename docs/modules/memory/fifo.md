@@ -13,27 +13,6 @@ model: sysml://Colibri::Memory::fifo
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-FIFO-001
-    statement: The cycle after reset_i, empty_o shall be high.
-  - id: REQ-FIFO-002
-    statement: The cycle after reset_i, full_o shall be low.
-  - id: REQ-FIFO-003
-    statement: The cycle after reset_i, usedw_o shall be zero.
-  - id: REQ-FIFO-004
-    statement: When usedw_o is zero, empty_o shall be high.
-  - id: REQ-FIFO-005
-    statement: When usedw_o equals g_NUM_WORDS, full_o shall be high.
-  - id: REQ-FIFO-006
-    statement: A write without read while not full shall increment usedw_o by one on the next cycle.
-  - id: REQ-FIFO-007
-    statement: A read without write while not empty shall decrement usedw_o by one on the next cycle.
-  - id: REQ-FIFO-008
-    statement: Simultaneous read and write while neither full nor empty shall hold usedw_o on the next cycle.
-  - id: REQ-FIFO-009
-    statement: A write while full shall not advance wr_ptr on the next cycle.
-  - id: REQ-FIFO-010
-    statement: A read while empty shall not advance rd_ptr on the next cycle.
 ---
 # Purpose
 
@@ -76,11 +55,11 @@ Single-clock FIFO. The shared-variable memory is a logic array updated in always
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-FIFO-001"></a>
 
 ## REQ-FIFO-001
+
+The cycle after reset_i, empty_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_after_reset_empty`
@@ -89,12 +68,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-FIFO-002
 
+The cycle after reset_i, full_o shall be low.
+
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_after_reset_n_full`
 
 <a id="REQ-FIFO-003"></a>
 
 ## REQ-FIFO-003
+
+The cycle after reset_i, usedw_o shall be zero.
 
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_after_reset_usedw`
@@ -103,12 +86,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-FIFO-004
 
+When usedw_o is zero, empty_o shall be high.
+
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_usedw_empty`
 
 <a id="REQ-FIFO-005"></a>
 
 ## REQ-FIFO-005
+
+When usedw_o equals g_NUM_WORDS, full_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_usedw_full`
@@ -117,12 +104,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-FIFO-006
 
+A write without read while not full shall increment usedw_o by one on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_wr_no_rd_normal`
 
 <a id="REQ-FIFO-007"></a>
 
 ## REQ-FIFO-007
+
+A read without write while not empty shall decrement usedw_o by one on the next cycle.
 
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_no_wr_rd_normal`
@@ -131,12 +122,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-FIFO-008
 
+Simultaneous read and write while neither full nor empty shall hold usedw_o on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_wr_rd_normal`
 
 <a id="REQ-FIFO-009"></a>
 
 ## REQ-FIFO-009
+
+A write while full shall not advance wr_ptr on the next cycle.
 
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_wr_on_full`
@@ -145,8 +140,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-FIFO-010
 
+A read while empty shall not advance rd_ptr on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/memory/fifo_sva.sv` property `t_rd_on_empty`
+
 # Integration
 
 - Verilator: add `verilator/files/memory.f` (or `verilator/colibri.f` for packages) to the compile list.

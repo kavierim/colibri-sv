@@ -13,17 +13,6 @@ model: sysml://Colibri::Common::skid_buffer
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-SKID_BUFFER-001
-    statement: The cycle after reset_i, src_valid_o shall be low and the skid register shall be empty.
-  - id: REQ-SKID_BUFFER-002
-    statement: When src_valid_o is high and src_ready_i is low, src_valid_o and src_data_o shall hold on the next clock edge.
-  - id: REQ-SKID_BUFFER-003
-    statement: When a beat is accepted while the output is stalled, the skid register shall capture snk_data_i on the next cycle.
-  - id: REQ-SKID_BUFFER-004
-    statement: When src_ready_i is high, snk_valid_i shall equal src_valid_o on the next clock edge.
-  - id: REQ-SKID_BUFFER-005
-    statement: When the skid register is full and src_ready_i is high, reg_full shall be low on the next cycle.
 ---
 # Purpose
 
@@ -70,11 +59,11 @@ Skid buffer to propagate back-pressure. Use this if low latency is needed, use p
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-SKID_BUFFER-001"></a>
 
 ## REQ-SKID_BUFFER-001
+
+The cycle after reset_i, src_valid_o shall be low and the skid register shall be empty.
 
 - Kind: extracted
 - Verified by: `fv/common/skid_buffer_sva.sv` property `t_no_valid_after_reset`
@@ -83,12 +72,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-SKID_BUFFER-002
 
+When src_valid_o is high and src_ready_i is low, src_valid_o and src_data_o shall hold on the next clock edge.
+
 - Kind: extracted
 - Verified by: `fv/common/skid_buffer_sva.sv` property `t_out_stable_backpressure`
 
 <a id="REQ-SKID_BUFFER-003"></a>
 
 ## REQ-SKID_BUFFER-003
+
+When a beat is accepted while the output is stalled, the skid register shall capture snk_data_i on the next cycle.
 
 - Kind: extracted
 - Verified by: `fv/common/skid_buffer_sva.sv` property `t_no_data_drop`
@@ -97,6 +90,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-SKID_BUFFER-004
 
+When src_ready_i is high, snk_valid_i shall equal src_valid_o on the next clock edge.
+
 - Kind: extracted
 - Verified by: `fv/common/skid_buffer_sva.sv` property `t_idle`
 
@@ -104,8 +99,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-SKID_BUFFER-005
 
+When the skid register is full and src_ready_i is high, reg_full shall be low on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/common/skid_buffer_sva.sv` property `t_reg_read`
+
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

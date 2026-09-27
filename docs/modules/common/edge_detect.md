@@ -13,13 +13,6 @@ model: sysml://Colibri::Common::edge_detect
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-EDGE_DETECT-001
-    statement: When data_i rises from g_RESET_VAL, pulse_o shall differ from g_RESET_VAL in the same cycle.
-  - id: REQ-EDGE_DETECT-002
-    statement: When data_i falls to g_RESET_VAL, pulse_o shall equal g_RESET_VAL in the same cycle.
-  - id: REQ-EDGE_DETECT-003
-    statement: When data_i is stable after the first sample, pulse_o shall equal g_RESET_VAL.
 ---
 # Purpose
 
@@ -53,11 +46,11 @@ Edge detect. Release log: - 0.1 first release See RTL for clocking; not every bl
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-EDGE_DETECT-001"></a>
 
 ## REQ-EDGE_DETECT-001
+
+When data_i rises from g_RESET_VAL, pulse_o shall differ from g_RESET_VAL in the same cycle.
 
 - Kind: extracted
 - Verified by: `fv/common/edge_detect_sva.sv` property `t_valid_pulse`
@@ -66,6 +59,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-EDGE_DETECT-002
 
+When data_i falls to g_RESET_VAL, pulse_o shall equal g_RESET_VAL in the same cycle.
+
 - Kind: extracted
 - Verified by: `fv/common/edge_detect_sva.sv` property `t_no_pulse_edge`
 
@@ -73,8 +68,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-EDGE_DETECT-003
 
+When data_i is stable after the first sample, pulse_o shall equal g_RESET_VAL.
+
 - Kind: extracted
 - Verified by: `fv/common/edge_detect_sva.sv` property `t_no_pulse_stable`
+
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

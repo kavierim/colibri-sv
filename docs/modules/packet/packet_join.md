@@ -13,21 +13,6 @@ model: sysml://Colibri::Packet::packet_join
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-PACKET_JOIN-001
-    statement: The cycle after reset_i, src_valid_o shall be low and snk_ready_o shall be low.
-  - id: REQ-PACKET_JOIN-002
-    statement: The cycle after reset_i falls, snk_ready_o shall be high.
-  - id: REQ-PACKET_JOIN-003
-    statement: When src_valid_o is stalled, output data and packet flags shall remain stable.
-  - id: REQ-PACKET_JOIN-004
-    statement: Non-zero src_empty_o shall only occur with src_eop_o.
-  - id: REQ-PACKET_JOIN-005
-    statement: When the join logic needs a start-of-packet, src_sop_o shall be high on valid output.
-  - id: REQ-PACKET_JOIN-006
-    statement: While waiting for the first output sop, a valid beat shall carry src_sop_o.
-  - id: REQ-PACKET_JOIN-007
-    statement: At an output end-of-packet with the expected input symbol count, out_cnt shall match the configured symbol total.
 ---
 # Purpose
 
@@ -74,11 +59,11 @@ Joins consecutive Avalon-ST packets into one. Empty symbols at an input end of p
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-PACKET_JOIN-001"></a>
 
 ## REQ-PACKET_JOIN-001
+
+The cycle after reset_i, src_valid_o shall be low and snk_ready_o shall be low.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_reset`
@@ -87,12 +72,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_JOIN-002
 
+The cycle after reset_i falls, snk_ready_o shall be high.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_ready_init`
 
 <a id="REQ-PACKET_JOIN-003"></a>
 
 ## REQ-PACKET_JOIN-003
+
+When src_valid_o is stalled, output data and packet flags shall remain stable.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_out_stable`
@@ -101,12 +90,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_JOIN-004
 
+Non-zero src_empty_o shall only occur with src_eop_o.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_empty_at_eop_only`
 
 <a id="REQ-PACKET_JOIN-005"></a>
 
 ## REQ-PACKET_JOIN-005
+
+When the join logic needs a start-of-packet, src_sop_o shall be high on valid output.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_first_and_next_sop`
@@ -115,6 +108,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_JOIN-006
 
+While waiting for the first output sop, a valid beat shall carry src_sop_o.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_out_sop`
 
@@ -122,8 +117,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_JOIN-007
 
+At an output end-of-packet with the expected input symbol count, out_cnt shall match the configured symbol total.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_join_sva.sv` property `a_out_cnt`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

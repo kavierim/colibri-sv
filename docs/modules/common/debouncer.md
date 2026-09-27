@@ -13,13 +13,6 @@ model: sysml://Colibri::Common::debouncer
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-DEBOUNCER-001
-    statement: After reset_i is low, when data_i matches a constant value for twelve consecutive clock cycles, the next cycle shall drive data_o to that value.
-  - id: REQ-DEBOUNCER-002
-    statement: When data_i changes after one to eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
-  - id: REQ-DEBOUNCER-003
-    statement: When data_i changes after eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
 ---
 # Purpose
 
@@ -56,11 +49,11 @@ Debouncer. Release log: - 0.1 first release g_RESET_VAL is an unconstrained std_
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-DEBOUNCER-001"></a>
 
 ## REQ-DEBOUNCER-001
+
+After reset_i is low, when data_i matches a constant value for twelve consecutive clock cycles, the next cycle shall drive data_o to that value.
 
 - Kind: extracted
 - Verified by: `fv/common/debouncer_sva.sv` property `t_stable_in`
@@ -69,6 +62,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-DEBOUNCER-002
 
+When data_i changes after one to eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
+
 - Kind: extracted
 - Verified by: `fv/common/debouncer_sva.sv` property `t_unsstable_in`
 
@@ -76,8 +71,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-DEBOUNCER-003
 
+When data_i changes after eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
+
 - Kind: extracted
 - Verified by: `fv/common/debouncer_sva.sv` property `t_unsstable_in_11`
+
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

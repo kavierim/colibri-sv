@@ -2,8 +2,9 @@
 
 ## 2026-09-27
 
+- SHALL prose moved from YAML `requirements[].statement` into `# Requirements` body paragraphs on **28** fv-backed module pages; frontmatter keeps OKF metadata only. `tools/check_sysml_ssot.py` parses SHALL from markdown; `tools/apply_okf_requirements_rollout.py` remains the statement/fv mapping for rollout and migration.
 - OKF v0.2 `requirements[]` + SysML stubs/satisfy rolled out to **27** fv-backed modules (140 requirements) following the [`counter`](modules/common/counter.md) pattern; `tools/apply_okf_requirements_rollout.py` holds the mapping. Skipped (no Module page or no dedicated fv obligation): `utils_fv`, CSR-only mmap FIFO blocks, `uart_rx`/`uart_tx` standalone, `block_sync_fsm`, and sim-only blocks without fv bind collateral.
-- OKF v0.2 requirement frontmatter on [`counter`](modules/common/counter.md) (`requirements[].statement`, `provenance`); `satisfy requirement` on `part def counter`; stub `doc` uses `OKF: path#id`. Reconciliation: [req-okf-reconciliation](reference/req-okf-reconciliation.md). Checker enforces frontmatter/body/stub/part alignment.
+- OKF requirement stubs and `satisfy` on parts; reconciliation: [req-okf-reconciliation](reference/req-okf-reconciliation.md). Checker enforces body/stub/part alignment.
 - Each part file references its own definition (`part wbRamUse : wb_ram` in the same package). Metadata definitions in `ArchitectureMeta.sysml` document `@OKFReference` and `@ArtifactTrace`.
 - SysML v2 is the structural source: edit `sysml/parts/` before RTL. Generators removed. Requirement stubs kept only for [`counter`](modules/common/counter.md); dumped `$fatal` and PSL fragments removed from other module pages. `tools/check_sysml_ssot.py` reports divergence. Textual notation checked with sysml-v2-lsp 0.29.0: no syntax or semantic errors (unused-definition warnings only, because the parts are a library).
 - [`CHANGELOG.md`](../CHANGELOG.md) for release **0.1.0** (release-level notes).

@@ -13,11 +13,6 @@ model: sysml://Colibri::Packet::broadcaster
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-BROADCASTER-001
-    statement: On each output port, when idle and a beat is presented, src_sop_o shall be high.
-  - id: REQ-BROADCASTER-002
-    statement: On each output port, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
 ---
 # Purpose
 
@@ -63,11 +58,11 @@ Broadcasts one Avalon-ST stream to g_NUM_OUTPUTS streams. Each output has its ow
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-BROADCASTER-001"></a>
 
 ## REQ-BROADCASTER-001
+
+On each output port, when idle and a beat is presented, src_sop_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/packet/broadcaster_sva.sv` property `a_valid_out_sop`
@@ -76,8 +71,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-BROADCASTER-002
 
+On each output port, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
+
 - Kind: extracted
 - Verified by: `fv/packet/broadcaster_sva.sv` property `a_valid_out_multi`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

@@ -13,15 +13,6 @@ model: sysml://Colibri::Interfaces_Stream::axis_to_avst
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-AXIS_TO_AVST-001
-    statement: When the AVST source is idle and presents a beat, src_sop_o shall be high.
-  - id: REQ-AXIS_TO_AVST-002
-    statement: During a multi-beat AVST packet, src_sop_o shall be low on presented beats.
-  - id: REQ-AXIS_TO_AVST-003
-    statement: A single-beat AVST packet shall return the source state machine to single-packet mode.
-  - id: REQ-AXIS_TO_AVST-004
-    statement: On an end-of-packet beat, src_empty_o shall indicate a partial final word.
 ---
 # Purpose
 
@@ -67,11 +58,11 @@ AXI Stream to Avalon ST adapter. AXI-Stream byte order is little-endian (first b
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-AXIS_TO_AVST-001"></a>
 
 ## REQ-AXIS_TO_AVST-001
+
+When the AVST source is idle and presents a beat, src_sop_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_idle_sop`
@@ -80,12 +71,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-AXIS_TO_AVST-002
 
+During a multi-beat AVST packet, src_sop_o shall be low on presented beats.
+
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_multi_no_sop`
 
 <a id="REQ-AXIS_TO_AVST-003"></a>
 
 ## REQ-AXIS_TO_AVST-003
+
+A single-beat AVST packet shall return the source state machine to single-packet mode.
 
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_single_packet`
@@ -94,8 +89,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-AXIS_TO_AVST-004
 
+On an end-of-packet beat, src_empty_o shall indicate a partial final word.
+
 - Kind: extracted
 - Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_eop_empty`
+
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

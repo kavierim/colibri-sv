@@ -13,19 +13,6 @@ model: sysml://Colibri::Comms::gearbox
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-GEARBOX-001
-    statement: For 4-to-12 upsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
-  - id: REQ-GEARBOX-002
-    statement: For 4-to-12 upsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
-  - id: REQ-GEARBOX-003
-    statement: For 4-to-12 upsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
-  - id: REQ-GEARBOX-004
-    statement: For 12-to-4 downsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
-  - id: REQ-GEARBOX-005
-    statement: For 12-to-4 downsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
-  - id: REQ-GEARBOX-006
-    statement: For 12-to-4 downsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
 ---
 # Purpose
 
@@ -65,11 +52,11 @@ Single-clock gearbox. Input and output widths are independent. Stream-facing mod
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-GEARBOX-001"></a>
 
 ## REQ-GEARBOX-001
+
+For 4-to-12 upsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
 
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_up_sva.sv` property `t_stable_valid_not_ready`
@@ -78,12 +65,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-GEARBOX-002
 
+For 4-to-12 upsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
+
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_up_sva.sv` property `t_stable_data`
 
 <a id="REQ-GEARBOX-003"></a>
 
 ## REQ-GEARBOX-003
+
+For 4-to-12 upsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
 
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_up_sva.sv` property `t_valid_reset`
@@ -92,12 +83,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-GEARBOX-004
 
+For 12-to-4 downsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
+
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_down_sva.sv` property `t_stable_valid_not_ready`
 
 <a id="REQ-GEARBOX-005"></a>
 
 ## REQ-GEARBOX-005
+
+For 12-to-4 downsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
 
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_down_sva.sv` property `t_stable_data`
@@ -106,8 +101,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-GEARBOX-006
 
+For 12-to-4 downsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
+
 - Kind: extracted
 - Verified by: `fv/comms/gearbox_down_sva.sv` property `t_valid_reset`
+
 # Integration
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.

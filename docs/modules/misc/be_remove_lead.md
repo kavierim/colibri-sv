@@ -13,13 +13,6 @@ model: sysml://Colibri::Misc::be_remove_lead
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-BE_REMOVE_LEAD-001
-    statement: When the output packet state is idle and a beat is presented, src_sop_o shall be high.
-  - id: REQ-BE_REMOVE_LEAD-002
-    statement: When the output packet state is multi-beat, src_sop_o shall be low on presented beats.
-  - id: REQ-BE_REMOVE_LEAD-003
-    statement: On the last beat of a packet, src_empty_o shall indicate fewer than a full word of valid bytes.
 ---
 # Purpose
 
@@ -67,11 +60,11 @@ Big-endian packet remove-leading-bytes module. Removes `shl_i` bytes and returns
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-BE_REMOVE_LEAD-001"></a>
 
 ## REQ-BE_REMOVE_LEAD-001
+
+When the output packet state is idle and a beat is presented, src_sop_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_valid_out_sop`
@@ -80,6 +73,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-BE_REMOVE_LEAD-002
 
+When the output packet state is multi-beat, src_sop_o shall be low on presented beats.
+
 - Kind: extracted
 - Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_valid_out_multi`
 
@@ -87,8 +82,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-BE_REMOVE_LEAD-003
 
+On the last beat of a packet, src_empty_o shall indicate fewer than a full word of valid bytes.
+
 - Kind: extracted
 - Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_empty_out`
+
 # Integration
 
 - Verilator: add `verilator/files/misc.f` (or `verilator/colibri.f` for packages) to the compile list.

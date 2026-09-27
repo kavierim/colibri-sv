@@ -14,13 +14,10 @@ model: sysml://Colibri::<Domain>::<module>   # optional; URI of the part def
 provenance:                                  # optional; cite upstream VHDL when ported
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: <40-char git sha>
-requirements:                                # optional; only when fv/ or self-checking sim/ exists
-  - id: REQ-<MODULE>-001
-    statement: <one observable sentence containing shall>
 ---
 ```
 
-SHALL prose belongs in `requirements[].statement` only. The `# Requirements` body lists ids (with HTML anchors), headings, Kind, and Verified by — not a second copy of the sentence. See [req-okf-reconciliation](reference/req-okf-reconciliation.md) and [counter](modules/common/counter.md).
+SHALL prose belongs in `# Requirements` only: anchor, `## REQ-<MODULE>-<NNN>`, one paragraph containing `shall`, then `- Kind:` and `- Verified by:`. Do not put `requirements[]` in frontmatter. See [req-okf-reconciliation](reference/req-okf-reconciliation.md) and [counter](modules/common/counter.md).
 
 ## Required sections
 

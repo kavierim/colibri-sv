@@ -24,6 +24,34 @@ def add(key: str, doc: str, part: str, reqs: list[tuple[str, str, str]]) -> None
     MODULES[key] = (doc, part, reqs)
 
 add(
+    "counter",
+    "common/counter.md",
+    "common/counter.sysml",
+    [
+        R(
+            "On the cycle after reset_i is released, value_o and wraparound_o shall be 0.",
+            "fv/common/counter_sva.sv",
+            "t_valid_reset",
+        ),
+        R(
+            "When reset_i is low and enable_i is low, the internal count register shall hold its value on the next clock edge.",
+            "fv/common/counter_sva.sv",
+            "t_not_counting",
+        ),
+        R(
+            "When g_MODULO is greater than zero, reset_i is low, and enable_i is high, the internal count register shall increment by one on the next clock edge while it is not already at the last code g_MODULO - 1.",
+            "fv/common/counter_sva.sv",
+            "t_count",
+        ),
+        R(
+            "When g_MODULO is greater than zero, reset_i is low, and enable_i is high with the internal count register at the last code, the next clock edge shall clear the register to zero and wraparound_o shall have been high in the previous cycle.",
+            "fv/common/counter_sva.sv",
+            "t_wraparound",
+        ),
+    ],
+)
+
+add(
     "debouncer",
     "common/debouncer.md",
     "common/debouncer.sysml",
@@ -387,32 +415,34 @@ def yaml_requirements(name: str, reqs: list[tuple[str, str, str]]) -> str:
 
 
 def requirements_body(name: str, reqs: list[tuple[str, str, str]]) -> str:
-    out = [
-        "# Requirements",
-        "",
-        "SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.",
-        "",
-    ]
-    for i, (_stmt, fv, prop) in enumerate(reqs, 1):
+    out = ["# Requirements", ""]
+    for i, (stmt, fv, prop) in enumerate(reqs, 1):
         rid = req_id(name, i)
         out.append(f'<a id="{rid}"></a>')
         out.append("")
         out.append(f"## {rid}")
         out.append("")
+        out.append(stmt)
+        out.append("")
         out.append("- Kind: extracted")
         out.append(f"- Verified by: `{fv}` property `{prop}`")
         out.append("")
-    return "\n".join(out)
+    return "\n".join(out) + "\n"
 
 
-def patch_frontmatter(text: str, name: str, reqs: list[tuple[str, str, str]]) -> str:
+def strip_frontmatter_requirements(fm: str) -> str:
+    if "requirements:" not in fm:
+        return fm
+    return re.sub(r"\nrequirements:.*?(?=\n[a-z_]+:|\Z)", "", fm, flags=re.DOTALL)
+
+
+def patch_frontmatter(text: str, name: str, reqs: list[tuple[str, str, str]], *, legacy_yaml: bool) -> str:
     m = re.match(r"^---\s*\n(.*?)\n---\s*\n", text, re.DOTALL)
     if not m:
         raise ValueError("no frontmatter")
     fm = m.group(1)
     body = text[m.end() :]
-    if "requirements:" in fm:
-        fm = re.sub(r"\nrequirements:.*?(?=\n[a-z_]+:|\Z)", "", fm, flags=re.DOTALL)
+    fm = strip_frontmatter_requirements(fm)
     prov = (
         "provenance:\n"
         f"  upstream_path: gitlab.com/colibri-cern/colibri\n"
@@ -420,8 +450,9 @@ def patch_frontmatter(text: str, name: str, reqs: list[tuple[str, str, str]]) ->
     )
     if "provenance:" not in fm:
         fm = fm.rstrip() + "\n" + prov
-    fm = fm.rstrip() + "\n" + yaml_requirements(name, reqs) + "\n"
-    return f"---\n{fm}---\n{body}"
+    if legacy_yaml:
+        fm = fm.rstrip() + "\n" + yaml_requirements(name, reqs) + "\n"
+    return f"---\n{fm.rstrip()}\n---\n{body}"
 
 
 def insert_requirements_section(text: str, name: str, reqs: list[tuple[str, str, str]]) -> str:
@@ -441,11 +472,19 @@ def insert_requirements_section(text: str, name: str, reqs: list[tuple[str, str,
     raise ValueError("no insertion point")
 
 
-def patch_md(path: Path, name: str, reqs: list[tuple[str, str, str]]) -> None:
+def patch_md(path: Path, name: str, reqs: list[tuple[str, str, str]], *, legacy_yaml: bool = False) -> None:
     text = path.read_text(encoding="utf-8")
-    text = patch_frontmatter(text, name, reqs)
+    text = patch_frontmatter(text, name, reqs, legacy_yaml=legacy_yaml)
     text = insert_requirements_section(text, name, reqs)
     path.write_text(text, encoding="utf-8")
+
+
+def migrate_requirements_to_body() -> None:
+    """Rewrite module pages: SHALL in # Requirements, no frontmatter requirements: block."""
+    for name, (doc_rel, _part_rel, reqs) in MODULES.items():
+        doc_path = DOCS / Path(doc_rel)
+        patch_md(doc_path, name, reqs, legacy_yaml=False)
+        print(f"migrated {name} ({len(reqs)} reqs) -> {doc_path.relative_to(ROOT)}")
 
 
 def concept_id(doc_rel: str) -> str:
@@ -499,7 +538,7 @@ def main() -> None:
     for name, (doc_rel, part_rel, reqs) in MODULES.items():
         doc_path = DOCS / doc_rel.replace("/", "\\") if False else DOCS / Path(doc_rel)
         part_path = PARTS / Path(part_rel)
-        patch_md(doc_path, name, reqs)
+        patch_md(doc_path, name, reqs, legacy_yaml=True)
         patch_part(part_path, reqs, name)
         for i in range(1, len(reqs) + 1):
             rid = req_id(name, i)

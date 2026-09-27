@@ -13,17 +13,6 @@ model: sysml://Colibri::Packet::interleaver
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-INTERLEAVER-001
-    statement: While reset_i is low, snk_ready_o shall be zero or one-hot.
-  - id: REQ-INTERLEAVER-002
-    statement: When the selected input is idle and a beat is output, src_sop_o shall be high.
-  - id: REQ-INTERLEAVER-003
-    statement: When the selected input is in a multi-beat packet, src_sop_o shall be low on output beats.
-  - id: REQ-INTERLEAVER-004
-    statement: A single-beat packet on the output shall mark the corresponding input state as single.
-  - id: REQ-INTERLEAVER-005
-    statement: During a multi-beat packet on an input, src_channel_o shall not change while that input is active.
 ---
 # Purpose
 
@@ -71,11 +60,11 @@ Interleaves Avalon-ST streams into one stream and tags the source with src_chann
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-INTERLEAVER-001"></a>
 
 ## REQ-INTERLEAVER-001
+
+While reset_i is low, snk_ready_o shall be zero or one-hot.
 
 - Kind: extracted
 - Verified by: `fv/packet/interleaver_sva.sv` property `a_only_one_src_active`
@@ -84,12 +73,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-INTERLEAVER-002
 
+When the selected input is idle and a beat is output, src_sop_o shall be high.
+
 - Kind: extracted
 - Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_sop`
 
 <a id="REQ-INTERLEAVER-003"></a>
 
 ## REQ-INTERLEAVER-003
+
+When the selected input is in a multi-beat packet, src_sop_o shall be low on output beats.
 
 - Kind: extracted
 - Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_multi`
@@ -98,6 +91,8 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-INTERLEAVER-004
 
+A single-beat packet on the output shall mark the corresponding input state as single.
+
 - Kind: extracted
 - Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_single`
 
@@ -105,8 +100,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-INTERLEAVER-005
 
+During a multi-beat packet on an input, src_channel_o shall not change while that input is active.
+
 - Kind: extracted
 - Verified by: `fv/packet/interleaver_bd_sva.sv` property `a_pkt_boundaries`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

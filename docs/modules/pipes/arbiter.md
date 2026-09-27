@@ -13,19 +13,6 @@ model: sysml://Colibri::Pipes::arbiter
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-ARBITER-001
-    statement: While reset_i is low, grants_o shall be zero or one-hot.
-  - id: REQ-ARBITER-002
-    statement: When exactly one request is active and reset_i is low, grants_o shall grant that request.
-  - id: REQ-ARBITER-003
-    statement: When no requests are active and reset_i is low, grants_o shall be all zeros.
-  - id: REQ-ARBITER-004
-    statement: When the previously granted request remains active, grants_o shall not change.
-  - id: REQ-ARBITER-005
-    statement: When the granted request drops but another request remains, grants_o shall change.
-  - id: REQ-ARBITER-006
-    statement: When the granted-request mask changes, priority_q shall update on the next cycle.
 ---
 # Purpose
 
@@ -60,11 +47,11 @@ Round-robin arbiter. Inspired by https://github.com/chclau/arbiter_rr Grants one
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-ARBITER-001"></a>
 
 ## REQ-ARBITER-001
+
+While reset_i is low, grants_o shall be zero or one-hot.
 
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_single_grant`
@@ -73,12 +60,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-ARBITER-002
 
+When exactly one request is active and reset_i is low, grants_o shall grant that request.
+
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_req_grant`
 
 <a id="REQ-ARBITER-003"></a>
 
 ## REQ-ARBITER-003
+
+When no requests are active and reset_i is low, grants_o shall be all zeros.
 
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_no_grant_if_no_req`
@@ -87,12 +78,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-ARBITER-004
 
+When the previously granted request remains active, grants_o shall not change.
+
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_stable_grant`
 
 <a id="REQ-ARBITER-005"></a>
 
 ## REQ-ARBITER-005
+
+When the granted request drops but another request remains, grants_o shall change.
 
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_change_grant`
@@ -101,8 +96,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-ARBITER-006
 
+When the granted-request mask changes, priority_q shall update on the next cycle.
+
 - Kind: extracted
 - Verified by: `fv/pipes/arbiter_sva.sv` property `a_round_robin`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

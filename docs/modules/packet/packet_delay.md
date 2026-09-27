@@ -13,19 +13,6 @@ model: sysml://Colibri::Packet::packet_delay
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
-requirements:
-  - id: REQ-PACKET_DELAY-001
-    statement: The cycle after reset_i, src_valid_o shall be low.
-  - id: REQ-PACKET_DELAY-002
-    statement: While reset_i is high, snk_ready_o shall be low.
-  - id: REQ-PACKET_DELAY-003
-    statement: On the cycle reset_i falls, snk_ready_o shall be high.
-  - id: REQ-PACKET_DELAY-004
-    statement: When src_valid_o is stalled, output data and packet flags shall remain stable.
-  - id: REQ-PACKET_DELAY-005
-    statement: When the delay logic needs a start-of-packet, src_sop_o shall be high on valid output.
-  - id: REQ-PACKET_DELAY-006
-    statement: On the first output start-of-packet with non-zero configured delay, delay_cnt shall equal the captured delay.
 ---
 # Purpose
 
@@ -75,11 +62,11 @@ Delays Avalon-ST packets by delay_i clock cycles, counted from the input start-o
 
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
-
 <a id="REQ-PACKET_DELAY-001"></a>
 
 ## REQ-PACKET_DELAY-001
+
+The cycle after reset_i, src_valid_o shall be low.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_reset`
@@ -88,12 +75,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_DELAY-002
 
+While reset_i is high, snk_ready_o shall be low.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_ready_mask`
 
 <a id="REQ-PACKET_DELAY-003"></a>
 
 ## REQ-PACKET_DELAY-003
+
+On the cycle reset_i falls, snk_ready_o shall be high.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_ready_init`
@@ -102,12 +93,16 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_DELAY-004
 
+When src_valid_o is stalled, output data and packet flags shall remain stable.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_out_stable`
 
 <a id="REQ-PACKET_DELAY-005"></a>
 
 ## REQ-PACKET_DELAY-005
+
+When the delay logic needs a start-of-packet, src_sop_o shall be high on valid output.
 
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_first_and_next_sop`
@@ -116,8 +111,11 @@ SHALL sentences are in YAML frontmatter (`requirements[].statement`). This secti
 
 ## REQ-PACKET_DELAY-006
 
+On the first output start-of-packet with non-zero configured delay, delay_cnt shall equal the captured delay.
+
 - Kind: extracted
 - Verified by: `fv/packet/packet_delay_sva.sv` property `a_delay`
+
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

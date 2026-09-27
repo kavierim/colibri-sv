@@ -34,10 +34,6 @@ STUB_OKF_DOC = re.compile(
     r"requirement def <'(REQ-[A-Z0-9_]+-\d+)'> (\w+) \{[^}]*doc /\* OKF: ([^#]+)#(REQ-[A-Z0-9_]+-\d+) \*/",
     re.DOTALL,
 )
-REQ_FM_ENTRY = re.compile(
-    r"^\s+-\s+id:\s+(REQ-[A-Z0-9_]+-\d+)\s*\n\s+statement:\s+(.+?)\s*$",
-    re.MULTILINE,
-)
 FRONTMATTER = re.compile(r"^---\s*\n(.*?)\n---\s*\n", re.DOTALL)
 PART_DEF = re.compile(r"part def (\w+)")
 IN_ITEM = re.compile(r"^\s*(in|out|inout) item (\w+);", re.MULTILINE)
@@ -270,11 +266,44 @@ def requirements_section_body(body: str) -> str:
     return m.group(1) if m else ""
 
 
-def frontmatter_requirements(fm: str) -> dict[str, str]:
+def parse_requirements_from_section(req_section: str) -> dict[str, str]:
+    """Map REQ id -> SHALL paragraph parsed from # Requirements section."""
     out: dict[str, str] = {}
-    for m in REQ_FM_ENTRY.finditer(fm):
-        out[m.group(1)] = m.group(2).strip()
+    if not req_section.strip():
+        return out
+    blocks = re.split(r"(?=^##\s+REQ-[A-Z0-9_]+-\d+\s*$)", req_section, flags=re.MULTILINE)
+    for block in blocks:
+        hm = REQ_HEADING.search(block)
+        if not hm:
+            continue
+        rid = hm.group(1)
+        after = block[hm.end() :]
+        kind_m = re.search(r"^- Kind:", after, re.MULTILINE)
+        prose_region = after[: kind_m.start()] if kind_m else after
+        lines = prose_region.splitlines()
+        para_lines: list[str] = []
+        saw_blank = False
+        for line in lines:
+            stripped = line.strip()
+            if stripped.startswith("<a id="):
+                continue
+            if not stripped:
+                if para_lines:
+                    saw_blank = True
+                continue
+            if stripped.startswith("- "):
+                break
+            if saw_blank:
+                break
+            para_lines.append(stripped)
+        if not para_lines:
+            continue
+        out[rid] = " ".join(para_lines)
     return out
+
+
+def frontmatter_has_requirements_block(fm: str) -> bool:
+    return bool(fm and re.search(r"^requirements:\s*$", fm, re.MULTILINE))
 
 
 def doc_path_for_module(md: Path) -> str:
@@ -316,39 +345,33 @@ def main() -> int:
             continue
         text = md.read_text(encoding="utf-8")
         fm, body = split_frontmatter(text)
-        fm_reqs = frontmatter_requirements(fm) if fm else {}
-        headings = {m.group(1) for m in REQ_HEADING.finditer(text)}
-        anchors = {m.group(1) for m in REQ_ANCHOR.finditer(text)}
+        if frontmatter_has_requirements_block(fm):
+            errors.append(
+                f"{md.relative_to(ROOT)}: remove requirements: from frontmatter; SHALL belongs in # Requirements body"
+            )
+        req_section = requirements_section_body(body)
+        body_reqs = parse_requirements_from_section(req_section) if req_section else {}
+        headings_in_section = {m.group(1) for m in REQ_HEADING.finditer(req_section)} if req_section else set()
+        anchors_in_section = {m.group(1) for m in REQ_ANCHOR.finditer(req_section)} if req_section else set()
         expected_doc = doc_path_for_module(md)
-        for rid, statement in sorted(fm_reqs.items()):
+        for rid, statement in sorted(body_reqs.items()):
             if not SHALL_IN_STUB.search(statement):
-                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} statement missing shall")
-            if rid not in headings:
-                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} without ## heading")
-            if rid not in anchors:
-                errors.append(f"{md.relative_to(ROOT)}: frontmatter {rid} without anchor")
+                errors.append(f"{md.relative_to(ROOT)}: {rid} SHALL paragraph missing shall")
+            if rid not in headings_in_section:
+                errors.append(f"{md.relative_to(ROOT)}: {rid} parsed without ## heading")
+            if rid not in anchors_in_section:
+                errors.append(f"{md.relative_to(ROOT)}: {rid} without anchor in # Requirements")
             module_req_short.setdefault(md.stem, set()).add(stub_short_name(rid))
-        if fm_reqs:
-            req_body = requirements_section_body(body)
-            anchor_start = re.search(r"^<a id=", req_body, re.MULTILINE)
-            if anchor_start:
-                req_body = req_body[anchor_start.start() :]
-            if req_body and SHALL_IN_STUB.search(req_body):
-                errors.append(
-                    f"{md.relative_to(ROOT)}: duplicate SHALL in # Requirements body; use frontmatter only"
-                )
-        for hid in headings:
-            doc_ids.add(hid)
-            if hid not in anchors:
-                errors.append(f"{md.relative_to(ROOT)}: heading {hid} without matching anchor")
-            if fm_reqs and hid not in fm_reqs:
-                errors.append(f"{md.relative_to(ROOT)}: heading {hid} missing frontmatter requirements entry")
-        for aid in anchors:
-            if aid not in headings:
-                errors.append(f"{md.relative_to(ROOT)}: anchor {aid} without ## heading")
-        for rid in fm_reqs:
             doc_ids.add(rid)
-        for rid in fm_reqs:
+        for hid in sorted(headings_in_section):
+            if hid not in body_reqs:
+                errors.append(f"{md.relative_to(ROOT)}: heading {hid} missing SHALL paragraph before - Kind:")
+            if hid not in anchors_in_section:
+                errors.append(f"{md.relative_to(ROOT)}: heading {hid} without matching anchor")
+        for aid in anchors_in_section:
+            if aid not in headings_in_section:
+                errors.append(f"{md.relative_to(ROOT)}: anchor {aid} without ## heading")
+        for rid in body_reqs:
             if not any(
                 sm.group(1) == rid and sm.group(3) == expected_doc
                 for sm in STUB_OKF_DOC.finditer(stub_text)

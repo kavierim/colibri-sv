@@ -1,13 +1,13 @@
 # SysML v2 playbook
 
-The structural model comes first. SystemVerilog in `src/` implements it. Observable SHALL text stays in `docs/modules/**/*.md` YAML frontmatter (`requirements[].statement`). The `# Requirements` section holds anchors and verification metadata only. `sysml/requirements.sysml` holds thin stubs (`OKF: path#id` in `doc`, no SHALL sentence). Each implementing `part def` declares `satisfy requirement` usages for its stubs.
+The structural model comes first. SystemVerilog in `src/` implements it. Observable SHALL text stays in `docs/modules/**/*.md` under **`# Requirements`** (one paragraph per `## REQ-*` heading). `sysml/requirements.sysml` holds thin stubs (`OKF: path#id` in `doc`, no SHALL sentence). Each implementing `part def` declares `satisfy requirement` usages for its stubs.
 
 The current part definitions are a baseline extracted from the existing RTL on 2026-09-27. That extraction is finished. Do not regenerate the model from `src/`.
 
 ## Order of change
 
 1. Edit the `part def` in `sysml/parts/` (ports, parameters, directions).
-2. Edit the module page: add `requirements` frontmatter when there is an observable obligation; keep `# Requirements` anchors/metadata; align the Schema table with the part.
+2. Edit the module page: add `# Requirements` with anchors, SHALL paragraphs, and verification metadata when there is an observable obligation; align the Schema table with the part.
 3. Add a matching stub in `sysml/requirements.sysml` (`OKF: docs/modules/...#REQ-...` in `doc` only).
 4. Add `satisfy requirement REQ_<MODULE>_<NNN>;` on the `part def`.
 5. Change `src/`, then `sim/` or `fv/`, so the RTL satisfies the model and the requirement.
@@ -19,7 +19,7 @@ The current part definitions are a baseline extracted from the existing RTL on 2
 | Artifact | Role |
 | --- | --- |
 | `sysml/parts/**/*.sysml` | Structural contract. One `part def` per module, SystemVerilog name (`counter`). |
-| `docs/modules/**` | SHALL in frontmatter; assumptions; human-readable Schema |
+| `docs/modules/**` | SHALL in `# Requirements`; assumptions; human-readable Schema |
 | `sysml/requirements.sysml` | `REQ-*` stubs with `OKF:` doc pointers |
 | `src/**/*.sv` | Implementation of the part |
 | `sysml/ArchitectureMeta.sysml`, `sysml/Colibri.sysml` | Metadata and the library index |
@@ -56,15 +56,16 @@ Golden requirement page: [`docs/modules/common/counter.md`](../modules/common/co
 
 ## Module page shape
 
-Frontmatter (when requirements exist):
+Frontmatter (OKF metadata only — no `requirements:` block):
 
 ```yaml
 provenance:
   upstream_path: gitlab.com/colibri-cern/colibri
   pinned_commit: <sha>
-requirements:
-  - id: REQ-MODULE-001
-    statement: <one SHALL sentence>
+sources:
+  - id: upstream
+    resource: <url>
+    title: Upstream at pin commit
 ```
 
 After `# Behaviour`:
@@ -72,11 +73,11 @@ After `# Behaviour`:
 ```markdown
 # Requirements
 
-SHALL sentences are in YAML frontmatter (`requirements[].statement`).
-
 <a id="REQ-MODULE-001"></a>
 
 ## REQ-MODULE-001
+
+<one observable sentence containing shall>
 
 - Kind: extracted
 - Verified by: `fv/.../module_sva.sv` property `name`
@@ -90,8 +91,8 @@ private import Colibri_Requirements::*;
 satisfy requirement REQ_MODULE_001;
 ```
 
-A requirement is a sentence about observable behaviour. A `$fatal` format string or a pasted PSL fragment is not a requirement. Write the sentence in frontmatter, then point at the property or test that checks it.
+A requirement is a sentence about observable behaviour. A `$fatal` format string or a pasted PSL fragment is not a requirement. Write the sentence under the REQ heading, then point at the property or test that checks it.
 
 ## Rollout to other modules
 
-Do **not** add empty `requirements:` lists or placeholder REQ ids to structure-only modules. When a module gains `fv/` or self-checking `sim/` collateral, add frontmatter entries, body anchors, stubs, and `satisfy` on the part in one change. Phased migration is recommended; only [`counter`](../modules/common/counter.md) is fully wired today.
+Do **not** add placeholder REQ ids to structure-only modules. When a module gains `fv/` or self-checking `sim/` collateral, add `# Requirements` body text, stubs, and `satisfy` on the part in one change. **28** fv-backed module pages follow the [`counter`](../modules/common/counter.md) shape; `tools/apply_okf_requirements_rollout.py` holds statement and verification mapping for rollout.
