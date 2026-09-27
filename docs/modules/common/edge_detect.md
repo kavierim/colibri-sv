@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Common::edge_detect
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-EDGE_DETECT-001
+    statement: When data_i rises from g_RESET_VAL, pulse_o shall differ from g_RESET_VAL in the same cycle.
+  - id: REQ-EDGE_DETECT-002
+    statement: When data_i falls to g_RESET_VAL, pulse_o shall equal g_RESET_VAL in the same cycle.
+  - id: REQ-EDGE_DETECT-003
+    statement: When data_i is stable after the first sample, pulse_o shall equal g_RESET_VAL.
 ---
-
 # Purpose
 
 Rising and falling edge detection.
@@ -42,6 +51,30 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Edge detect. Release log: - 0.1 first release See RTL for clocking; not every block has `reset_i`.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-EDGE_DETECT-001"></a>
+
+## REQ-EDGE_DETECT-001
+
+- Kind: extracted
+- Verified by: `fv/common/edge_detect_sva.sv` property `t_valid_pulse`
+
+<a id="REQ-EDGE_DETECT-002"></a>
+
+## REQ-EDGE_DETECT-002
+
+- Kind: extracted
+- Verified by: `fv/common/edge_detect_sva.sv` property `t_no_pulse_edge`
+
+<a id="REQ-EDGE_DETECT-003"></a>
+
+## REQ-EDGE_DETECT-003
+
+- Kind: extracted
+- Verified by: `fv/common/edge_detect_sva.sv` property `t_no_pulse_stable`
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

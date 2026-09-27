@@ -9,6 +9,7 @@
 package Colibri_Packet_broadcaster {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/broadcaster.sv";
@@ -38,6 +39,9 @@ package Colibri_Packet_broadcaster {
         attribute src_valid_o_sv : String = "logic [g_NUM_OUTPUTS-1:0] src_valid_o";
         in item src_ready_i;
         attribute src_ready_i_sv : String = "logic [g_NUM_OUTPUTS-1:0] src_ready_i";
+        satisfy requirement REQ_BROADCASTER_001;
+        satisfy requirement REQ_BROADCASTER_002;
+
     }
 
     part broadcasterUse : broadcaster;

@@ -9,6 +9,7 @@
 package Colibri_Interfaces_Stream_avst_ram_write_unaligned {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/interfaces/stream/avst_ram_write_unaligned.sv";
@@ -40,6 +41,22 @@ package Colibri_Interfaces_Stream_avst_ram_write_unaligned {
         attribute wr_addr_o_sv : String = "logic [c_ADDR_W-1:0] wr_addr_o";
         out item wr_data_o;
         attribute wr_data_o_sv : String = "logic [c_DATA_W-1:0] wr_data_o";
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_001;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_002;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_003;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_004;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_005;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_006;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_007;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_008;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_009;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_010;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_011;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_012;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_013;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_014;
+        satisfy requirement REQ_AVST_RAM_WRITE_UNALIGNED_015;
+
     }
 
     part avstRamWriteUnalignedUse : avst_ram_write_unaligned;

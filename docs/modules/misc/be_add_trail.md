@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Misc::be_add_trail
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-BE_ADD_TRAIL-001
+    statement: When the output packet state is idle and a beat is presented, src_sop_o shall be high.
+  - id: REQ-BE_ADD_TRAIL-002
+    statement: When the output packet state is multi-beat, src_sop_o shall be low on presented beats.
+  - id: REQ-BE_ADD_TRAIL-003
+    statement: On the last beat of a packet, src_empty_o shall indicate fewer than a full word of valid bytes.
 ---
-
 # Purpose
 
 Append a trailing word (e.g. CRC).
@@ -55,6 +64,30 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Big-endian add-trailing-word module. Adds `snk_trail_i` at the end of an Avalon-ST packet. `snk_trail_i` and `shl_i` are sampled at `snk_eop_i`. Many blocks are Avalon-ST packet manipulators or Wishbone bridges.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-BE_ADD_TRAIL-001"></a>
+
+## REQ-BE_ADD_TRAIL-001
+
+- Kind: extracted
+- Verified by: `fv/misc/be_add_trail_sva.sv` property `a_valid_out_sop`
+
+<a id="REQ-BE_ADD_TRAIL-002"></a>
+
+## REQ-BE_ADD_TRAIL-002
+
+- Kind: extracted
+- Verified by: `fv/misc/be_add_trail_sva.sv` property `a_valid_out_multi`
+
+<a id="REQ-BE_ADD_TRAIL-003"></a>
+
+## REQ-BE_ADD_TRAIL-003
+
+- Kind: extracted
+- Verified by: `fv/misc/be_add_trail_sva.sv` property `a_empty_out`
 # Integration
 
 - Verilator: add `verilator/files/misc.f` (or `verilator/colibri.f` for packages) to the compile list.

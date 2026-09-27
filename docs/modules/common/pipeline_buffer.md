@@ -10,8 +10,23 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Common::pipeline_buffer
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-PIPELINE_BUFFER-001
+    statement: The cycle after reset_i, src_valid_o shall be low and internal pipeline state shall be idle.
+  - id: REQ-PIPELINE_BUFFER-002
+    statement: When src_valid_o is high and src_ready_i is low, src_data_o and src_valid_o shall be stable on the next cycle while reset_i is low.
+  - id: REQ-PIPELINE_BUFFER-003
+    statement: When stall is high and src_ready_i is high, stall shall be low on the next cycle.
+  - id: REQ-PIPELINE_BUFFER-004
+    statement: When the register stage is valid and the output is not ready, incoming data shall move into the skid stage without loss.
+  - id: REQ-PIPELINE_BUFFER-005
+    statement: When snk_valid_i and snk_ready_o are high, src_valid_o shall be high on the next cycle.
+  - id: REQ-PIPELINE_BUFFER-006
+    statement: When no sink or skid data is pending and src_ready_i is high, reg_valid shall clear on the next cycle.
 ---
-
 # Purpose
 
 Legacy two-stage decoupled buffer; prefer `stream_buffer`.
@@ -55,6 +70,51 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Pipeline buffer (two-stage fifo) to propagate back-pressure and register combinational paths. Use this for better performance and full decoupling, use skid buffer if low latency is needed. Release log: - 0.1 first release See RTL for clocking; not every block has `reset_i`.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-PIPELINE_BUFFER-001"></a>
+
+## REQ-PIPELINE_BUFFER-001
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_no_valid_after_reset`
+
+<a id="REQ-PIPELINE_BUFFER-002"></a>
+
+## REQ-PIPELINE_BUFFER-002
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_out_stable_backpressure`
+
+<a id="REQ-PIPELINE_BUFFER-003"></a>
+
+## REQ-PIPELINE_BUFFER-003
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_reg_read`
+
+<a id="REQ-PIPELINE_BUFFER-004"></a>
+
+## REQ-PIPELINE_BUFFER-004
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_no_data_drop`
+
+<a id="REQ-PIPELINE_BUFFER-005"></a>
+
+## REQ-PIPELINE_BUFFER-005
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_valid_out`
+
+<a id="REQ-PIPELINE_BUFFER-006"></a>
+
+## REQ-PIPELINE_BUFFER-006
+
+- Kind: extracted
+- Verified by: `fv/common/pipeline_buffer_sva.sv` property `t_consume_reg`
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

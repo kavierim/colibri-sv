@@ -10,8 +10,27 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Endec::rle_encode
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-RLE_ENCODE-001
+    statement: The cycle after reset_i, src_valid_o shall be low.
+  - id: REQ-RLE_ENCODE-002
+    statement: When src_valid_o is stalled, src_data_o shall be stable on the next cycle.
+  - id: REQ-RLE_ENCODE-003
+    statement: When a run ends with a normal count, the next output beat shall carry the previous word and its run length.
+  - id: REQ-RLE_ENCODE-004
+    statement: When a run ends at maximum count, the next output beat shall carry the word and the saturated count field.
+  - id: REQ-RLE_ENCODE-005
+    statement: On flush with buffered data and no output valid, src_valid_o shall present the buffered word on the next cycle.
+  - id: REQ-RLE_ENCODE-006
+    statement: On flush while output is valid and the register is ready, the next beat shall present the buffered word.
+  - id: REQ-RLE_ENCODE-007
+    statement: On flush after a prior non-flush cycle with skid data pending, the next beat shall present the prior buffered word.
+  - id: REQ-RLE_ENCODE-008
+    statement: After consecutive flush conditions, src_valid_o shall be low on the following cycle.
 ---
-
 # Purpose
 
 Run-length encoder.
@@ -49,6 +68,65 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Run-Length Encoder Some of the work was inspired by VHDL Whiz Release log: - 0.1 first release Library entity. Lint alongside verilator/wave0_elab.sv reports multiple tops. 8b/10b tables live in `colibri_common_8b10b`; RLE modules operate on streaming data.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-RLE_ENCODE-001"></a>
+
+## REQ-RLE_ENCODE-001
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_no_valid_after_reset`
+
+<a id="REQ-RLE_ENCODE-002"></a>
+
+## REQ-RLE_ENCODE-002
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_out_stable_backpressure`
+
+<a id="REQ-RLE_ENCODE-003"></a>
+
+## REQ-RLE_ENCODE-003
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_rle_out_normal`
+
+<a id="REQ-RLE_ENCODE-004"></a>
+
+## REQ-RLE_ENCODE-004
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_rle_out_ovf`
+
+<a id="REQ-RLE_ENCODE-005"></a>
+
+## REQ-RLE_ENCODE-005
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_rle_flush_empty`
+
+<a id="REQ-RLE_ENCODE-006"></a>
+
+## REQ-RLE_ENCODE-006
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_rle_flush_buffered_no_in`
+
+<a id="REQ-RLE_ENCODE-007"></a>
+
+## REQ-RLE_ENCODE-007
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_rle_flush_buffered_no_skid`
+
+<a id="REQ-RLE_ENCODE-008"></a>
+
+## REQ-RLE_ENCODE-008
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_encode_sva.sv` property `t_double_flush`
 # Integration
 
 - Verilator: add `verilator/files/endec.f` (or `verilator/colibri.f` for packages) to the compile list.

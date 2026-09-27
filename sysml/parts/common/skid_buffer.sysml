@@ -9,6 +9,7 @@
 package Colibri_Common_skid_buffer {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/common/skid_buffer.sv";
@@ -41,6 +42,12 @@ package Colibri_Common_skid_buffer {
         out item src_eop_o;
         out item src_valid_o;
         in item src_ready_i;
+        satisfy requirement REQ_SKID_BUFFER_001;
+        satisfy requirement REQ_SKID_BUFFER_002;
+        satisfy requirement REQ_SKID_BUFFER_003;
+        satisfy requirement REQ_SKID_BUFFER_004;
+        satisfy requirement REQ_SKID_BUFFER_005;
+
     }
 
     part skidBufferUse : skid_buffer;

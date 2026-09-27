@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Misc::be_remove_lead
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-BE_REMOVE_LEAD-001
+    statement: When the output packet state is idle and a beat is presented, src_sop_o shall be high.
+  - id: REQ-BE_REMOVE_LEAD-002
+    statement: When the output packet state is multi-beat, src_sop_o shall be low on presented beats.
+  - id: REQ-BE_REMOVE_LEAD-003
+    statement: On the last beat of a packet, src_empty_o shall indicate fewer than a full word of valid bytes.
 ---
-
 # Purpose
 
 Remove the leading word (e.g. header).
@@ -56,6 +65,30 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Big-endian packet remove-leading-bytes module. Removes `shl_i` bytes and returns them on `src_head_o` with `src_sop_o`. `g_REGISTER_OUT` is in the VHDL entity and unused by the architecture. Many blocks are Avalon-ST packet manipulators or Wishbone bridges.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-BE_REMOVE_LEAD-001"></a>
+
+## REQ-BE_REMOVE_LEAD-001
+
+- Kind: extracted
+- Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_valid_out_sop`
+
+<a id="REQ-BE_REMOVE_LEAD-002"></a>
+
+## REQ-BE_REMOVE_LEAD-002
+
+- Kind: extracted
+- Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_valid_out_multi`
+
+<a id="REQ-BE_REMOVE_LEAD-003"></a>
+
+## REQ-BE_REMOVE_LEAD-003
+
+- Kind: extracted
+- Verified by: `fv/misc/be_remove_lead_sva.sv` property `a_empty_out`
 # Integration
 
 - Verilator: add `verilator/files/misc.f` (or `verilator/colibri.f` for packages) to the compile list.

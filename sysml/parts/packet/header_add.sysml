@@ -9,6 +9,7 @@
 package Colibri_Packet_header_add {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/header_add.sv";
@@ -40,6 +41,10 @@ package Colibri_Packet_header_add {
         attribute src_data_o_sv : String = "logic [c_DATA_W-1:0] src_data_o";
         out item src_empty_o;
         attribute src_empty_o_sv : String = "logic [c_EMPTY_W-1:0] src_empty_o";
+        satisfy requirement REQ_HEADER_ADD_001;
+        satisfy requirement REQ_HEADER_ADD_002;
+        satisfy requirement REQ_HEADER_ADD_003;
+
     }
 
     part headerAddUse : header_add;

@@ -10,8 +10,23 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Comms::gearbox
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-GEARBOX-001
+    statement: For 4-to-12 upsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
+  - id: REQ-GEARBOX-002
+    statement: For 4-to-12 upsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
+  - id: REQ-GEARBOX-003
+    statement: For 4-to-12 upsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
+  - id: REQ-GEARBOX-004
+    statement: For 12-to-4 downsizing, when src_valid_o is high and src_ready_i is low, src_valid_o shall remain high on the next cycle unless reset_i is high.
+  - id: REQ-GEARBOX-005
+    statement: For 12-to-4 downsizing, when src_valid_o is stalled, src_data_o shall be stable on the next cycle unless reset_i is high.
+  - id: REQ-GEARBOX-006
+    statement: For 12-to-4 downsizing, the first cycle after reset_i falls, snk_ready_o shall be high, src_valid_o low, and src_data_o zero.
 ---
-
 # Purpose
 
 Single-clock width gearbox.
@@ -48,6 +63,51 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Single-clock gearbox. Input and output widths are independent. Stream-facing modules use Avalon-ST records from `colibri_types` unless the RTL exposes a simple valid/ready bus.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-GEARBOX-001"></a>
+
+## REQ-GEARBOX-001
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_up_sva.sv` property `t_stable_valid_not_ready`
+
+<a id="REQ-GEARBOX-002"></a>
+
+## REQ-GEARBOX-002
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_up_sva.sv` property `t_stable_data`
+
+<a id="REQ-GEARBOX-003"></a>
+
+## REQ-GEARBOX-003
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_up_sva.sv` property `t_valid_reset`
+
+<a id="REQ-GEARBOX-004"></a>
+
+## REQ-GEARBOX-004
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_down_sva.sv` property `t_stable_valid_not_ready`
+
+<a id="REQ-GEARBOX-005"></a>
+
+## REQ-GEARBOX-005
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_down_sva.sv` property `t_stable_data`
+
+<a id="REQ-GEARBOX-006"></a>
+
+## REQ-GEARBOX-006
+
+- Kind: extracted
+- Verified by: `fv/comms/gearbox_down_sva.sv` property `t_valid_reset`
 # Integration
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.

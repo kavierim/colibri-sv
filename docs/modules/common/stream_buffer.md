@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Common::stream_buffer
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-STREAM_BUFFER-001
+    statement: The cycle after reset_i, snk_ready_o shall be high.
+  - id: REQ-STREAM_BUFFER-002
+    statement: When snk_ready_o is low, the skid register data shall not change on the next clock edge.
+  - id: REQ-STREAM_BUFFER-003
+    statement: When snk_valid_i has been high for four cycles without src_valid_o, src_valid_o shall not remain low indefinitely while reset_i is low.
 ---
-
 # Purpose
 
 Elastic stream buffer (skid or pipeline via generic).
@@ -48,6 +57,30 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Simple generic stream buffer. Zero latency (skid) when g_REGISTER_DATAPATH is 0. One clock of latency (pipeline) when g_REGISTER_DATAPATH is 1. g_DATA_WIDTH is VHDL natural. downto_width keeps a 0-wide vector off the [ -1 : 0 ] range. Skid mode keeps the datapath direct in normal operation; on backpressure the in-flight beat is stored and `snk_ready_o` can deassert until the skid empties. Pipeline mode always registers data (two-word FIFO semantics) and fully decouples source and destination.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-STREAM_BUFFER-001"></a>
+
+## REQ-STREAM_BUFFER-001
+
+- Kind: extracted
+- Verified by: `fv/common/stream_buffer_sva.sv` property `t_reset_state`
+
+<a id="REQ-STREAM_BUFFER-002"></a>
+
+## REQ-STREAM_BUFFER-002
+
+- Kind: extracted
+- Verified by: `fv/common/stream_buffer_sva.sv` property `t_buffer_stable`
+
+<a id="REQ-STREAM_BUFFER-003"></a>
+
+## REQ-STREAM_BUFFER-003
+
+- Kind: extracted
+- Verified by: `fv/common/stream_buffer_sva.sv` property `t_data_pass`
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

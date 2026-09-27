@@ -9,6 +9,7 @@
 package Colibri_Common_stream_buffer {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/common/stream_buffer.sv";
@@ -30,6 +31,10 @@ package Colibri_Common_stream_buffer {
         attribute src_data_o_sv : String = "logic [colibri_utils::downto_width(g_DATA_WIDTH)-1:0] src_data_o";
         in item src_ready_i;
         out item src_valid_o;
+        satisfy requirement REQ_STREAM_BUFFER_001;
+        satisfy requirement REQ_STREAM_BUFFER_002;
+        satisfy requirement REQ_STREAM_BUFFER_003;
+
     }
 
     part streamBufferUse : stream_buffer;

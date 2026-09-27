@@ -9,6 +9,7 @@
 package Colibri_Misc_be_remove_trail {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/misc/be_remove_trail.sv";
@@ -42,6 +43,10 @@ package Colibri_Misc_be_remove_trail {
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
         out item src_tail_o;
         attribute src_tail_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_tail_o";
+        satisfy requirement REQ_BE_REMOVE_TRAIL_001;
+        satisfy requirement REQ_BE_REMOVE_TRAIL_002;
+        satisfy requirement REQ_BE_REMOVE_TRAIL_003;
+
     }
 
     part beRemoveTrailUse : be_remove_trail;

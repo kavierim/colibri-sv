@@ -9,6 +9,7 @@
 package Colibri_Endec_rle_encode {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/endec/rle_encode.sv";
@@ -31,6 +32,15 @@ package Colibri_Endec_rle_encode {
         out item src_valid_o;
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_WORD_WIDTH+g_COUNT_WIDTH-1:0] src_data_o";
+        satisfy requirement REQ_RLE_ENCODE_001;
+        satisfy requirement REQ_RLE_ENCODE_002;
+        satisfy requirement REQ_RLE_ENCODE_003;
+        satisfy requirement REQ_RLE_ENCODE_004;
+        satisfy requirement REQ_RLE_ENCODE_005;
+        satisfy requirement REQ_RLE_ENCODE_006;
+        satisfy requirement REQ_RLE_ENCODE_007;
+        satisfy requirement REQ_RLE_ENCODE_008;
+
     }
 
     part rleEncodeUse : rle_encode;

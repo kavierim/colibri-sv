@@ -9,6 +9,7 @@
 package Colibri_Common_debouncer {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/common/debouncer.sv";
@@ -27,6 +28,11 @@ package Colibri_Common_debouncer {
         attribute data_i_sv : String = "logic [$bits(g_RESET_VAL)-1:0] data_i";
         out item data_o;
         attribute data_o_sv : String = "logic [$bits(g_RESET_VAL)-1:0] data_o";
+
+        satisfy requirement REQ_DEBOUNCER_001;
+        satisfy requirement REQ_DEBOUNCER_002;
+        satisfy requirement REQ_DEBOUNCER_003;
+
     }
 
     part debouncerUse : debouncer;

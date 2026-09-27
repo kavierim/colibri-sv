@@ -9,6 +9,7 @@
 package Colibri_Packet_interleaver {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/interleaver.sv";
@@ -45,6 +46,12 @@ package Colibri_Packet_interleaver {
         attribute src_empty_o_sv : String = "logic [c_EMPTY_W-1:0] src_empty_o";
         out item src_channel_o;
         attribute src_channel_o_sv : String = "logic [c_CH_W-1:0] src_channel_o";
+        satisfy requirement REQ_INTERLEAVER_001;
+        satisfy requirement REQ_INTERLEAVER_002;
+        satisfy requirement REQ_INTERLEAVER_003;
+        satisfy requirement REQ_INTERLEAVER_004;
+        satisfy requirement REQ_INTERLEAVER_005;
+
     }
 
     part interleaverUse : interleaver;

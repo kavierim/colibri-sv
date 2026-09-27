@@ -9,6 +9,7 @@
 package Colibri_Packet_packet_join {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/packet_join.sv";
@@ -39,6 +40,14 @@ package Colibri_Packet_packet_join {
         out item src_eop_o;
         out item src_valid_o;
         in item src_ready_i;
+        satisfy requirement REQ_PACKET_JOIN_001;
+        satisfy requirement REQ_PACKET_JOIN_002;
+        satisfy requirement REQ_PACKET_JOIN_003;
+        satisfy requirement REQ_PACKET_JOIN_004;
+        satisfy requirement REQ_PACKET_JOIN_005;
+        satisfy requirement REQ_PACKET_JOIN_006;
+        satisfy requirement REQ_PACKET_JOIN_007;
+
     }
 
     part packetJoinUse : packet_join;

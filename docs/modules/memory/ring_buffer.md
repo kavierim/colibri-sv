@@ -10,8 +10,23 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Memory::ring_buffer
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-RING_BUFFER-001
+    statement: The cycle after reset_i, src_valid_o shall be low and usedw shall be zero.
+  - id: REQ-RING_BUFFER-002
+    statement: While reset_i is low, usedw shall not exceed g_NUM_WORDS.
+  - id: REQ-RING_BUFFER-003
+    statement: A write while full with no read shall keep usedw at g_NUM_WORDS on the next cycle.
+  - id: REQ-RING_BUFFER-004
+    statement: When usedw is zero, src_valid_o shall be low.
+  - id: REQ-RING_BUFFER-005
+    statement: When src_valid_o is stalled and the buffer is not full, src_data_o and src_valid_o shall be stable on the next cycle.
+  - id: REQ-RING_BUFFER-006
+    statement: When snk_valid_i is accepted into non-full storage and src_valid_o is low, src_valid_o shall rise within one cycle.
 ---
-
 # Purpose
 
 Circular buffer; overwrite oldest when full.
@@ -47,6 +62,51 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 RAM-based ring buffer. A write while full overwrites the oldest word. FIFOs support optional first-word fall-through via `g_ENABLE_FWFT`. Packet FIFOs honour Avalon-ST `startofpacket`/`endofpacket`.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-RING_BUFFER-001"></a>
+
+## REQ-RING_BUFFER-001
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_reset_state`
+
+<a id="REQ-RING_BUFFER-002"></a>
+
+## REQ-RING_BUFFER-002
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_count_max`
+
+<a id="REQ-RING_BUFFER-003"></a>
+
+## REQ-RING_BUFFER-003
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_overwrite_full`
+
+<a id="REQ-RING_BUFFER-004"></a>
+
+## REQ-RING_BUFFER-004
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_empty_read`
+
+<a id="REQ-RING_BUFFER-005"></a>
+
+## REQ-RING_BUFFER-005
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_data_stable_norm`
+
+<a id="REQ-RING_BUFFER-006"></a>
+
+## REQ-RING_BUFFER-006
+
+- Kind: extracted
+- Verified by: `fv/memory/ring_buffer_sva.sv` property `p_data_availability`
 # Integration
 
 - Verilator: add `verilator/files/memory.f` (or `verilator/colibri.f` for packages) to the compile list.

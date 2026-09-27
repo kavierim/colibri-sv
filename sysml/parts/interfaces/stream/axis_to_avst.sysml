@@ -9,6 +9,7 @@
 package Colibri_Interfaces_Stream_axis_to_avst {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/interfaces/stream/axis_to_avst.sv";
@@ -38,6 +39,11 @@ package Colibri_Interfaces_Stream_axis_to_avst {
         attribute src_empty_o_sv : String = "logic [c_EMPTY_W-1:0] src_empty_o";
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
+        satisfy requirement REQ_AXIS_TO_AVST_001;
+        satisfy requirement REQ_AXIS_TO_AVST_002;
+        satisfy requirement REQ_AXIS_TO_AVST_003;
+        satisfy requirement REQ_AXIS_TO_AVST_004;
+
     }
 
     part axisToAvstUse : axis_to_avst;

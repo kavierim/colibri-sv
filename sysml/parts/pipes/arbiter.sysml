@@ -9,6 +9,7 @@
 package Colibri_Pipes_arbiter {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/pipes/arbiter.sv";
@@ -25,6 +26,13 @@ package Colibri_Pipes_arbiter {
         attribute requests_i_sv : String = "logic [g_NUM_INPUTS-1:0] requests_i";
         out item grants_o;
         attribute grants_o_sv : String = "logic [g_NUM_INPUTS-1:0] grants_o";
+        satisfy requirement REQ_ARBITER_001;
+        satisfy requirement REQ_ARBITER_002;
+        satisfy requirement REQ_ARBITER_003;
+        satisfy requirement REQ_ARBITER_004;
+        satisfy requirement REQ_ARBITER_005;
+        satisfy requirement REQ_ARBITER_006;
+
     }
 
     part arbiterUse : arbiter;

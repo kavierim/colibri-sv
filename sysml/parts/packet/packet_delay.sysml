@@ -9,6 +9,7 @@
 package Colibri_Packet_packet_delay {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/packet_delay.sv";
@@ -43,6 +44,13 @@ package Colibri_Packet_packet_delay {
         out item src_eop_o;
         out item src_valid_o;
         in item src_ready_i;
+        satisfy requirement REQ_PACKET_DELAY_001;
+        satisfy requirement REQ_PACKET_DELAY_002;
+        satisfy requirement REQ_PACKET_DELAY_003;
+        satisfy requirement REQ_PACKET_DELAY_004;
+        satisfy requirement REQ_PACKET_DELAY_005;
+        satisfy requirement REQ_PACKET_DELAY_006;
+
     }
 
     part packetDelayUse : packet_delay;

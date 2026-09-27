@@ -9,6 +9,7 @@
 package Colibri_Misc_be_add_lead {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/misc/be_add_lead.sv";
@@ -41,6 +42,10 @@ package Colibri_Misc_be_add_lead {
         attribute src_empty_o_sv : String = "logic [colibri_utils::downto_width(colibri_utils::log2ceil(int'(g_DATA_WIDTH) / 8))-1:0] src_empty_o";
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
+        satisfy requirement REQ_BE_ADD_LEAD_001;
+        satisfy requirement REQ_BE_ADD_LEAD_002;
+        satisfy requirement REQ_BE_ADD_LEAD_003;
+
     }
 
     part beAddLeadUse : be_add_lead;

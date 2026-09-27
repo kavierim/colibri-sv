@@ -10,8 +10,21 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Interfaces_Stream::avst_ram_write
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-AVST_RAM_WRITE-001
+    statement: The cycle after reset_i, wr_en_o shall be low and write address and data shall be zero.
+  - id: REQ-AVST_RAM_WRITE-002
+    statement: On a valid start-of-packet beat, wr_en_o shall pulse with data and address taken from the beat and start_addr_i.
+  - id: REQ-AVST_RAM_WRITE-003
+    statement: During an active packet, each valid beat shall produce wr_en_o with the captured snk_data_i.
+  - id: REQ-AVST_RAM_WRITE-004
+    statement: Successive writes in one packet shall use incrementing wr_addr_o.
+  - id: REQ-AVST_RAM_WRITE-005
+    statement: Outside an active packet without a valid beat, wr_en_o shall stay low on the next cycle.
 ---
-
 # Purpose
 
 Write Avalon-ST beats into RAM.
@@ -50,6 +63,44 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Simple Avalon Stream to RAM writer. Sequential writes of a packeted Avalon-ST input. start_addr_i is sampled at start of packet. A later start of packet restarts from the new address. The write stops on end of packet. Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-AVST_RAM_WRITE-001"></a>
+
+## REQ-AVST_RAM_WRITE-001
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_reset_quiet`
+
+<a id="REQ-AVST_RAM_WRITE-002"></a>
+
+## REQ-AVST_RAM_WRITE-002
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_sop_write`
+
+<a id="REQ-AVST_RAM_WRITE-003"></a>
+
+## REQ-AVST_RAM_WRITE-003
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_packet_write`
+
+<a id="REQ-AVST_RAM_WRITE-004"></a>
+
+## REQ-AVST_RAM_WRITE-004
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_addr_increment`
+
+<a id="REQ-AVST_RAM_WRITE-005"></a>
+
+## REQ-AVST_RAM_WRITE-005
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_sva.sv` property `t_wr_en_idle`
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

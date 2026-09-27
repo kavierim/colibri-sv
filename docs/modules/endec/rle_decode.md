@@ -10,8 +10,19 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Endec::rle_decode
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-RLE_DECODE-001
+    statement: The cycle after reset_i, src_valid_o shall be low.
+  - id: REQ-RLE_DECODE-002
+    statement: When src_valid_o is stalled, src_data_o shall be stable on the next cycle.
+  - id: REQ-RLE_DECODE-003
+    statement: When a new RLE word is accepted and the output is idle, src_valid_o shall rise with the expanded data word.
+  - id: REQ-RLE_DECODE-004
+    statement: When the sink presents a new data value after a gap, the output count field shall match the encoder count.
 ---
-
 # Purpose
 
 Run-length decoder.
@@ -48,6 +59,37 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Run-Length Decoder Some of the work was inspired by VHDL Whiz Release log: - 0.1 first release Library entity. Lint alongside verilator/wave0_elab.sv reports multiple tops. 8b/10b tables live in `colibri_common_8b10b`; RLE modules operate on streaming data.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-RLE_DECODE-001"></a>
+
+## REQ-RLE_DECODE-001
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_decode_sva.sv` property `t_no_valid_after_reset`
+
+<a id="REQ-RLE_DECODE-002"></a>
+
+## REQ-RLE_DECODE-002
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_decode_sva.sv` property `t_out_stable_backpressure`
+
+<a id="REQ-RLE_DECODE-003"></a>
+
+## REQ-RLE_DECODE-003
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_decode_sva.sv` property `t_rle_forward`
+
+<a id="REQ-RLE_DECODE-004"></a>
+
+## REQ-RLE_DECODE-004
+
+- Kind: extracted
+- Verified by: `fv/endec/rle_decode_sva.sv` property `t_rle_count`
 # Integration
 
 - Verilator: add `verilator/files/endec.f` (or `verilator/colibri.f` for packages) to the compile list.

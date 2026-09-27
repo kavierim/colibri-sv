@@ -9,6 +9,7 @@
 package Colibri_Memory_fifo {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/memory/fifo.sv";
@@ -34,6 +35,17 @@ package Colibri_Memory_fifo {
         attribute usedw_o_sv : String = "logic [colibri_utils::log2ceil(g_NUM_WORDS):0] usedw_o";
         out item empty_o;
         out item full_o;
+        satisfy requirement REQ_FIFO_001;
+        satisfy requirement REQ_FIFO_002;
+        satisfy requirement REQ_FIFO_003;
+        satisfy requirement REQ_FIFO_004;
+        satisfy requirement REQ_FIFO_005;
+        satisfy requirement REQ_FIFO_006;
+        satisfy requirement REQ_FIFO_007;
+        satisfy requirement REQ_FIFO_008;
+        satisfy requirement REQ_FIFO_009;
+        satisfy requirement REQ_FIFO_010;
+
     }
 
     part fifoUse : fifo;

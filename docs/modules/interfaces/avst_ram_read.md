@@ -10,8 +10,37 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Interfaces_Stream::avst_ram_read
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-AVST_RAM_READ-001
+    statement: The cycle after reset_i, busy_o, src_valid_o, and rd_en_o shall be low.
+  - id: REQ-AVST_RAM_READ-002
+    statement: After rd_start without backpressure, the next cycle shall enable a read and assert busy_o when needed.
+  - id: REQ-AVST_RAM_READ-003
+    statement: After a read enable without backpressure, the next cycle shall present rd_data_i on src_data_o with src_valid_o.
+  - id: REQ-AVST_RAM_READ-004
+    statement: Non-zero src_empty_o shall only occur with src_eop_o.
+  - id: REQ-AVST_RAM_READ-005
+    statement: src_sop_o or src_eop_o shall imply src_valid_o.
+  - id: REQ-AVST_RAM_READ-006
+    statement: Under backpressure on a non-SOP beat, AVST outputs shall remain stable.
+  - id: REQ-AVST_RAM_READ-007
+    statement: On the last word of a capped read, busy_o shall be low when rd_en_o is high.
+  - id: REQ-AVST_RAM_READ-008
+    statement: After stop_i, busy_o shall be low on the next cycle.
+  - id: REQ-AVST_RAM_READ-009
+    statement: Successive rd_en_o cycles shall use incrementing rd_addr_o while busy.
+  - id: REQ-AVST_RAM_READ-010
+    statement: After rd_start with pending output, the first src_valid_o shall carry src_sop_o.
+  - id: REQ-AVST_RAM_READ-011
+    statement: Before the captured length is emitted, the final beat shall assert src_eop_o.
+  - id: REQ-AVST_RAM_READ-012
+    statement: On the final beat, src_empty_o shall match the encoded partial word.
+  - id: REQ-AVST_RAM_READ-013
+    statement: After stop_i with in-flight data, the next handshake shall be an end-of-packet.
 ---
-
 # Purpose
 
 Read Avalon-ST beats from RAM.
@@ -57,6 +86,100 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Simple Avalon Stream to RAM reader. Sequential reads through a RAM interface, presented as a packeted Avalon-ST output. length_i is a byte count. A length of 0 reads until stop_i. start_i is accepted only while busy_o is low. stop_i ends the transfer. Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-AVST_RAM_READ-001"></a>
+
+## REQ-AVST_RAM_READ-001
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_reset_idle`
+
+<a id="REQ-AVST_RAM_READ-002"></a>
+
+## REQ-AVST_RAM_READ-002
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_rd_start`
+
+<a id="REQ-AVST_RAM_READ-003"></a>
+
+## REQ-AVST_RAM_READ-003
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_data_forward`
+
+<a id="REQ-AVST_RAM_READ-004"></a>
+
+## REQ-AVST_RAM_READ-004
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_empty_eop`
+
+<a id="REQ-AVST_RAM_READ-005"></a>
+
+## REQ-AVST_RAM_READ-005
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_sop_eop_valid`
+
+<a id="REQ-AVST_RAM_READ-006"></a>
+
+## REQ-AVST_RAM_READ-006
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_backpressure_stable`
+
+<a id="REQ-AVST_RAM_READ-007"></a>
+
+## REQ-AVST_RAM_READ-007
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_busy_last_word`
+
+<a id="REQ-AVST_RAM_READ-008"></a>
+
+## REQ-AVST_RAM_READ-008
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_stop_clears_busy`
+
+<a id="REQ-AVST_RAM_READ-009"></a>
+
+## REQ-AVST_RAM_READ-009
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_addr_increment`
+
+<a id="REQ-AVST_RAM_READ-010"></a>
+
+## REQ-AVST_RAM_READ-010
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_first_sop`
+
+<a id="REQ-AVST_RAM_READ-011"></a>
+
+## REQ-AVST_RAM_READ-011
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_last_eop`
+
+<a id="REQ-AVST_RAM_READ-012"></a>
+
+## REQ-AVST_RAM_READ-012
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_last_empty`
+
+<a id="REQ-AVST_RAM_READ-013"></a>
+
+## REQ-AVST_RAM_READ-013
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_read_sva.sv` property `t_stop_eop`
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

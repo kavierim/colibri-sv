@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Common::debouncer
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-DEBOUNCER-001
+    statement: After reset_i is low, when data_i matches a constant value for twelve consecutive clock cycles, the next cycle shall drive data_o to that value.
+  - id: REQ-DEBOUNCER-002
+    statement: When data_i changes after one to eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
+  - id: REQ-DEBOUNCER-003
+    statement: When data_i changes after eleven consecutive cycles matching the previous value, data_o shall remain stable on the next clock edge.
 ---
-
 # Purpose
 
 Input debouncer.
@@ -45,6 +54,30 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Debouncer. Release log: - 0.1 first release g_RESET_VAL is an unconstrained std_logic_vector in VHDL. data_i and data_o take $bits(g_RESET_VAL); pass a sized vector. g_CLOCK_PERIOD has no VHDL default; 10 ns is only so Verilator can elaborate this module. See RTL for clocking; not every block has `reset_i`.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-DEBOUNCER-001"></a>
+
+## REQ-DEBOUNCER-001
+
+- Kind: extracted
+- Verified by: `fv/common/debouncer_sva.sv` property `t_stable_in`
+
+<a id="REQ-DEBOUNCER-002"></a>
+
+## REQ-DEBOUNCER-002
+
+- Kind: extracted
+- Verified by: `fv/common/debouncer_sva.sv` property `t_unsstable_in`
+
+<a id="REQ-DEBOUNCER-003"></a>
+
+## REQ-DEBOUNCER-003
+
+- Kind: extracted
+- Verified by: `fv/common/debouncer_sva.sv` property `t_unsstable_in_11`
 # Integration
 
 - Verilator: add `verilator/files/common.f` (or `verilator/colibri.f` for packages) to the compile list.

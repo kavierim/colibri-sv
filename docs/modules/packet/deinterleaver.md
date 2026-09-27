@@ -10,8 +10,17 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Packet::deinterleaver
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-DEINTERLEAVER-001
+    statement: On each output, when idle and a beat is presented, src_sop_o shall be high.
+  - id: REQ-DEINTERLEAVER-002
+    statement: On each output, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
+  - id: REQ-DEINTERLEAVER-003
+    statement: While reset_i is low, at most one snk_ready_o shall be high.
 ---
-
 # Purpose
 
 Split one stream into multiple outputs.
@@ -55,6 +64,30 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Deinterleaves one Avalon-ST stream into g_NUM_OUTPUTS streams using the sideband identifier snk_channel_i. Packet semantics follow Avalon-ST: `startofpacket`, `endofpacket`, and `empty` on beats.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-DEINTERLEAVER-001"></a>
+
+## REQ-DEINTERLEAVER-001
+
+- Kind: extracted
+- Verified by: `fv/packet/deinterleaver_sva.sv` property `a_valid_out_sop`
+
+<a id="REQ-DEINTERLEAVER-002"></a>
+
+## REQ-DEINTERLEAVER-002
+
+- Kind: extracted
+- Verified by: `fv/packet/deinterleaver_sva.sv` property `a_valid_out_multi`
+
+<a id="REQ-DEINTERLEAVER-003"></a>
+
+## REQ-DEINTERLEAVER-003
+
+- Kind: extracted
+- Verified by: `fv/packet/deinterleaver_sva.sv` property `a_only_one_snk_active`
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

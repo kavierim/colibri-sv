@@ -9,6 +9,7 @@
 package Colibri_Common_edge_detect {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/common/edge_detect.sv";
@@ -22,6 +23,10 @@ package Colibri_Common_edge_detect {
         in item clk_i;
         in item data_i;
         out item pulse_o;
+        satisfy requirement REQ_EDGE_DETECT_001;
+        satisfy requirement REQ_EDGE_DETECT_002;
+        satisfy requirement REQ_EDGE_DETECT_003;
+
     }
 
     part edgeDetectUse : edge_detect;

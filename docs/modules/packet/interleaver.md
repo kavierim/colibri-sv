@@ -10,8 +10,21 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Packet::interleaver
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-INTERLEAVER-001
+    statement: While reset_i is low, snk_ready_o shall be zero or one-hot.
+  - id: REQ-INTERLEAVER-002
+    statement: When the selected input is idle and a beat is output, src_sop_o shall be high.
+  - id: REQ-INTERLEAVER-003
+    statement: When the selected input is in a multi-beat packet, src_sop_o shall be low on output beats.
+  - id: REQ-INTERLEAVER-004
+    statement: A single-beat packet on the output shall mark the corresponding input state as single.
+  - id: REQ-INTERLEAVER-005
+    statement: During a multi-beat packet on an input, src_channel_o shall not change while that input is active.
 ---
-
 # Purpose
 
 Merge multiple packet streams into one.
@@ -56,6 +69,44 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Interleaves Avalon-ST streams into one stream and tags the source with src_channel_o. Packets already in flight win; otherwise the grant rotates. g_INTERLEAVE_WORDS selects word interleaving or whole-packet boundaries. Packet semantics follow Avalon-ST: `startofpacket`, `endofpacket`, and `empty` on beats.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-INTERLEAVER-001"></a>
+
+## REQ-INTERLEAVER-001
+
+- Kind: extracted
+- Verified by: `fv/packet/interleaver_sva.sv` property `a_only_one_src_active`
+
+<a id="REQ-INTERLEAVER-002"></a>
+
+## REQ-INTERLEAVER-002
+
+- Kind: extracted
+- Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_sop`
+
+<a id="REQ-INTERLEAVER-003"></a>
+
+## REQ-INTERLEAVER-003
+
+- Kind: extracted
+- Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_multi`
+
+<a id="REQ-INTERLEAVER-004"></a>
+
+## REQ-INTERLEAVER-004
+
+- Kind: extracted
+- Verified by: `fv/packet/interleaver_sva.sv` property `a_valid_out_single`
+
+<a id="REQ-INTERLEAVER-005"></a>
+
+## REQ-INTERLEAVER-005
+
+- Kind: extracted
+- Verified by: `fv/packet/interleaver_bd_sva.sv` property `a_pkt_boundaries`
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

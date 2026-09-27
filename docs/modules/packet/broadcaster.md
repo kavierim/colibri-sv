@@ -10,8 +10,15 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Packet::broadcaster
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-BROADCASTER-001
+    statement: On each output port, when idle and a beat is presented, src_sop_o shall be high.
+  - id: REQ-BROADCASTER-002
+    statement: On each output port, during a multi-beat packet, src_sop_o shall be low when a beat is presented.
 ---
-
 # Purpose
 
 Duplicate one stream to several outputs.
@@ -54,6 +61,23 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Broadcasts one Avalon-ST stream to g_NUM_OUTPUTS streams. Each output has its own pipeline buffer, and the input fires only when every buffer is ready. Packet semantics follow Avalon-ST: `startofpacket`, `endofpacket`, and `empty` on beats.
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-BROADCASTER-001"></a>
+
+## REQ-BROADCASTER-001
+
+- Kind: extracted
+- Verified by: `fv/packet/broadcaster_sva.sv` property `a_valid_out_sop`
+
+<a id="REQ-BROADCASTER-002"></a>
+
+## REQ-BROADCASTER-002
+
+- Kind: extracted
+- Verified by: `fv/packet/broadcaster_sva.sv` property `a_valid_out_multi`
 # Integration
 
 - Verilator: add `verilator/files/packet_pipes.f` (or `verilator/colibri.f` for packages) to the compile list.

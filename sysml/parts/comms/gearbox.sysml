@@ -9,6 +9,7 @@
 package Colibri_Comms_gearbox {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/comms/gearbox.sv";
@@ -28,6 +29,13 @@ package Colibri_Comms_gearbox {
         attribute src_data_o_sv : String = "logic [g_OUTPUT_WIDTH-1:0] src_data_o";
         out item src_valid_o;
         in item src_ready_i;
+        satisfy requirement REQ_GEARBOX_001;
+        satisfy requirement REQ_GEARBOX_002;
+        satisfy requirement REQ_GEARBOX_003;
+        satisfy requirement REQ_GEARBOX_004;
+        satisfy requirement REQ_GEARBOX_005;
+        satisfy requirement REQ_GEARBOX_006;
+
     }
 
     part gearboxUse : gearbox;

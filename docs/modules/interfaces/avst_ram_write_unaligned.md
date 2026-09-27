@@ -10,8 +10,41 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Interfaces_Stream::avst_ram_write_unaligned
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-001
+    statement: The cycle after reset_i, wr_be_o shall be zero and the FSM shall be in S_IDLE.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-002
+    statement: In S_IDLE without a accepted SOP beat, the FSM shall remain in S_IDLE on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-003
+    statement: An accepted SOP beat in S_IDLE shall move the FSM to S_SOP on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-004
+    statement: In S_SOP without the SOP completion condition, the FSM shall not leave S_SOP on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-005
+    statement: After a qualifying EOP in S_SOP, a new SOP handshake shall keep S_SOP.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-006
+    statement: After a qualifying EOP in S_SOP without a new SOP, the FSM shall return to S_IDLE.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-007
+    statement: A non-EOP beat after S_SOP shall enter S_WRITE on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-008
+    statement: A short final word in S_SOP shall move to S_EOP on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-009
+    statement: An EOP beat in S_SOP shall move to S_EOP on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-010
+    statement: In S_WRITE without EOP or flush, the FSM shall stay in S_WRITE.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-011
+    statement: An EOP or flush in S_WRITE shall move to S_EOP on the next cycle.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-012
+    statement: In S_EOP while snk_ready_o is low, the FSM shall remain in S_EOP.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-013
+    statement: In S_EOP with snk_ready_o and no new SOP, the FSM shall return to S_IDLE.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-014
+    statement: In S_EOP with snk_ready_o and a new SOP, the FSM shall enter S_SOP.
+  - id: REQ-AVST_RAM_WRITE_UNALIGNED-015
+    statement: Flush in S_SOP or S_WRITE shall move the FSM to S_IDLE or S_EOP.
 ---
-
 # Purpose
 
 Byte-addressable Avalon-ST RAM writer.
@@ -54,6 +87,114 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Avalon Stream to RAM writer with unaligned (byte-addressable) access. Writes Avalon-ST packets to a word-addressed RAM with a byte-enable vector. start_addr_i is the initial byte address at start of packet. An extra write after end of packet can deassert snk_ready_o for one cycle. RAM outputs are delayed by 2 cycles. flush_i writes any bytes still in the buffer. Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-001"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-001
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_reset_idle`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-002"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-002
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_idle_hold`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-003"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-003
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_idle_to_sop`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-004"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-004
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_stay`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-005"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-005
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_chain`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-006"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-006
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_to_idle`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-007"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-007
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_to_write`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-008"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-008
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_to_eop_short`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-009"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-009
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_sop_eop_to_eop`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-010"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-010
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_write_hold`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-011"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-011
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_write_to_eop`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-012"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-012
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_eop_stall`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-013"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-013
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_eop_to_idle`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-014"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-014
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_eop_to_sop`
+
+<a id="REQ-AVST_RAM_WRITE_UNALIGNED-015"></a>
+
+## REQ-AVST_RAM_WRITE_UNALIGNED-015
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_ram_write_unaligned_sva.sv` property `t_flush_escape`
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

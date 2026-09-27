@@ -10,8 +10,15 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Interfaces_Stream::avst_to_axis
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-AVST_TO_AXIS-001
+    statement: When AXI stream output is valid and ready, tkeep shall be a one-hot mask.
+  - id: REQ-AVST_TO_AXIS-002
+    statement: When AXI stream output is valid and ready, tkeep shall not be all zeros.
 ---
-
 # Purpose
 
 Avalon-ST to AXI-Stream adapter.
@@ -54,6 +61,23 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Avalon ST to AXI Stream adapter. Release log: - 0.1 first release - 0.2 changed g_SWAP_ENDIANNESS for g_AVST_ENDIANNESS Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-AVST_TO_AXIS-001"></a>
+
+## REQ-AVST_TO_AXIS-001
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_to_axis_sva.sv` property `a_onehot_keep`
+
+<a id="REQ-AVST_TO_AXIS-002"></a>
+
+## REQ-AVST_TO_AXIS-002
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/avst_to_axis_sva.sv` property `a_nonempty_keep`
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

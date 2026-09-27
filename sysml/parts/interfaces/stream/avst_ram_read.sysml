@@ -9,6 +9,7 @@
 package Colibri_Interfaces_Stream_avst_ram_read {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/interfaces/stream/avst_ram_read.sv";
@@ -43,6 +44,20 @@ package Colibri_Interfaces_Stream_avst_ram_read {
         attribute rd_addr_o_sv : String = "logic [c_ADDR_W-1:0] rd_addr_o";
         in item rd_data_i;
         attribute rd_data_i_sv : String = "logic [c_DATA_W-1:0] rd_data_i";
+        satisfy requirement REQ_AVST_RAM_READ_001;
+        satisfy requirement REQ_AVST_RAM_READ_002;
+        satisfy requirement REQ_AVST_RAM_READ_003;
+        satisfy requirement REQ_AVST_RAM_READ_004;
+        satisfy requirement REQ_AVST_RAM_READ_005;
+        satisfy requirement REQ_AVST_RAM_READ_006;
+        satisfy requirement REQ_AVST_RAM_READ_007;
+        satisfy requirement REQ_AVST_RAM_READ_008;
+        satisfy requirement REQ_AVST_RAM_READ_009;
+        satisfy requirement REQ_AVST_RAM_READ_010;
+        satisfy requirement REQ_AVST_RAM_READ_011;
+        satisfy requirement REQ_AVST_RAM_READ_012;
+        satisfy requirement REQ_AVST_RAM_READ_013;
+
     }
 
     part avstRamReadUse : avst_ram_read;

@@ -9,6 +9,7 @@
 package Colibri_Packet_deinterleaver {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/deinterleaver.sv";
@@ -40,6 +41,10 @@ package Colibri_Packet_deinterleaver {
         attribute src_valid_o_sv : String = "logic [g_NUM_OUTPUTS-1:0] src_valid_o";
         in item src_ready_i;
         attribute src_ready_i_sv : String = "logic [g_NUM_OUTPUTS-1:0] src_ready_i";
+        satisfy requirement REQ_DEINTERLEAVER_001;
+        satisfy requirement REQ_DEINTERLEAVER_002;
+        satisfy requirement REQ_DEINTERLEAVER_003;
+
     }
 
     part deinterleaverUse : deinterleaver;

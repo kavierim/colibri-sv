@@ -9,6 +9,7 @@
 package Colibri_Interfaces_Stream_avst_ram_write {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/interfaces/stream/avst_ram_write.sv";
@@ -34,6 +35,12 @@ package Colibri_Interfaces_Stream_avst_ram_write {
         attribute wr_addr_o_sv : String = "logic [g_ADDR_WIDTH-1:0] wr_addr_o";
         out item wr_data_o;
         attribute wr_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] wr_data_o";
+        satisfy requirement REQ_AVST_RAM_WRITE_001;
+        satisfy requirement REQ_AVST_RAM_WRITE_002;
+        satisfy requirement REQ_AVST_RAM_WRITE_003;
+        satisfy requirement REQ_AVST_RAM_WRITE_004;
+        satisfy requirement REQ_AVST_RAM_WRITE_005;
+
     }
 
     part avstRamWriteUse : avst_ram_write;

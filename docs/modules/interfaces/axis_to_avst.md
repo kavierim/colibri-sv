@@ -10,8 +10,19 @@ sources:
     resource: https://gitlab.com/colibri-cern/colibri/-/tree/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
     title: Upstream VHDL at pin commit
 model: sysml://Colibri::Interfaces_Stream::axis_to_avst
+provenance:
+  upstream_path: gitlab.com/colibri-cern/colibri
+  pinned_commit: 3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f
+requirements:
+  - id: REQ-AXIS_TO_AVST-001
+    statement: When the AVST source is idle and presents a beat, src_sop_o shall be high.
+  - id: REQ-AXIS_TO_AVST-002
+    statement: During a multi-beat AVST packet, src_sop_o shall be low on presented beats.
+  - id: REQ-AXIS_TO_AVST-003
+    statement: A single-beat AVST packet shall return the source state machine to single-packet mode.
+  - id: REQ-AXIS_TO_AVST-004
+    statement: On an end-of-packet beat, src_empty_o shall indicate a partial final word.
 ---
-
 # Purpose
 
 AXI-Stream to Avalon-ST adapter.
@@ -54,6 +65,37 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 AXI Stream to Avalon ST adapter. AXI-Stream byte order is little-endian (first byte in the low bits). Partially empty words keep the valid bytes grouped at the low end. Release log: - 0.1 first release - 0.2 changed g_SWAP_ENDIANNESS for g_AVST_ENDIANNESS Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Requirements
+
+SHALL sentences are in YAML frontmatter (`requirements[].statement`). This section lists ids, anchors, and verification only.
+
+<a id="REQ-AXIS_TO_AVST-001"></a>
+
+## REQ-AXIS_TO_AVST-001
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_idle_sop`
+
+<a id="REQ-AXIS_TO_AVST-002"></a>
+
+## REQ-AXIS_TO_AVST-002
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_multi_no_sop`
+
+<a id="REQ-AXIS_TO_AVST-003"></a>
+
+## REQ-AXIS_TO_AVST-003
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_single_packet`
+
+<a id="REQ-AXIS_TO_AVST-004"></a>
+
+## REQ-AXIS_TO_AVST-004
+
+- Kind: extracted
+- Verified by: `fv/interfaces/stream/axis_to_avst_sva.sv` property `a_eop_empty`
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

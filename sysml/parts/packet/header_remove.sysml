@@ -9,6 +9,7 @@
 package Colibri_Packet_header_remove {
     private import ScalarValues::*;
     private import ArchitectureMeta::*;
+    private import Colibri_Requirements::*;
 
     @ArtifactTrace {
         rtlPath = "src/packet/header_remove.sv";
@@ -40,6 +41,10 @@ package Colibri_Packet_header_remove {
         attribute src_empty_o_sv : String = "logic [c_EMPTY_W-1:0] src_empty_o";
         out item src_header_o;
         attribute src_header_o_sv : String = "logic [c_HDR_BITS-1:0] src_header_o";
+        satisfy requirement REQ_HEADER_REMOVE_001;
+        satisfy requirement REQ_HEADER_REMOVE_002;
+        satisfy requirement REQ_HEADER_REMOVE_003;
+
     }
 
     part headerRemoveUse : header_remove;
