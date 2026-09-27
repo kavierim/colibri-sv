@@ -27,4 +27,6 @@ package Colibri_Common_comparator {
         attribute b_i_sv : String = "logic [g_DATA_WIDTH-1:0] b_i";
         out item a_gt_b_o;
     }
+
+    part comparatorUse : comparator;
 }

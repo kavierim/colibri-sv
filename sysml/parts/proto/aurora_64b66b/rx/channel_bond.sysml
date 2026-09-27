@@ -27,4 +27,6 @@ package Colibri_Proto_Aurora_64b66b_Rx_channel_bond {
         attribute src_valid_o_sv : String = "logic [g_N_LANES-1:0] src_valid_o";
         out item src_bond_o;
     }
+
+    part channelBondUse : channel_bond;
 }

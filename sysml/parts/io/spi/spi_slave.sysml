@@ -33,4 +33,6 @@ package Colibri_Io_Spi_spi_slave {
         in item snk_valid_i;
         out item snk_ready_o;
     }
+
+    part spiSlaveUse : spi_slave;
 }

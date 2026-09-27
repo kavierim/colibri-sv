@@ -35,4 +35,6 @@ package Colibri_Io_Spi_spi_master {
         in item snk_valid_i;
         out item snk_ready_o;
     }
+
+    part spiMasterUse : spi_master;
 }

@@ -42,4 +42,6 @@ package Colibri_Common_skid_buffer {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part skidBufferUse : skid_buffer;
 }

@@ -28,4 +28,6 @@ package Colibri_Misc_frequency_counter {
         out item freq_valid_o;
         attribute freq_valid_o_sv : String = "logic [g_NUM_CLOCKS-1:0] freq_valid_o";
     }
+
+    part frequencyCounterUse : frequency_counter;
 }

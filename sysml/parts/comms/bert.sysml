@@ -38,4 +38,6 @@ package Colibri_Comms_bert {
         out item invalid_words_o;
         attribute invalid_words_o_sv : String = "logic [g_STATS_WIDTH-1:0] invalid_words_o";
     }
+
+    part bertUse : bert;
 }

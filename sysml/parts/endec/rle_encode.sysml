@@ -32,4 +32,6 @@ package Colibri_Endec_rle_encode {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_WORD_WIDTH+g_COUNT_WIDTH-1:0] src_data_o";
     }
+
+    part rleEncodeUse : rle_encode;
 }

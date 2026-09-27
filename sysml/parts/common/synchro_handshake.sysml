@@ -31,4 +31,6 @@ package Colibri_Common_synchro_handshake {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part synchroHandshakeUse : synchro_handshake;
 }

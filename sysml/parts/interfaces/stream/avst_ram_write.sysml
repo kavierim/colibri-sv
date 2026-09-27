@@ -35,4 +35,6 @@ package Colibri_Interfaces_Stream_avst_ram_write {
         out item wr_data_o;
         attribute wr_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] wr_data_o";
     }
+
+    part avstRamWriteUse : avst_ram_write;
 }

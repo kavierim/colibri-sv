@@ -27,4 +27,6 @@ package Colibri_Proto_Aurora_64b66b_Rx_block_sync_fsm {
         out item snk_slip_o;
         out item src_sync_o;
     }
+
+    part blockSyncFsmUse : block_sync_fsm;
 }

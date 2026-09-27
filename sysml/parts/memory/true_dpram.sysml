@@ -49,4 +49,6 @@ package Colibri_Memory_true_dpram {
         out item datab_o;
         attribute datab_o_sv : String = "logic [g_B_DATA_WIDTH-1:0] datab_o";
     }
+
+    part trueDpramUse : true_dpram;
 }

@@ -44,4 +44,6 @@ package Colibri_Comms_crc {
         out item src_crc_o;
         attribute src_crc_o_sv : String = "logic [$bits(g_CRC_POLY)-1:0] src_crc_o";
     }
+
+    part crcUse : crc;
 }

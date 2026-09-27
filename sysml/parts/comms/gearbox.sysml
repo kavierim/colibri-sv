@@ -29,4 +29,6 @@ package Colibri_Comms_gearbox {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part gearboxUse : gearbox;
 }

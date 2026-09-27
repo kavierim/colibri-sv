@@ -27,4 +27,6 @@ package Colibri_Common_synchro_generic {
         out item data_o;
         attribute data_o_sv : String = "data_t data_o";
     }
+
+    part synchroGenericUse : synchro_generic;
 }

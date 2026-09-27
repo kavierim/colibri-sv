@@ -41,4 +41,6 @@ package Colibri_Interfaces_Stream_avst_ram_write_unaligned {
         out item wr_data_o;
         attribute wr_data_o_sv : String = "logic [c_DATA_W-1:0] wr_data_o";
     }
+
+    part avstRamWriteUnalignedUse : avst_ram_write_unaligned;
 }

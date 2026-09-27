@@ -28,4 +28,6 @@ package Colibri_Proto_Aurora_64b66b_Include_meta_buffer {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
     }
+
+    part metaBufferUse : meta_buffer;
 }

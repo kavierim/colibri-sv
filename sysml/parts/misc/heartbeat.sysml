@@ -23,4 +23,6 @@ package Colibri_Misc_heartbeat {
         in item reset_i;
         out item heartbeat_o;
     }
+
+    part heartbeatUse : heartbeat;
 }

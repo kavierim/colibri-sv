@@ -43,4 +43,6 @@ package Colibri_Memory_cc_fifo {
         attribute wrq_o_sv : String = "logic [g_INPUT_WIDTH-1:0] wrq_o";
         out item wrq_valid_o;
     }
+
+    part ccFifoUse : cc_fifo;
 }

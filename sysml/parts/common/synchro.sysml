@@ -27,4 +27,6 @@ package Colibri_Common_synchro {
         out item data_o;
         attribute data_o_sv : String = "logic [g_DATA_LENGTH-1:0] data_o";
     }
+
+    part synchroUse : synchro;
 }

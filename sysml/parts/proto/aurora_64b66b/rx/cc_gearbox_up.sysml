@@ -30,4 +30,6 @@ package Colibri_Proto_Aurora_64b66b_Rx_cc_gearbox_up {
         attribute src_data_o_sv : String = "logic [g_OUTPUT_WIDTH-1:0] src_data_o";
         out item src_valid_o;
     }
+
+    part ccGearboxUpUse : cc_gearbox_up;
 }

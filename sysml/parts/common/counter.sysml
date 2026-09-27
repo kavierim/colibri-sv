@@ -27,4 +27,6 @@ package Colibri_Common_counter {
         attribute value_o_sv : String = "logic [((g_COUNTER_WIDTH > 0) ? g_COUNTER_WIDTH : 1)-1:0] value_o";
         out item wraparound_o;
     }
+
+    part counterUse : counter;
 }

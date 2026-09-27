@@ -24,4 +24,6 @@ package Colibri_Common_synchro_reset {
         in item reset_i;
         out item reset_o;
     }
+
+    part synchroResetUse : synchro_reset;
 }

@@ -42,4 +42,6 @@ package Colibri_Misc_be_add_trail {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
     }
+
+    part beAddTrailUse : be_add_trail;
 }

@@ -40,4 +40,6 @@ package Colibri_Packet_packet_join {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part packetJoinUse : packet_join;
 }

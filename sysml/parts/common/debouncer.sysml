@@ -28,4 +28,6 @@ package Colibri_Common_debouncer {
         out item data_o;
         attribute data_o_sv : String = "logic [$bits(g_RESET_VAL)-1:0] data_o";
     }
+
+    part debouncerUse : debouncer;
 }

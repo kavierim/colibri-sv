@@ -35,4 +35,6 @@ package Colibri_Proto_Aurora_64b66b_Tx_aurora_st_encoder {
         out item src_valid_o;
         attribute src_valid_o_sv : String = "logic [g_N_LANES-1:0] src_valid_o";
     }
+
+    part auroraStEncoderUse : aurora_st_encoder;
 }

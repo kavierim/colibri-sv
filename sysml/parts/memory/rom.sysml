@@ -25,4 +25,6 @@ package Colibri_Memory_rom {
         out item data_o;
         attribute data_o_sv : String = "logic [g_DATA_WIDTH-1:0] data_o";
     }
+
+    part romUse : rom;
 }

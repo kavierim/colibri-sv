@@ -38,4 +38,6 @@ package Colibri_Misc_Mmap_fifo_Vhdl_if_rxfifo_csr {
         out item hwif_out;
         attribute hwif_out_sv : String = "rxfifo_csr_pkg::rxfifo_csr_out_t hwif_out";
     }
+
+    part rxfifoCsrUse : rxfifo_csr;
 }

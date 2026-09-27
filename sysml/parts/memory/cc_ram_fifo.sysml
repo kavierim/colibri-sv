@@ -46,4 +46,6 @@ package Colibri_Memory_cc_ram_fifo {
         out item rdempty_o;
         out item rdfull_o;
     }
+
+    part ccRamFifoUse : cc_ram_fifo;
 }

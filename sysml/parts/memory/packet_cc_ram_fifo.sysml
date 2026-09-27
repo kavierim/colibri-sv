@@ -45,4 +45,6 @@ package Colibri_Memory_packet_cc_ram_fifo {
         in item src_ready_i;
         out item src_valid_o;
     }
+
+    part packetCcRamFifoUse : packet_cc_ram_fifo;
 }

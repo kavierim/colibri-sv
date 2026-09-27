@@ -39,4 +39,6 @@ package Colibri_Packet_broadcaster {
         in item src_ready_i;
         attribute src_ready_i_sv : String = "logic [g_NUM_OUTPUTS-1:0] src_ready_i";
     }
+
+    part broadcasterUse : broadcaster;
 }

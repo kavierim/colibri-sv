@@ -42,4 +42,6 @@ package Colibri_Common_pipeline_buffer {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part pipelineBufferUse : pipeline_buffer;
 }

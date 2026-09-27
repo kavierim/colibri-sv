@@ -34,4 +34,6 @@ package Colibri_Proto_Aurora_64b66b_Rx_aurora_st_decoder {
         out item src_empty_o;
         attribute src_empty_o_sv : String = "logic [colibri_utils::log2ceil(colibri_aurora_const::c_AURORA_DATA_WIDTH / 8)-1:0] src_empty_o";
     }
+
+    part auroraStDecoderUse : aurora_st_decoder;
 }

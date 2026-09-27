@@ -46,4 +46,6 @@ package Colibri_Memory_Optimized_true_dpram_altera {
         out item datab_o;
         attribute datab_o_sv : String = "logic [g_B_DATA_WIDTH-1:0] datab_o";
     }
+
+    part trueDpramAlteraUse : true_dpram_altera;
 }

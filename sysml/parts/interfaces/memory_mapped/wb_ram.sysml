@@ -36,4 +36,6 @@ package Colibri_Interfaces_Memory_mapped_wb_ram {
         out item wb_ack_o;
         out item wb_err_o;
     }
+
+    part wbRamUse : wb_ram;
 }

@@ -26,4 +26,6 @@ package Colibri_Pipes_arbiter {
         out item grants_o;
         attribute grants_o_sv : String = "logic [g_NUM_INPUTS-1:0] grants_o";
     }
+
+    part arbiterUse : arbiter;
 }

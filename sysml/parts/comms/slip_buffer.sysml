@@ -30,4 +30,6 @@ package Colibri_Comms_slip_buffer {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_data_o";
     }
+
+    part slipBufferUse : slip_buffer;
 }

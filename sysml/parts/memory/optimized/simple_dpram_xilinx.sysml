@@ -42,4 +42,6 @@ package Colibri_Memory_Optimized_simple_dpram_xilinx {
         out item rddata_o;
         attribute rddata_o_sv : String = "logic [g_B_DATA_WIDTH-1:0] rddata_o";
     }
+
+    part simpleDpramXilinxUse : simple_dpram_xilinx;
 }

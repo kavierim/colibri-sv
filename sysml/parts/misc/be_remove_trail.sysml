@@ -43,4 +43,6 @@ package Colibri_Misc_be_remove_trail {
         out item src_tail_o;
         attribute src_tail_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_tail_o";
     }
+
+    part beRemoveTrailUse : be_remove_trail;
 }

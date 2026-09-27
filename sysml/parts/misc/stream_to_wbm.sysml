@@ -42,4 +42,6 @@ package Colibri_Misc_stream_to_wbm {
         in item wb_ack_i;
         in item wb_err_i;
     }
+
+    part streamToWbmUse : stream_to_wbm;
 }

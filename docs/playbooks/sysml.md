@@ -28,7 +28,7 @@ Do not add `(* sysml_part *)` pragmas to RTL. Do not copy SHALL sentences into s
 ## Identifiers
 
 - Defining package is unique per module, `Colibri_<Domain>_<module>` (for example `Colibri_Common_counter`), because one shared package name per file does not parse when the folder is loaded together.
-- [`sysml/Colibri.sysml`](../../sysml/Colibri.sysml) re-exports those packages. Stable URI: `sysml://Colibri::Common::counter`.
+- [`sysml/Colibri.sysml`](../../sysml/Colibri.sysml) re-exports those packages. Stable URI: `sysml://Colibri::Common::counter`. Each part file also contains a usage in the same package (`part wbRamUse : wb_ram`) so the definition is referenced. Add that usage when you add a part.
 - Requirement: `REQ-<MODULE>-<NNN>` (`REQ-COUNTER-001`). One observable SHALL per heading, English, on ports or a named bound signal.
 - Assumption: `ASM-<MODULE>-<NNN>` on the module page only. It is not a `requirement def`.
 - Anchor: `<a id="REQ-COUNTER-001"></a>` immediately before the matching `##` heading.

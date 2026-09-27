@@ -31,4 +31,6 @@ package Colibri_Common_stream_buffer {
         in item src_ready_i;
         out item src_valid_o;
     }
+
+    part streamBufferUse : stream_buffer;
 }

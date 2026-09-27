@@ -44,4 +44,6 @@ package Colibri_Packet_packet_delay {
         out item src_valid_o;
         in item src_ready_i;
     }
+
+    part packetDelayUse : packet_delay;
 }

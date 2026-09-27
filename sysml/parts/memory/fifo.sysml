@@ -35,4 +35,6 @@ package Colibri_Memory_fifo {
         out item empty_o;
         out item full_o;
     }
+
+    part fifoUse : fifo;
 }

@@ -51,4 +51,6 @@ package Colibri_Misc_Mmap_fifo_mmap_fifo_rx {
         out item wb_err_o;
         out item intr_o;
     }
+
+    part mmapFifoRxUse : mmap_fifo_rx;
 }

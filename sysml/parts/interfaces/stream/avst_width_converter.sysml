@@ -39,4 +39,6 @@ package Colibri_Interfaces_Stream_avst_width_converter {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [c_OUTPUT_WIDTH-1:0] src_data_o";
     }
+
+    part avstWidthConverterUse : avst_width_converter;
 }

@@ -37,4 +37,6 @@ package Colibri_Proto_Aurora_64b66b_aurora_tx {
         in item src_ready_i;
         attribute src_ready_i_sv : String = "logic [g_N_LANES-1:0] src_ready_i";
     }
+
+    part auroraTxUse : aurora_tx;
 }

@@ -30,4 +30,6 @@ package Colibri_Common_stream_buffer_generic {
         in item src_ready_i;
         out item src_valid_o;
     }
+
+    part streamBufferGenericUse : stream_buffer_generic;
 }

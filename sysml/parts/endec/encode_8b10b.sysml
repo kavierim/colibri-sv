@@ -24,4 +24,6 @@ package Colibri_Endec_encode_8b10b {
         attribute src_data_o_sv : String = "logic [9:0] src_data_o";
         out item src_valid_o;
     }
+
+    part encode8b10bUse : encode_8b10b;
 }

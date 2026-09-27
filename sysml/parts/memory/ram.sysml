@@ -34,4 +34,6 @@ package Colibri_Memory_ram {
         out item q_o;
         attribute q_o_sv : String = "logic [g_DATA_WIDTH-1:0] q_o";
     }
+
+    part ramUse : ram;
 }

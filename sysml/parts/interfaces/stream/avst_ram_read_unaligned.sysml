@@ -41,4 +41,6 @@ package Colibri_Interfaces_Stream_avst_ram_read_unaligned {
         in item rd_data_i;
         attribute rd_data_i_sv : String = "logic [c_DATA_W-1:0] rd_data_i";
     }
+
+    part avstRamReadUnalignedUse : avst_ram_read_unaligned;
 }

@@ -46,4 +46,6 @@ package Colibri_Packet_interleaver {
         out item src_channel_o;
         attribute src_channel_o_sv : String = "logic [c_CH_W-1:0] src_channel_o";
     }
+
+    part interleaverUse : interleaver;
 }

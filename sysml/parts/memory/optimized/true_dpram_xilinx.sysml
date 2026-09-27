@@ -47,4 +47,6 @@ package Colibri_Memory_Optimized_true_dpram_xilinx {
         out item datab_o;
         attribute datab_o_sv : String = "logic [g_B_DATA_WIDTH-1:0] datab_o";
     }
+
+    part trueDpramXilinxUse : true_dpram_xilinx;
 }

@@ -33,4 +33,6 @@ package Colibri_Io_Jtag_jtag_serdes {
         in item ser_data_i;
         out item ser_data_o;
     }
+
+    part jtagSerdesUse : jtag_serdes;
 }

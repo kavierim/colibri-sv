@@ -23,4 +23,6 @@ package Colibri_Misc_powerup_reset {
         in item reset_ext_i;
         out item reset_o;
     }
+
+    part powerupResetUse : powerup_reset;
 }

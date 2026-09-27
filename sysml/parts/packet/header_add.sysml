@@ -41,4 +41,6 @@ package Colibri_Packet_header_add {
         out item src_empty_o;
         attribute src_empty_o_sv : String = "logic [c_EMPTY_W-1:0] src_empty_o";
     }
+
+    part headerAddUse : header_add;
 }

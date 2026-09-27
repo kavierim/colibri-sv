@@ -23,4 +23,6 @@ package Colibri_Common_edge_detect {
         in item data_i;
         out item pulse_o;
     }
+
+    part edgeDetectUse : edge_detect;
 }

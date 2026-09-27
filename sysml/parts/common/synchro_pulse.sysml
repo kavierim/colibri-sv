@@ -23,4 +23,6 @@ package Colibri_Common_synchro_pulse {
         in item pulse_i;
         out item pulse_o;
     }
+
+    part synchroPulseUse : synchro_pulse;
 }

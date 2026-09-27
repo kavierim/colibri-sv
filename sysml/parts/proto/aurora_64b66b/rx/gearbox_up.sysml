@@ -28,4 +28,6 @@ package Colibri_Proto_Aurora_64b66b_Rx_gearbox_up {
         attribute src_data_o_sv : String = "logic [g_OUTPUT_WIDTH-1:0] src_data_o";
         out item src_valid_o;
     }
+
+    part gearboxUpUse : gearbox_up;
 }

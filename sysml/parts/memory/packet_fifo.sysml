@@ -47,4 +47,6 @@ package Colibri_Memory_packet_fifo {
         out item src_size_o;
         attribute src_size_o_sv : String = "logic [g_PKT_SIZE_BITS-1:0] src_size_o";
     }
+
+    part packetFifoUse : packet_fifo;
 }

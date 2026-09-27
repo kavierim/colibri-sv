@@ -36,4 +36,6 @@ package Colibri_Memory_simple_dpram_be {
         out item rddata_o;
         attribute rddata_o_sv : String = "logic [g_WORD_BYTES*g_BYTE_WIDTH-1:0] rddata_o";
     }
+
+    part simpleDpramBeUse : simple_dpram_be;
 }

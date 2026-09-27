@@ -26,4 +26,6 @@ package Colibri_Io_Uart_uart_tx {
         out item tx_ready_o;
         out item tx_pin_o;
     }
+
+    part uartTxUse : uart_tx;
 }

@@ -41,4 +41,6 @@ package Colibri_Interfaces_Stream_avst_fifo {
         out item src_data_o;
         attribute src_data_o_sv : String = "logic [c_DATA_WIDTH-1:0] src_data_o";
     }
+
+    part avstFifoUse : avst_fifo;
 }

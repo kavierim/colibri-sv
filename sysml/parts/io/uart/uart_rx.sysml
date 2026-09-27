@@ -25,4 +25,6 @@ package Colibri_Io_Uart_uart_rx {
         out item rx_valid_o;
         in item rx_pin_i;
     }
+
+    part uartRxUse : uart_rx;
 }

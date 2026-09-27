@@ -43,4 +43,6 @@ package Colibri_Misc_be_remove_lead {
         out item src_head_o;
         attribute src_head_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_head_o";
     }
+
+    part beRemoveLeadUse : be_remove_lead;
 }

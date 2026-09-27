@@ -32,4 +32,6 @@ package Colibri_Memory_bicam {
         out item addr_o;
         attribute addr_o_sv : String = "logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_N_WORDS))-1:0] addr_o";
     }
+
+    part bicamUse : bicam;
 }

@@ -38,4 +38,6 @@ package Colibri_Io_I2c_i2c_controller {
         out item rd_valid_o;
         in item rd_ready_i;
     }
+
+    part i2cControllerUse : i2c_controller;
 }

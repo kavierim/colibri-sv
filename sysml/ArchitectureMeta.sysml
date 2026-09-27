@@ -11,12 +11,14 @@ package ArchitectureMeta {
     private import ScalarValues::*;
 
     metadata def OKFReference {
+        doc /* Links a requirement stub to the markdown page that owns the SHALL text. */
         attribute docPath : String;
         attribute conceptId : String;
         attribute section : String;
     }
 
     metadata def ArtifactTrace {
+        doc /* Paths from a part definition to its SystemVerilog sources. */
         attribute rtlPath : String;
         attribute verifPath : String;
         attribute fvPath : String;

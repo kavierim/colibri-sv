@@ -41,4 +41,6 @@ package Colibri_Packet_header_remove {
         out item src_header_o;
         attribute src_header_o_sv : String = "logic [c_HDR_BITS-1:0] src_header_o";
     }
+
+    part headerRemoveUse : header_remove;
 }

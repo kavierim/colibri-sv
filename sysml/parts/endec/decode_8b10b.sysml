@@ -25,4 +25,6 @@ package Colibri_Endec_decode_8b10b {
         out item src_control_o;
         out item src_valid_o;
     }
+
+    part decode8b10bUse : decode_8b10b;
 }

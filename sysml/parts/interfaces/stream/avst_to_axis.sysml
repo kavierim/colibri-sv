@@ -39,4 +39,6 @@ package Colibri_Interfaces_Stream_avst_to_axis {
         out item src_tdata_o;
         attribute src_tdata_o_sv : String = "logic [g_DATA_WIDTH-1:0] src_tdata_o";
     }
+
+    part avstToAxisUse : avst_to_axis;
 }
