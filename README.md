@@ -4,20 +4,47 @@ SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
 Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
 -->
 
-# Colibri SystemVerilog
+# Colibri SystemVerilog - Open RTL for Avalon-ST and AXI-Stream packet blocks
 
 [![Verilator](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml)
 [![ASIC synth](https://github.com/kavierim/colibri-sv/actions/workflows/asic-synth.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/asic-synth.yml)
 
-Open-source SystemVerilog port of the CERN **colibri** VHDL library for [Verilator](https://www.veripool.org/verilator/) and other free EDA tooling: reusable FPGA/ASIC RTL components (memory, buses, I/O, packet handling, and more).
+**colibri-sv** is an unofficial SystemVerilog RTL port of the CERN [colibri](https://gitlab.com/colibri-cern/colibri) VHDL library. It provides reusable packet and stream blocks (Avalon-ST, AXI-Stream subset), memories, bus adapters, and related IP for Verilator simulation and an ASIC synthesis smoke check with Yosys. CERN has not endorsed this port. Sources are pinned to upstream commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f).
 
-This repository is an **unofficial** port. CERN has not endorsed it. It is pinned to upstream commit [`3fa7841`](https://gitlab.com/colibri-cern/colibri/-/commit/3fa784121ccea86d9e65b2e0dc08d2a3327f5f2f).
+## Overview
 
-## Licence
+CERN colibri is a VHDL component library aimed at FPGA and ASIC designs. This repository translates that library to SystemVerilog so free EDA flows—especially Verilator 5 and Yosys `read_slang`—can compile and check the same style of stream/packet datapath without a proprietary simulator.
 
-CERN-OHL-W-2.0. The text is [`LICENSES/CERN-OHL-W-2.0.txt`](LICENSES/CERN-OHL-W-2.0.txt). [`NOTICE`](NOTICE) records the modification and the source location. Release history: [`CHANGELOG.md`](CHANGELOG.md).
+Use it when you need Avalon-ST or AXI-Stream–oriented RTL (FIFOs, CRC, width converters, header/packet helpers, Wishbone bridges, and related blocks) under CERN-OHL-W, with self-checking testbenches and optional Python behavioral models.
 
-## Simulation
+## Key features
+
+- SystemVerilog RTL under `src/`, organized by domain (common, memory, packet, interfaces, comms, and others)
+- Avalon-ST and AXI-Stream subset adapters and packet/stream building blocks
+- Self-checking Verilator 5 regression: `./verilator/run_all.sh`
+- ASIC synthesis smoke via Yosys (`read_slang` + generic `synth`): `tools/synth_asic.py`
+- Integration manifests: [`colibri.f`](colibri.f), [Bender](https://github.com/pulp-platform/bender) [`Bender.yml`](Bender.yml), FuseSoC [`colibri.core`](colibri.core)
+- Behavioral Python models under `model/` (`uv run pytest`)
+- SysML v2 structural model under `sysml/`; module docs under [`docs/`](docs/index.md)
+
+## Architecture / tech stack
+
+| Layer | Role |
+| --- | --- |
+| `src/` | SystemVerilog modules and packages (`colibri_*` package names) |
+| `sim/` | Self-checking `*_tb.sv` testbenches |
+| `fv/` | SystemVerilog assertions |
+| `verilator/` | File lists and `run_all.sh` regression |
+| `tools/synth_asic.py` | Yosys ASIC smoke (generic `synth`, not FPGA `synth_*`) |
+| `model/` | Python behavioral models (`colibri_model/`) via [uv](https://github.com/astral-sh/uv) |
+| `sysml/` | SysML v2 parts (edit before matching RTL) |
+| `docs/` | Module catalog, playbooks, packages |
+
+Naming and VHDL→SV rules: [`CONVENTIONS.md`](CONVENTIONS.md). Packaging details: [package managers](docs/playbooks/package-managers.md).
+
+## Quickstart / installation
+
+### Verilator simulation
 
 Requires Verilator 5 (`--timing` and `--assert`). From this directory:
 
@@ -28,9 +55,25 @@ sudo apt install verilator
 
 The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes. GitHub Actions (`verilator.yml`) runs the same script.
 
-## ASIC synthesis smoke
+### Behavioral models (Python / uv)
 
-GitHub Actions (`asic-synth.yml`) also runs [`tools/synth_asic.py`](tools/synth_asic.py): Yosys `read_slang` plus generic `synth` for every `src/` module (not FPGA `synth_*`). Details: [asic-synth playbook](docs/playbooks/asic-synth.md).
+```sh
+cd model
+uv run pytest
+```
+
+See [model playbook](docs/playbooks/model.md).
+
+### ASIC synthesis smoke (Yosys)
+
+Install [oss-cad-suite](https://github.com/YosysHQ/oss-cad-suite-build) (CI pins release `20260930` / linux-x64), activate it, then from the repository root:
+
+```sh
+source /path/to/oss-cad-suite/environment
+python3 tools/synth_asic.py
+```
+
+Details and accepted exceptions: [ASIC synthesis smoke](docs/playbooks/asic-synth.md).
 
 This is a smoke check, not a Liberty- or SRAM-mapped signoff. Accepted exceptions:
 
@@ -38,43 +81,47 @@ This is a smoke check, not a Liberty- or SRAM-mapped signoff. Accepted exception
 - Memories may map to flip-flops rather than RAM macros.
 - Files with no module (for example `src/fileio/binaryio.sv`) are not synthesised as tops.
 
-## Package managers and integration
+## Usage / example
 
-| Artifact | Use |
-| --- | --- |
-| [`colibri.f`](colibri.f) | Full `src/` compile order and `+incdir+src` for simulators |
-| [`Bender.yml`](Bender.yml) | [Bender](https://github.com/pulp-platform/bender) package `colibri-sv` |
-| [`colibri.core`](colibri.core) | FuseSoC core `kavierim:colibri:sv:0.1.0` (`default` = RTL, `sim` = Verilator testbenches) |
+**Pull RTL into a Verilator project** using one of:
 
-Details: [Package managers and integration](docs/playbooks/package-managers.md).
+- [`colibri.f`](colibri.f) — full `src/` compile order and `+incdir+src`
+- Domain file lists under `verilator/files/` (see [getting started](docs/playbooks/getting-started.md))
+- Bender package `colibri-sv` or FuseSoC core `kavierim:colibri:sv:0.1.0`
 
-## Names
+Import packages as needed:
 
-VHDL packages use a `colibri_` prefix: `utils` is `colibri_utils`, and the same for `types`, `encoders`, `poly`, `mem`, `common_8b10b`, `aurora_const`, and `binaryio`. Module and port names are unchanged. The translation rules are in [`CONVENTIONS.md`](CONVENTIONS.md).
+```systemverilog
+import colibri_utils::*;
+import colibri_types::*;
+```
+
+Pick modules from the [module catalog](docs/modules/index.md). Stream adapters and packet blocks assume Avalon-ST / AXI-Stream macros from `colibri_types`; see [stream interfaces](docs/playbooks/stream-interfaces.md).
+
+**Confirm the tree still matches CI:**
+
+```sh
+./verilator/run_all.sh
+# optional, with oss-cad-suite on PATH:
+python3 tools/synth_asic.py
+```
+
+## Licence
+
+CERN-OHL-W-2.0. The text is [`LICENSES/CERN-OHL-W-2.0.txt`](LICENSES/CERN-OHL-W-2.0.txt). [`NOTICE`](NOTICE) records the modification and the source location. Release history: [`CHANGELOG.md`](CHANGELOG.md). Bundle changelog: [`docs/log.md`](docs/log.md).
 
 ## Documentation
 
-Canonical module and package documentation is under [`docs/`](docs/index.md), maintained directly in the repo. Coding agents should start from [`AGENTS.md`](AGENTS.md).
+Canonical module and package documentation is under [`docs/`](docs/index.md). Coding agents should start from [`AGENTS.md`](AGENTS.md).
 
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)
+- [Getting started](docs/playbooks/getting-started.md)
 - [Behavioral models](docs/playbooks/model.md) (`model/`)
 - [ASIC synthesis smoke](docs/playbooks/asic-synth.md) (Yosys generic `synth`)
 - [Module catalog](docs/modules/index.md)
 - [Packages](docs/packages/index.md)
-
-## SysML v2
-
-The structural model lives in [`sysml/`](sysml/Colibri.sysml). There is one `part def` per SystemVerilog module. Edit that part before the matching file under `src/`. SHALL sentences stay on the module page in [`docs/modules/`](docs/modules/index.md). [`sysml/requirements.sysml`](sysml/requirements.sysml) stores only the requirement identifier and a link to that page.
-
-`sysml/parts/` is Covered Source under CERN-OHL-W-2.0, like the RTL. The library index, metadata, and requirement stubs are ancillary.
-
-- [SysML playbook](docs/playbooks/sysml.md)
-- Check agreement of the model, the stubs, and the RTL ports: `uv run python tools/check_sysml_ssot.py`
-
-## Components
-
-Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and [`docs/packages/index.md`](docs/packages/index.md). [`COMPONENTS.md`](COMPONENTS.md) points to the bundle.
+- [SysML playbook](docs/playbooks/sysml.md) — check with `uv run python tools/check_sysml_ssot.py`
 
 ## Layout
 
@@ -84,12 +131,12 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `sim/` | Self-checking testbenches |
 | `fv/` | SystemVerilog assertions |
 | `docs/` | Module and package documentation |
-| `model/` | Behavioral Python models (`colibri_model/`) and shared kernel; see [model playbook](docs/playbooks/model.md) |
-| `sysml/` | SysML v2 structural model (`parts/`), requirement stubs, library index. Edit the model before RTL. Do not regenerate `parts/` from `src/`. |
-| `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests (see above) |
+| `model/` | Behavioral Python models (`colibri_model/`) and shared kernel |
+| `sysml/` | SysML v2 structural model (`parts/`), requirement stubs, library index |
+| `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests |
 | `tools/gen_packaging.py` | Regenerates those manifests from `verilator/files/` |
-| `tools/check_sysml_ssot.py` | Checks that the SysML model, requirement stubs, and RTL ports still match (see [sysml playbook](docs/playbooks/sysml.md)) |
-| `tools/synth_asic.py` | Yosys ASIC smoke (`read_slang` + generic `synth`); see [asic-synth](docs/playbooks/asic-synth.md) |
+| `tools/check_sysml_ssot.py` | SysML / RTL / docs agreement check |
+| `tools/synth_asic.py` | Yosys ASIC smoke |
 | `verilator/run_all.sh` | Full regression |
 
 ## CERN upstream (colibri)

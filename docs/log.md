@@ -2,6 +2,7 @@
 
 ## 2026-09-30
 
+- README rewritten for public search visibility (keyword-led H1/overview, Quickstart with Verilator / `uv` model / Yosys synth paths); CI badges and ASIC synth exceptions unchanged.
 - ASIC synthesis smoke: `tools/synth_asic.py` (Yosys `read_slang` + generic `synth` per `src/` module), CI workflow `asic-synth.yml` (oss-cad-suite `20260930`), playbook [asic-synth](playbooks/asic-synth.md). RTL fixes for Yosys: task→function in unaligned AVST RAM blocks, `$error`/`SYNTHESIS` guard in `axis_to_avst`, bounded loops in `avst_width_converter`, `gearbox_up` parameter defaults, local gray helpers in `cc_fifo` / `packet_cc_fifo` (avoids multi-`enc#` Yosys assert).
 - README documents both Verilator and ASIC synth CI, plus accepted synth exceptions (behavioral RAM / flops, package-only skip, not Liberty/SRAM signoff).
 - Behavioral models under `model/` (`colibri_model/`, shared `kernel/`); playbook [model](playbooks/model.md). Cross-repo chain test `model/tests/test_compat_poc.py` (optional sibling `PoC_sv/model`). `# Model` sections on the six runnable module pages. `AGENTS.md` / README note that SysML `parts/` are not regenerated.
