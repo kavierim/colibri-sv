@@ -16,7 +16,11 @@
 
 Edit pages under `docs/` directly (see [`docs/MODULE_TEMPLATE.md`](docs/MODULE_TEMPLATE.md)). Keep each module page in sync with its `resource` RTL file.
 
-SysML v2: edit `sysml/parts/` before the matching RTL. SHALL text stays in module page `# Requirements` (one paragraph per `## REQ-*` heading). Add stubs in `sysml/requirements.sysml` and `satisfy requirement` on the part when you add REQ ids. Check with `tools/check_sysml_ssot.py`. See [`docs/playbooks/sysml.md`](docs/playbooks/sysml.md). Do not copy SHALL text into stubs.
+SysML v2: edit `sysml/parts/` before the matching RTL. SHALL text stays in module page `# Requirements` (one paragraph per `## REQ-*` heading). Add stubs in `sysml/requirements.sysml` and `satisfy requirement` on the part when you add REQ ids. Check with `tools/check_sysml_ssot.py`. See [`docs/playbooks/sysml.md`](docs/playbooks/sysml.md). Do not copy SHALL text into stubs. Do **not** regenerate `sysml/parts/` from RTL; the baseline extraction is finished.
+
+## Behavioral models
+
+Python models live under [`model/`](model/) (`colibri_model/`, shared `kernel/`). See [`docs/playbooks/model.md`](docs/playbooks/model.md). Run `uv run pytest` from `model/`. Do not add a dependency on `PoC_sv`.
 
 ## Parallel work
 

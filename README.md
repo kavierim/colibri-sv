@@ -47,6 +47,7 @@ Canonical module and package documentation is under [`docs/`](docs/index.md), ma
 
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)
+- [Behavioral models](docs/playbooks/model.md) (`model/`)
 - [Module catalog](docs/modules/index.md)
 - [Packages](docs/packages/index.md)
 
@@ -71,7 +72,8 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `sim/` | Self-checking testbenches |
 | `fv/` | SystemVerilog assertions |
 | `docs/` | Module and package documentation |
-| `sysml/` | SysML v2 structural model (`parts/`), requirement stubs, library index. Edit the model before RTL. |
+| `model/` | Behavioral Python models (`colibri_model/`) and shared kernel; see [model playbook](docs/playbooks/model.md) |
+| `sysml/` | SysML v2 structural model (`parts/`), requirement stubs, library index. Edit the model before RTL. Do not regenerate `parts/` from `src/`. |
 | `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests (see above) |
 | `tools/gen_packaging.py` | Regenerates those manifests from `verilator/files/` |
 | `tools/check_sysml_ssot.py` | Checks that the SysML model, requirement stubs, and RTL ports still match (see [sysml playbook](docs/playbooks/sysml.md)) |

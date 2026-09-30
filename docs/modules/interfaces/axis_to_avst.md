@@ -56,6 +56,10 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 AXI Stream to Avalon ST adapter. AXI-Stream byte order is little-endian (first byte in the low bits). Partially empty words keep the valid bytes grouped at the low end. Release log: - 0.1 first release - 0.2 changed g_SWAP_ENDIANNESS for g_AVST_ENDIANNESS Stream adapters assume `colibri_types` AVST/AXIS macros. See [stream-interfaces](../../playbooks/stream-interfaces.md).
 
+# Model
+
+Behavioral Python class: colibri_model.axis_to_avst.axis_to_avst (model/colibri_model/axis_to_avst.py).
+
 # Requirements
 
 <a id="REQ-AXIS_TO_AVST-001"></a>

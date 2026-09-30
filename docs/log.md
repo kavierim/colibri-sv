@@ -1,5 +1,9 @@
 # Bundle changelog
 
+## 2026-09-30
+
+- Behavioral models under `model/` (`colibri_model/`, shared `kernel/`); playbook [model](playbooks/model.md). Cross-repo chain test `model/tests/test_compat_poc.py` (optional sibling `PoC_sv/model`). `# Model` sections on the six runnable module pages. `AGENTS.md` / README note that SysML `parts/` are not regenerated.
+
 ## 2026-09-27
 
 - SHALL prose moved from YAML `requirements[].statement` into `# Requirements` body paragraphs on **28** fv-backed module pages; frontmatter keeps OKF metadata only. `tools/check_sysml_ssot.py` parses SHALL from markdown; `tools/apply_okf_requirements_rollout.py` remains the statement/fv mapping for rollout and migration.

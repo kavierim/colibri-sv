@@ -53,6 +53,10 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Single-clock FIFO. The shared-variable memory is a logic array updated in always_ff. Mixed input/output widths instantiate gearbox (src/comms). Optional first-word fall-through: with `g_ENABLE_FWFT` set, `rdreq` acts as acknowledge and `empty` means not-valid; otherwise `rdreq` is a read request with one-cycle data latency.
 
+# Model
+
+Behavioral Python class: colibri_model.fifo.fifo (model/colibri_model/fifo.py).
+
 # Requirements
 
 <a id="REQ-FIFO-001"></a>

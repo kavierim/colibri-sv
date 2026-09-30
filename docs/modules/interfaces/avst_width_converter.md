@@ -55,6 +55,10 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Avalon-ST width converter. Converts the data width of an Avalon stream, including packet delimiters (start and end of packet) and empty symbols. Symbol width is unchanged. Buffers and serialises beats when `g_INPUT_SYM` and `g_OUTPUT_SYM` differ. `snk_*` is the wide side, `src_*` the narrow side (or vice versa per parameterisation). Preserves packet boundaries via `sop`/`eop` and `empty`.
 
+# Model
+
+Behavioral Python class: colibri_model.avst_width_converter.avst_width_converter (model/colibri_model/avst_width_converter.py).
+
 # Integration
 
 - Verilator: add `verilator/files/interfaces.f` (or `verilator/colibri.f` for packages) to the compile list.

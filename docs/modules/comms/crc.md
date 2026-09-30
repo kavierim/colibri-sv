@@ -59,6 +59,10 @@ Width and typing rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md).
 
 Cyclic redundancy check for a packet stream. The CRC is presented with the end-of-packet word. Computes CRC over the AVST packet on the fly; configure polynomial width and init via generics. Typically sits before [`be_add_trail`](../misc/be_add_trail.md) or after payload logic.
 
+# Model
+
+Behavioral Python class: colibri_model.crc.crc (model/colibri_model/crc.py).
+
 # Integration
 
 - Verilator: add `verilator/files/comms.f` (or `verilator/colibri.f` for packages) to the compile list.

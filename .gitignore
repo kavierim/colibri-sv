@@ -7,3 +7,5 @@ sim/fileio/testfile.bin
 obj_dir_log_*.txt
 __pycache__/
 *.pyc
+.venv/
+.pytest_cache/

@@ -57,6 +57,10 @@ Key types and width rules: [`CONVENTIONS.md`](../../../CONVENTIONS.md) and [`col
 
 Inserts snk_header_i, sampled at the input start of packet, in front of an Avalon-ST packet. Packet semantics follow Avalon-ST: `startofpacket`, `endofpacket`, and `empty` on beats.
 
+# Model
+
+Behavioral Python class: colibri_model.header_add.header_add (model/colibri_model/header_add.py).
+
 # Requirements
 
 <a id="REQ-HEADER_ADD-001"></a>

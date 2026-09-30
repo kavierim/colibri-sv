@@ -11,6 +11,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 - [Typical datapaths](playbooks/typical-datapaths.md)
 - [Agent workflow](playbooks/agent-workflow.md)
 - [SysML v2](playbooks/sysml.md)
+- [Behavioral models](playbooks/model.md)
 
 ## Reference
 

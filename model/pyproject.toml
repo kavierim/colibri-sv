@@ -1,0 +1,13 @@
+[project]
+name = "colibri-model"
+version = "0.1.0"
+description = "Behavioral models for colibri_sv"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
