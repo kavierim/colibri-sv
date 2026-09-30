@@ -6,7 +6,8 @@ Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOT
 
 # Colibri SystemVerilog
 
-[![CI Status](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml)
+[![Verilator](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/verilator.yml)
+[![ASIC synth](https://github.com/kavierim/colibri-sv/actions/workflows/asic-synth.yml/badge.svg)](https://github.com/kavierim/colibri-sv/actions/workflows/asic-synth.yml)
 
 Open-source SystemVerilog port of the CERN **colibri** VHDL library for [Verilator](https://www.veripool.org/verilator/) and other free EDA tooling: reusable FPGA/ASIC RTL components (memory, buses, I/O, packet handling, and more).
 
@@ -25,7 +26,17 @@ sudo apt install verilator
 ./verilator/run_all.sh
 ```
 
-The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes. GitHub Actions runs the same script.
+The script builds every `sim/**/*_tb.sv` and exits 0 only when every test passes. GitHub Actions (`verilator.yml`) runs the same script.
+
+## ASIC synthesis smoke
+
+GitHub Actions (`asic-synth.yml`) also runs [`tools/synth_asic.py`](tools/synth_asic.py): Yosys `read_slang` plus generic `synth` for every `src/` module (not FPGA `synth_*`). Details: [asic-synth playbook](docs/playbooks/asic-synth.md).
+
+This is a smoke check, not a Liberty- or SRAM-mapped signoff. Accepted exceptions:
+
+- Yosys does not strip `// xilinx translate_off` comments, so `get_compiler()` stays `AUTO` and `true_dpram` uses the behavioral model.
+- Memories may map to flip-flops rather than RAM macros.
+- Files with no module (for example `src/fileio/binaryio.sv`) are not synthesised as tops.
 
 ## Package managers and integration
 
@@ -48,6 +59,7 @@ Canonical module and package documentation is under [`docs/`](docs/index.md), ma
 - [Bundle index](docs/index.md)
 - [Playbooks](docs/playbooks/index.md)
 - [Behavioral models](docs/playbooks/model.md) (`model/`)
+- [ASIC synthesis smoke](docs/playbooks/asic-synth.md) (Yosys generic `synth`)
 - [Module catalog](docs/modules/index.md)
 - [Packages](docs/packages/index.md)
 
@@ -77,6 +89,7 @@ Module and package catalog: [`docs/modules/index.md`](docs/modules/index.md) and
 | `colibri.f`, `Bender.yml`, `colibri.core` | Integration manifests (see above) |
 | `tools/gen_packaging.py` | Regenerates those manifests from `verilator/files/` |
 | `tools/check_sysml_ssot.py` | Checks that the SysML model, requirement stubs, and RTL ports still match (see [sysml playbook](docs/playbooks/sysml.md)) |
+| `tools/synth_asic.py` | Yosys ASIC smoke (`read_slang` + generic `synth`); see [asic-synth](docs/playbooks/asic-synth.md) |
 | `verilator/run_all.sh` | Full regression |
 
 ## CERN upstream (colibri)

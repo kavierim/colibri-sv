@@ -12,6 +12,7 @@ Canonical module and package documentation for the Verilator-oriented SystemVeri
 - [Agent workflow](playbooks/agent-workflow.md)
 - [SysML v2](playbooks/sysml.md)
 - [Behavioral models](playbooks/model.md)
+- [ASIC synthesis smoke](playbooks/asic-synth.md)
 
 ## Reference
 

@@ -53,8 +53,10 @@ module axis_to_avst #(
     logic [c_EMPTY_W-1:0] v_empty;
     logic [c_KEEP_W-1:0]  v_onehot;
     v_empty  = '0;
+`ifndef SYNTHESIS
     if (keep == '0)
       $error("keep cannot be 0");
+`endif
     v_onehot = keep ^ (keep >> 1);
     for (int i = c_KEEP_W - 1; i >= 0; i--) begin
       if (v_onehot[i])

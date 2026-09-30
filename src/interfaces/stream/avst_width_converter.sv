@@ -95,17 +95,20 @@ module avst_width_converter #(
     return v_out;
   endfunction
 
+  // Constant loop bounds: a runtime-bounded `for (i = 0; i < ptr; i++)` exhausts
+  // slang's unroll limit during Yosys elaboration.
   function automatic logic is_eop(input logic [c_BUF_SYM-1:0] eop_buf, input int ptr);
     logic v_or;
     if (ptr == 0)
       return 1'b0;
     v_or = 1'b0;
-    if (ptr < int'(g_OUTPUT_SYM)) begin
-      for (int i = 0; i < ptr; i++)
-        v_or |= eop_buf[i];
-    end else begin
-      for (int i = 0; i < int'(g_OUTPUT_SYM); i++)
+    for (int i = 0; i < c_BUF_SYM; i++) begin
+      if (ptr < int'(g_OUTPUT_SYM)) begin
+        if (i < ptr)
+          v_or |= eop_buf[i];
+      end else if (i < int'(g_OUTPUT_SYM)) begin
         v_or |= eop_buf[ptr - int'(g_OUTPUT_SYM) + i];
+      end
     end
     return v_or;
   endfunction
@@ -114,7 +117,7 @@ module avst_width_converter #(
     for (int i = 1; i <= int'(g_OUTPUT_SYM); i++) begin
       if (i > ptr)
         return int'(g_OUTPUT_SYM) - i + 1;
-      else if (eop_buf[ptr - i])
+      else if ((ptr - i) >= 0 && (ptr - i) < c_BUF_SYM && eop_buf[ptr - i])
         return int'(g_OUTPUT_SYM) - i;
     end
     return 0;

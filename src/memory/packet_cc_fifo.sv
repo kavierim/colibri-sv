@@ -57,13 +57,14 @@ module packet_cc_fifo #(
     logic [g_DATA_WIDTH-1:0] data;
   } record_t;
 
-  typedef struct {
-    int count;
-    logic wreq;
-    logic rreq;
-    logic ready;
-    logic valid;
-    record_t orecord;
+  // Packed: Yosys read_slang asserts on unpacked structs with int fields here.
+  typedef struct packed {
+    logic [31:0] count;
+    logic        wreq;
+    logic        rreq;
+    logic        ready;
+    logic        valid;
+    record_t     orecord;
   } sig_t;
 
   function automatic logic [c_RECORD_BITS-1:0] record_to_slv(input record_t arg);
@@ -79,6 +80,22 @@ module packet_cc_fifo #(
     return v_res;
   endfunction
 
+  // Local gray helpers: Yosys read_slang asserts when this module also uses
+  // colibri_encoders::enc#(c_PTR_W) while an inner cc_fifo uses enc#(other W).
+  function automatic logic [c_PTR_W-1:0] ptr_bin2gray(input logic [c_PTR_W-1:0] arg);
+    if (c_PTR_W <= 1)
+      return arg;
+    return {1'b0, arg[c_PTR_W-1:1]} ^ arg;
+  endfunction
+
+  function automatic logic [c_PTR_W-1:0] ptr_gray2bin(input logic [c_PTR_W-1:0] arg);
+    logic [c_PTR_W-1:0] v_ret;
+    v_ret = arg;
+    for (int i = c_PTR_W - 2; i >= 0; i--)
+      v_ret[i] = v_ret[i+1] ^ v_ret[i];
+    return v_ret;
+  endfunction
+
   record_t rsnk;
   record_t rsrc;
   logic [c_RECORD_BITS-1:0] snk_rec_slv;
@@ -86,26 +103,34 @@ module packet_cc_fifo #(
   logic fifo_empty;
   logic fifo_full;
   logic fifo_wreq;
-  int wr_ptr;
-  int rd_ptr;
-  int rwr_ptr;
-  int wrd_ptr;
+  // Dummy sinks for unused cc_fifo status/peek ports (Yosys/slang crashes on
+  // some combinations of left-open parameterized ports in this hierarchy).
+  logic [colibri_utils::downto_width(colibri_utils::log2ceil(c_PACKET_WORDS * g_NUM_PACKETS))-1:0] cc_wrusedw_nc;
+  logic [colibri_utils::downto_width(colibri_utils::log2ceil(c_PACKET_WORDS * g_NUM_PACKETS))-1:0] cc_rdusedw_nc;
+  logic cc_wrempty_nc;
+  logic cc_rdfull_nc;
+  logic [c_RECORD_BITS-1:0] cc_wrq_nc;
+  logic cc_wrq_valid_nc;
+  logic [31:0] wr_ptr;
+  logic [31:0] rd_ptr;
+  logic [31:0] rwr_ptr;
+  logic [31:0] wrd_ptr;
   logic [c_PTR_W-1:0] wr_ptr_gray;
   logic [c_PTR_W-1:0] rd_ptr_gray;
   logic [c_PTR_W-1:0] rwr_ptr_gray;
   logic [c_PTR_W-1:0] wrd_ptr_gray;
-  int int_rusedp;
-  int int_wusedp;
+  logic [31:0] int_rusedp;
+  logic [31:0] int_wusedp;
   logic src_reset;
   logic [c_SIZE_W-1:0] int_size;
   sig_t rreg;
   sig_t rcmb;
 
   initial begin
-    wr_ptr = 0;
-    rd_ptr = 0;
+    wr_ptr = '0;
+    rd_ptr = '0;
     rreg = '{
-      count: 0,
+      count: '0,
       wreq: 1'b0,
       rreq: 1'b0,
       ready: 1'b0,
@@ -125,15 +150,15 @@ module packet_cc_fifo #(
   );
 
   always_ff @(posedge wrclk_i) begin : proc_wr_ptr_gray
-    wr_ptr_gray <= colibri_encoders::enc#(c_PTR_W)::bin2gray_nat(wr_ptr);
+    wr_ptr_gray <= ptr_bin2gray(c_PTR_W'(wr_ptr));
   end
 
   always_ff @(posedge rdclk_i) begin : proc_rd_ptr_gray
-    rd_ptr_gray <= colibri_encoders::enc#(c_PTR_W)::bin2gray_nat(rd_ptr);
+    rd_ptr_gray <= ptr_bin2gray(c_PTR_W'(rd_ptr));
   end
 
-  assign rwr_ptr = colibri_encoders::enc#(c_PTR_W)::gray2bin_nat(rwr_ptr_gray);
-  assign wrd_ptr = colibri_encoders::enc#(c_PTR_W)::gray2bin_nat(wrd_ptr_gray);
+  assign rwr_ptr = 32'(ptr_gray2bin(rwr_ptr_gray));
+  assign wrd_ptr = 32'(ptr_gray2bin(wrd_ptr_gray));
 
   synchro #(
     .g_DATA_LENGTH(c_PTR_W),
@@ -155,14 +180,14 @@ module packet_cc_fifo #(
     .data_o(wrd_ptr_gray)
   );
 
-  assign int_wusedp = (wr_ptr < wrd_ptr) ? (g_NUM_PACKETS + wr_ptr - wrd_ptr) : (wr_ptr - wrd_ptr);
+  assign int_wusedp = (wr_ptr < wrd_ptr) ? 32'(g_NUM_PACKETS) + wr_ptr - wrd_ptr : (wr_ptr - wrd_ptr);
   assign wrusedp_o  = c_USEDP_W'(int_wusedp);
-  assign int_rusedp = (rwr_ptr < rd_ptr) ? (g_NUM_PACKETS + rwr_ptr - rd_ptr) : (rwr_ptr - rd_ptr);
+  assign int_rusedp = (rwr_ptr < rd_ptr) ? 32'(g_NUM_PACKETS) + rwr_ptr - rd_ptr : (rwr_ptr - rd_ptr);
   assign rdusedp_o  = c_USEDP_W'(int_rusedp);
-  assign wrfull_o   = (int_wusedp == (g_NUM_PACKETS - 1));
-  assign wrempty_o  = (int_wusedp == 0);
-  assign rdfull_o   = (int_rusedp == (g_NUM_PACKETS - 1));
-  assign rdempty_o  = (int_rusedp == 0);
+  assign wrfull_o   = (int_wusedp == 32'(g_NUM_PACKETS - 1));
+  assign wrempty_o  = (int_wusedp == 32'(0));
+  assign rdfull_o   = (int_rusedp == 32'(g_NUM_PACKETS - 1));
+  assign rdempty_o  = (int_rusedp == 32'(0));
 
   assign rsnk.sop    = snk_sop_i;
   assign rsnk.eop    = snk_eop_i;
@@ -174,17 +199,16 @@ module packet_cc_fifo #(
 
   always_ff @(posedge wrclk_i) begin : proc_cnt_packets
     if (reset_i)
-      wr_ptr <= 0;
+      wr_ptr <= '0;
     else if (fifo_wreq && rsnk.eop) begin
-      if (wr_ptr == (g_NUM_PACKETS - 1))
-        wr_ptr <= 0;
+      if (wr_ptr == 32'(g_NUM_PACKETS - 1))
+        wr_ptr <= '0;
       else
-        wr_ptr <= wr_ptr + 1;
+        wr_ptr <= wr_ptr + 32'(1);
     end
   end
 
-  // Status and peek ports left open match the VHDL port map.
-  // verilator lint_off PINMISSING
+  // Status and peek ports tied off (open ports tripped a Yosys/slang assert).
   cc_fifo #(
     .g_NUM_WORDS(c_PACKET_WORDS * g_NUM_PACKETS),
     .g_INPUT_WIDTH(c_RECORD_BITS),
@@ -198,14 +222,27 @@ module packet_cc_fifo #(
     .wrreq_i(fifo_wreq),
     .rdreq_i(rcmb.rreq),
     .q_o(src_rec_slv),
+    .wrusedw_o(cc_wrusedw_nc),
+    .rdusedw_o(cc_rdusedw_nc),
+    .wrempty_o(cc_wrempty_nc),
     .wrfull_o(fifo_full),
-    .rdempty_o(fifo_empty)
+    .rdempty_o(fifo_empty),
+    .rdfull_o(cc_rdfull_nc),
+    .wrq_o(cc_wrq_nc),
+    .wrq_valid_o(cc_wrq_valid_nc)
   );
-  // verilator lint_on PINMISSING
 
   if (g_ENABLE_SIZE_COUNT) begin : gen_size_count_fifo
     logic [c_SIZE_W-1:0] cmb_size;
     logic [c_SIZE_W-1:0] reg_size;
+    logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_NUM_PACKETS))-1:0] sz_wrusedw_nc;
+    logic [colibri_utils::downto_width(colibri_utils::log2ceil(g_NUM_PACKETS))-1:0] sz_rdusedw_nc;
+    logic sz_wrempty_nc;
+    logic sz_wrfull_nc;
+    logic sz_rdempty_nc;
+    logic sz_rdfull_nc;
+    logic [c_SIZE_W-1:0] sz_wrq_nc;
+    logic sz_wrq_valid_nc;
 
     always_comb begin : proc_size_cnt_cmb
       logic [c_SIZE_W-1:0] v_int;
@@ -224,7 +261,6 @@ module packet_cc_fifo #(
       reg_size <= cmb_size;
     end
 
-    // verilator lint_off PINMISSING
     cc_fifo #(
       .g_NUM_WORDS(g_NUM_PACKETS),
       .g_INPUT_WIDTH(c_SIZE_W),
@@ -237,9 +273,16 @@ module packet_cc_fifo #(
       .data_i(cmb_size),
       .wrreq_i(fifo_wreq & snk_eop_i),
       .rdreq_i(rcmb.rreq & rsrc.sop),
-      .q_o(int_size)
+      .q_o(int_size),
+      .wrusedw_o(sz_wrusedw_nc),
+      .rdusedw_o(sz_rdusedw_nc),
+      .wrempty_o(sz_wrempty_nc),
+      .wrfull_o(sz_wrfull_nc),
+      .rdempty_o(sz_rdempty_nc),
+      .rdfull_o(sz_rdfull_nc),
+      .wrq_o(sz_wrq_nc),
+      .wrq_valid_o(sz_wrq_valid_nc)
     );
-    // verilator lint_on PINMISSING
   end else begin : gen_size_tieoff
     assign int_size = '0;
   end
@@ -263,15 +306,15 @@ module packet_cc_fifo #(
       v_int.valid   = 1'b1;
       v_int.orecord = rsrc;
       if (rsrc.eop) begin
-        if (rd_ptr == (g_NUM_PACKETS - 1))
-          v_int.count = 0;
+        if (rd_ptr == 32'(g_NUM_PACKETS - 1))
+          v_int.count = '0;
         else
-          v_int.count = rreg.count + 1;
+          v_int.count = rreg.count + 32'(1);
       end
     end
 
     if (src_reset) begin
-      v_int.count   = 0;
+      v_int.count   = '0;
       v_int.wreq    = 1'b0;
       v_int.rreq    = 1'b0;
       v_int.ready   = 1'b0;

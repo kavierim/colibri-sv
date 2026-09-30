@@ -10,6 +10,7 @@
 
 - Sources under `src/`. Follow [`CONVENTIONS.md`](CONVENTIONS.md).
 - Verify with `sim/**/*_tb.sv` and [`verilator/run_all.sh`](verilator/run_all.sh).
+- ASIC smoke: [`tools/synth_asic.py`](tools/synth_asic.py) (Yosys `read_slang` + generic `synth`). A synthesis fix must not break `verilator/run_all.sh`. See [`docs/playbooks/asic-synth.md`](docs/playbooks/asic-synth.md).
 - Root integration manifests: [`colibri.f`](colibri.f), [`Bender.yml`](Bender.yml), [`colibri.core`](colibri.core). After changing `verilator/files/*.f`, run [`tools/gen_packaging.py`](tools/gen_packaging.py).
 
 ## Maintaining docs

@@ -69,6 +69,22 @@ module cc_fifo #(
     rd_ptr = 0;
   end
 
+  // Local gray helpers avoid Yosys read_slang asserting when multiple cc_fifo
+  // specializations would otherwise elaborate distinct enc#(W) class uses.
+  function automatic logic [c_PTR_W-1:0] ptr_bin2gray(input logic [c_PTR_W-1:0] arg);
+    if (c_PTR_W <= 1)
+      return arg;
+    return {1'b0, arg[c_PTR_W-1:1]} ^ arg;
+  endfunction
+
+  function automatic logic [c_PTR_W-1:0] ptr_gray2bin(input logic [c_PTR_W-1:0] arg);
+    logic [c_PTR_W-1:0] v_ret;
+    v_ret = arg;
+    for (int i = c_PTR_W - 2; i >= 0; i--)
+      v_ret[i] = v_ret[i+1] ^ v_ret[i];
+    return v_ret;
+  endfunction
+
   synchro_reset #(
     .g_IN_POLARITY(1'b1),
     .g_OUT_POLARITY(1'b1),
@@ -115,15 +131,15 @@ module cc_fifo #(
   assign rd_safe = int_rdreq & ~int_empty;
 
   always_ff @(posedge wrclk_i) begin : proc_wr_ptr_gray
-    wr_ptr_gray <= colibri_encoders::enc#(c_PTR_W)::bin2gray_nat(wr_ptr);
+    wr_ptr_gray <= ptr_bin2gray(c_PTR_W'(wr_ptr));
   end
 
   always_ff @(posedge rdclk_i) begin : proc_rd_ptr_gray
-    rd_ptr_gray <= colibri_encoders::enc#(c_PTR_W)::bin2gray_nat(rd_ptr);
+    rd_ptr_gray <= ptr_bin2gray(c_PTR_W'(rd_ptr));
   end
 
-  assign rwr_ptr = colibri_encoders::enc#(c_PTR_W)::gray2bin_nat(rwr_ptr_gray);
-  assign wrd_ptr = colibri_encoders::enc#(c_PTR_W)::gray2bin_nat(wrd_ptr_gray);
+  assign rwr_ptr = int'(ptr_gray2bin(rwr_ptr_gray));
+  assign wrd_ptr = int'(ptr_gray2bin(wrd_ptr_gray));
 
   synchro #(
     .g_DATA_LENGTH(c_PTR_W),

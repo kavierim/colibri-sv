@@ -10,3 +10,4 @@
 | [agent-workflow](agent-workflow.md) | How agents maintain this bundle |
 | [sysml](sysml.md) | Structural model first, then RTL; requirement identifiers |
 | [model](model.md) | Behavioral Python models under `model/` |
+| [asic-synth](asic-synth.md) | Yosys `read_slang` + generic `synth` smoke for every `src/` module |

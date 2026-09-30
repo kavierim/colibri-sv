@@ -85,7 +85,10 @@ module avst_ram_write_unaligned #(
   reg_t r /* verilator public */ = c_REG_TYPE_INIT;
   reg_t rin;
 
-  task automatic start_of_packet(inout reg_t v);
+  // Function form: Yosys read_slang rejects task/inout calls in always_comb.
+  function automatic reg_t start_of_packet(input reg_t v_in);
+    reg_t v;
+    v = v_in;
     v.start_addr = c_ADDR_W'(c_DIV_W'(start_addr_i) / c_DIV_W'(g_WORD_BYTES));
     v.byte_skew  = int'(c_DIV_W'(start_addr_i) % c_DIV_W'(g_WORD_BYTES));
     v.state      = S_SOP;
@@ -94,14 +97,18 @@ module avst_ram_write_unaligned #(
         (int'(g_WORD_BYTES) - int'(snk_empty_i) + v.byte_skew) <= int'(g_WORD_BYTES)
       ));
     end
-  endtask
+    return v;
+  endfunction
 
-  task automatic end_of_packet(inout reg_t v);
+  function automatic reg_t end_of_packet(input reg_t v_in);
+    reg_t v;
+    v = v_in;
     v.snk_ready = colibri_types::bool_to_sl(bit'(
       (v.buf_bytes + int'(g_WORD_BYTES) - int'(snk_empty_i)) <= int'(g_WORD_BYTES)
     ));
     v.state = S_EOP;
-  endtask
+    return v;
+  endfunction
 
   // Two-process structure.
   always_comb begin : proc_comb
@@ -117,7 +124,7 @@ module avst_ram_write_unaligned #(
         v.ram_wr    = c_RAM_WR_INIT;
         v.byte_skew = 0;
         if (snk_valid_i && snk_sop_i && r.snk_ready)
-          start_of_packet(v);
+          v = start_of_packet(v);
       end
 
       S_SOP: begin
@@ -133,7 +140,7 @@ module avst_ram_write_unaligned #(
         if ((r.buf_bytes + r.byte_skew) <= int'(g_WORD_BYTES)) begin
           v.buf_bytes = 0;
           if (snk_valid_i && snk_sop_i && r.snk_ready)
-            start_of_packet(v);
+            v = start_of_packet(v);
           else
             v.state = S_IDLE;
         end else begin
@@ -146,7 +153,7 @@ module avst_ram_write_unaligned #(
             v.state    = S_EOP;
           end
         end else if (snk_eop_i && snk_valid_i) begin
-          end_of_packet(v);
+          v = end_of_packet(v);
         end else begin
           v.state = S_WRITE;
         end
@@ -165,7 +172,7 @@ module avst_ram_write_unaligned #(
         end
 
         if (snk_eop_i && snk_valid_i)
-          end_of_packet(v);
+          v = end_of_packet(v);
 
         if (flush_i) begin
           v.buf_bytes = r.byte_skew;
@@ -193,7 +200,7 @@ module avst_ram_write_unaligned #(
 
         if (v.buf_bytes == 0) begin
           if (snk_valid_i && snk_sop_i && r.snk_ready)
-            start_of_packet(v);
+            v = start_of_packet(v);
           else
             v.state = S_IDLE;
         end

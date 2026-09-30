@@ -16,8 +16,9 @@
 `timescale 1ns/1ps
 
 module gearbox_up #(
-  parameter int g_INPUT_WIDTH,
-  parameter int g_OUTPUT_WIDTH
+  // Defaults for standalone ASIC/Verilator elaboration; instantiations override.
+  parameter int g_INPUT_WIDTH  = 8,
+  parameter int g_OUTPUT_WIDTH = 10
 ) (
   input  logic                         clk_i,
   input  logic                         reset_i,

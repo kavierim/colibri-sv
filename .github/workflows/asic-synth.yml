@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2026 Kari Vierimaa, Kempele, Finland
+#
+# Ancillary repository file (not Covered Source). RTL is under CERN-OHL-W; see NOTICE.
+
+name: asic-synth
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  synth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install oss-cad-suite
+        env:
+          OSS_CAD_VERSION: "20260930"
+          OSS_CAD_TAG: "2026-09-30"
+          OSS_CAD_ASSET: "oss-cad-suite-linux-x64-20260930.tgz"
+        run: |
+          set -euo pipefail
+          url="https://github.com/YosysHQ/oss-cad-suite-build/releases/download/${OSS_CAD_TAG}/${OSS_CAD_ASSET}"
+          curl -L --fail -o /tmp/oss-cad-suite.tgz "$url"
+          mkdir -p "$HOME/oss-cad-suite"
+          tar -xzf /tmp/oss-cad-suite.tgz -C "$HOME/oss-cad-suite" --strip-components=1
+          echo "$HOME/oss-cad-suite/bin" >> "$GITHUB_PATH"
+          # Confirm the release VERSION file matches the pin.
+          grep -qx "$OSS_CAD_VERSION" "$HOME/oss-cad-suite/VERSION"
+
+      - name: ASIC synth smoke
+        run: |
+          set -eo pipefail
+          # oss-cad-suite's environment script may reference unset vars; keep -e.
+          set +u
+          source "$HOME/oss-cad-suite/environment"
+          set -u
+          mkdir -p build/asic-synth
+          python3 tools/synth_asic.py --log-dir build/asic-synth
+
+      - name: Upload synth log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: asic-synth-log
+          path: build/asic-synth/
+          if-no-files-found: warn

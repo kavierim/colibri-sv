@@ -106,8 +106,11 @@ module avst_ram_read_unaligned #(
   reg_t rin;
 
   // Reads r (the register), matching the VHDL procedure.
-  task automatic output_buf_data(inout reg_t v);
+  // Function form: Yosys read_slang rejects task/inout calls in always_comb.
+  function automatic reg_t output_buf_data(input reg_t v_in);
+    reg_t v;
     int v_lo;
+    v = v_in;
     v_lo = c_DATA_W - int'(g_BYTE_WIDTH) * r.skew;
     v.avst_src.data = r.buf_data[v_lo +: c_DATA_W];
     v.buf_bytes     = r.buf_bytes - int'(g_WORD_BYTES);
@@ -115,7 +118,8 @@ module avst_ram_read_unaligned #(
       v.out_cntdwn = r.out_cntdwn - c_LEN_W'(g_WORD_BYTES);
     else
       v.out_cntdwn = '0;
-  endtask
+    return v;
+  endfunction
 
   // Two-process structure.
   always_comb begin : proc_comb
@@ -154,10 +158,10 @@ module avst_ram_read_unaligned #(
           if (r.out_cntdwn <= c_LEN_W'(g_WORD_BYTES)) begin
             v.avst_src.eop   = 1'b1;
             v.avst_src.empty = c_EMPTY_W'(int'(g_WORD_BYTES) - int'(r.out_cntdwn));
-            output_buf_data(v);
+            v = output_buf_data(v);
             v.state = S_IDLE;
           end else begin
-            output_buf_data(v);
+            v = output_buf_data(v);
             if (v.out_cntdwn <= c_LEN_W'(g_WORD_BYTES)) begin
               if (!r.rd_valid)
                 v.buf_data = {v.buf_data[c_DATA_W-1:0], r.rd_data};
@@ -172,7 +176,7 @@ module avst_ram_read_unaligned #(
       S_BODY: begin
         if (v.avst_src.valid == 1'b0) begin
           v.avst_src.valid = 1'b1;
-          output_buf_data(v);
+          v = output_buf_data(v);
         end
         if (v.out_cntdwn <= c_LEN_W'(g_WORD_BYTES)) begin
           if (!r.rd_valid)
@@ -186,7 +190,7 @@ module avst_ram_read_unaligned #(
           v.avst_src.valid = 1'b1;
           v.avst_src.eop   = 1'b1;
           v.avst_src.empty = c_EMPTY_W'(int'(g_WORD_BYTES) - int'(r.out_cntdwn));
-          output_buf_data(v);
+          v = output_buf_data(v);
           v.state = S_IDLE;
         end
       end
